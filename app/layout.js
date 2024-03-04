@@ -1,4 +1,5 @@
 'use client'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { Poppins } from 'next/font/google';
 import "./globals.css"
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.className } bg-white antialiased`} >
 
         {children}
+        <SpeedInsights />
 
       </body>
       
