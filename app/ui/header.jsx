@@ -99,7 +99,7 @@ const [popupOpen, setPopupOpen] = useState('hidden')
               
               <div className="px-8 py-1 flex items-center justify-between w-full bg-white">
 
-        <img className="w-[150px]" alt="Image" src={logo} />
+        <Link href={"/"}><img className="w-[150px]" alt="Image" src={logo} /></Link>
 
         <Link href={"/m/quisommesnous"}>
           <div className=" font-sans font-normal text-black text-lg">
