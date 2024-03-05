@@ -85,7 +85,7 @@ export default function Home() {
         <div className="pt-1 gap-9 mt-8 flex ">
 
           {/* barre de navigation */}
-            <div className="sticky md:block hidden top-5 h-fit items-stretch content-end flex-wrap flex md:w-[250px] flex-col ">
+            <div className="sticky md:block hidden top-5 h-fit items-stretch content-end flex-wrap flex md:w-[200px] flex-col ">
             <div className="text-black text-xl font-bold w-full">
               Navigation
             </div>
@@ -196,9 +196,9 @@ export default function Home() {
 
         {/* processus */}
 
-        <div className="flex justify-center mt-36">
+        <div className="flex flex-col items-center md:flex-row md:justify-center mt-36">
 
-        <div className="flex w-[370px] mr-8 items-center flex-col">
+        <div className="flex w-[370px] md:mr-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className="  w-[155px] h-[155px]"
               loading="lazy"
@@ -217,7 +217,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex w-[370px] mr-8 items-center flex-col">
+        <div className="flex w-[370px] my-8 md:my-0 md:mr-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className=" w-[155px] h-[155px]"
               loading="lazy"

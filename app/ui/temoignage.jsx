@@ -26,7 +26,8 @@ function Temoignage() {
 
 export default function Temoignages(){
     return(
-        <div className=''>
+        <>
+        <div className='md:block hidden'>
             <swiper-container space-between="10" slides-per-view="3" navigation="true" speed="500" css-mode="true">
                 <swiper-slide><Temoignage></Temoignage></swiper-slide>
                 <swiper-slide><Temoignage></Temoignage></swiper-slide>
@@ -34,6 +35,15 @@ export default function Temoignages(){
                 <swiper-slide><Temoignage></Temoignage></swiper-slide>
             </swiper-container>
         </div>
+        <div className='md:hidden'>
+                <swiper-container space-between="10" slides-per-view="1" navigation="true" speed="500" css-mode="true">
+                    <swiper-slide><Temoignage></Temoignage></swiper-slide>
+                    <swiper-slide><Temoignage></Temoignage></swiper-slide>
+                    <swiper-slide><Temoignage></Temoignage></swiper-slide>
+                    <swiper-slide><Temoignage></Temoignage></swiper-slide>
+                </swiper-container>
+            </div>
+        </>
         
     )
 } 

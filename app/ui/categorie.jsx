@@ -28,22 +28,37 @@ export default function Categories(){
 
 
     return(
-        <div className='my-5'>
-            <swiper-container space-between="10" slides-per-view="9" navigation="true" speed="500" loop="true" css-mode="true">
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-                <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            </swiper-container>
-        </div>
+        <><div className='my-5 md:block hidden'>
+        <swiper-container space-between="10" slides-per-view="9" navigation="true" speed="500" loop="true" css-mode="true">
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+        </swiper-container>
+      </div><div className='my-5 md:hidden'>
+          <swiper-container space-between="10" slides-per-view="5" navigation="true" speed="500" loop="true" css-mode="true">
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          </swiper-container>
+        </div></>
         
     )
 }
