@@ -29,16 +29,16 @@ export default function ArticleView(){
     return(
         <div className="relative px-8 pt-5">
 
-            <div className={"absolute right-0 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
+            <div className={"absolute right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                 <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
-                <div>Viande de Porc - 5KG ajouté au panier avec succès</div>
+                <div className="text-base">Viande de Porc - 5KG ajouté au panier avec succès</div>
                 <button onClick={()=> setAjoutReussi('hidden')}><img loading="lazy" srcSet={imgClose}></img></button>
             </div>
 
             <div className="text-base  font-semibold mb-5">Acceuil &gt; <span className="text-[#9ca3af] font-medium">Viande de porc</span>  </div>
 
             {/* article, ses images et sa description */}
-            <div className="flex ">
+            <div className="flex mb-12">
             
                 {/* image en mignature */}
                 <div className="flex flex-col mr-8 w-[120px]">
@@ -54,14 +54,14 @@ export default function ArticleView(){
 
                 {/* description */}
                 <div className="ml-8 w-fit">
-                    <h1 className="text-2xl font-bold ">Viande de porc</h1>
+                    <h1 className="text-xl font-bold ">Viande de porc</h1>
                     <div className="text-base  text-[#9ca3af]">5kg - 2 morceaux</div>
                  
-                    <div className="px-3 py-3 my-3 rounded-md bg-teal-50 border border-teal-300 text-base ">Disponibilité : <span className="text-teal-400">En stock</span></div>
+                    <div className="px-3 py-2 my-3 rounded-md bg-teal-50 border border-teal-300 text-base ">Disponibilité : <span className="text-teal-400">En stock</span></div>
 
                     <div className="text-xl ">10 000 FCFA</div>
 
-                    <p className="mt-3 text-[17px] ">
+                    <p className="mt-3 text-base mb-8">
                         lorem ipsum dolor sit lorem ipsum dolor sit lorem ipsum lorem ipsum dolor sit lorem ipsum dolor sit lorem ipsumlorem ipsum dolor sit lorem ipsum dolor sit 
                     </p>
 
@@ -71,7 +71,7 @@ export default function ArticleView(){
 
                     <button onClick={() => setAjoutReussi('')} className="flex justify-center items-center  text-base text-white w-full bg-rouge rounded-xl px-3 py-3 mt-5">
                         <img loading="lazy" alt="shopping cart" src={imgShoppingCart} className="h-[20px] w-[20px]"></img>
-                        <div className="ml-5">Ajouter au panier</div>
+                        <div className="ml-5 text-base">Ajouter au panier</div>
                     </button>
                 </div>
             </div>
@@ -95,18 +95,18 @@ export default function ArticleView(){
                     </div>
                 </div>
 
-                <div className={swipeDescription == 'description' ? "mt-5" : "hidden"}>
+                <div className={swipeDescription == 'description' ? "mt-5 text-base" : "hidden"}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque a, reprehenderit, eligendi illum, quasi fugit veritatis aut obcaecati eos atque officiis omnis excepturi quod quam. Voluptatem quia nam nihil voluptates!
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, delectus ab corrupti magnam optio, quia vero eveniet quos itaque corporis exercitationem? Possimus doloribus deleniti quidem suscipit voluptatem. Excepturi, aperiam itaque.
                 </div>
 
 
-                <div  className={swipeDescription == 'infoSupp' ? "mt-5" : "hidden"}>
+                <div  className={swipeDescription == 'infoSupp' ? "mt-5 text-base" : "hidden"}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                 </div>
 
 
-                <div className={swipeDescription == 'conservation' ? "mt-5" : "hidden"}>
+                <div className={swipeDescription == 'conservation' ? "mt-5 text-base" : "hidden"}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque a, reprehenderit, eligendi illum, quasi fugit veritatis aut obcaecati eos atque officiis omnis excepturi quod quam. Voluptatem quia nam nihil voluptates!
                     
                 </div>
@@ -118,7 +118,7 @@ export default function ArticleView(){
 
 
             {/* produit similaire */}
-            <div className="mt-36 mb-28">
+            <div className="mt-16 mb-28">
                 <h1 className="text-2xl font-bold  mb-5">Produit similaire</h1>
                 <div className="grid grid-cols-5 gap-4">
                     <Article></Article>

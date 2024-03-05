@@ -35,7 +35,7 @@ export default function ItemPanier(){
                     <button onClick={diminuQuantite}>-</button>{quantite}<button onClick={augmenteQuantite}>+</button>
                 </div>
             </div>
-            <div className="w-[15%] flex justify-center items-center"><div>{prix * quantite} FCFA</div></div>
+            <div className="w-[15%] flex justify-center text-base items-center"><div>{prix * quantite} FCFA</div></div>
             <div className="w-[5%] flex justify-center items-center"><button onClick={() => { setVu('hidden') } }><img loading="lazy" srcSet={imgClose}></img></button></div>
 
 

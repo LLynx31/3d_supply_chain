@@ -57,7 +57,7 @@ export default function Panier(){
                             <div className="text-base font-bold">6000 FCFA</div>
                         </div>
 
-                        <button className="text-white w-full bg-rouge text-center py-3 rounded-md">VALIDER MA COMMANDE</button>
+                        <button className="text-white text-base w-full bg-rouge text-center py-3 rounded-md">VALIDER MA COMMANDE</button>
                     </div>
 
 

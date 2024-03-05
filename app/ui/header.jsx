@@ -89,6 +89,7 @@ const [popupOpen, setPopupOpen] = useState('hidden')
 
     return(
       <div>
+        
         <PopupConnexion className={popupOpen} closePopup={closePopup} ></PopupConnexion>
                 
               <div className="w-full flex items-center justify-center h-[56px] bg-[#f6cb05]">
@@ -97,54 +98,66 @@ const [popupOpen, setPopupOpen] = useState('hidden')
                   </p>
                 </div>
               
-              <div className="px-8 py-1 flex items-center justify-between w-full bg-white">
+        <div className="px-8 py-1 flex items-center justify-between w-full bg-white">
+        
+              <Link href={"/"}><img className="w-[150px]" alt="Image" src={logo} /></Link>
 
-        <Link href={"/"}><img className="w-[150px]" alt="Image" src={logo} /></Link>
+            <Link href={"/m/quisommesnous"}>
+              <div className=" max-[870px]:hidden font-sans font-normal text-black text-lg">
+                Qui sommes-nous ?
+              </div>
+            </Link>
 
-        <Link href={"/m/quisommesnous"}>
-          <div className=" font-sans font-normal text-black text-lg">
-            Qui sommes-nous ?
-          </div>
-        </Link>
+            <Link href={"/m/FAQ"}>
+              <div className="max-[870px]:hidden font-sans font-normal text-black text-lg">
+                FAQ
+              </div>
+            </Link>
 
-        <Link href={"/m/FAQ"}>
-          <div className="font-sans font-normal text-black text-lg">
-            FAQ
-          </div>
-        </Link>
-
-        <div className="w-[325px] h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
-          <div className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
-              <img className="w-[24px] h-[24px]" alt="Search" src={search} />
-          </div>
-          <div className="font-sans h-[40px] font-normal text-black text-lg">
-            <input type="search" placeholder="Rechercher un produit"className="font-sans w-[277px] text-base p-1 h-full outline-0" ></input>
-          </div>
-          
-        </div>
+            <div className="md:w-[400px] max-md:hidden max-[820px]:w-[400px] min-[870px]:w-[325px] h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
+              <div className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
+                  <img className="w-[24px] h-[24px]" alt="Search" src={search} />
+              </div>
+              <div className="font-sans h-[40px] font-normal text-black text-lg">
+                <input type="search" placeholder="Rechercher un produit"className="font-sans md:w-[352px] min-[870px]:w-[277px]  text-base p-1 h-full outline-0" ></input>
+              </div>
+              
+            </div>
 
 
-        <img onClick={() => setPopupOpen("")} className="w-[30px] h-[30px]" alt="User" src={user} />
+            <img onClick={() => setPopupOpen("")} className="w-[30px] cursor-pointer h-[30px]" alt="User" src={user} />
 
-        <div className="flex items-center justify-center">
-          <Link href={"/m/panier"}>
-            <img
-              className="w-[30px] h-[30px]"
-              alt="Shopping bag"
-              src={shoppingBag}
-            />
-          </Link> 
+            <div className="flex items-center justify-center">
+              <Link href={"/m/panier"}>
+                <img
+                  className="w-[30px] h-[30px]"
+                  alt="Shopping bag"
+                  src={shoppingBag}
+                />
+              </Link> 
 
-          <div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f6cb05] rounded-full">
-            <div className="font-sans font-normal text-black ">
-              0
+              <div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f6cb05] rounded-full">
+                <div className="font-sans font-normal text-black ">
+                  0
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        
-        
-   </div>
+          
+      
+
+        <div className="px-8 py-1">
+          <div className="w-[325px] md:hidden h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
+                <div className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
+                    <img className="w-[24px] h-[24px]" alt="Search" src={search} />
+                </div>
+                <div className="font-sans h-[40px] font-normal text-black text-lg">
+                  <input type="search" placeholder="Rechercher un produit"className="font-sans w-[277px]  text-base p-1 h-full outline-0" ></input>
+                </div>
+                
+              </div>
+        </div>
    </div>
     )
 }

@@ -9,7 +9,7 @@ function Temoignage() {
     const imgUser = 'User.png'
     return (
         <div className='flex flex-col items-center relative rounded-md shadow-[0_0px_40px_-20px_rgba(0,0,0,0.3)] pt-20 pb-8 mb-8 mt-[60px] mx-5' >
-            <div>“lorem ipsum dolor sit lorem ipsum dolor sit lorem ipsum dolor sit lorem”</div>
+            <div className='text-base'>“lorem ipsum dolor sit lorem ipsum dolor sit lorem ipsum dolor sit lorem”</div>
             <div className='flex justify-between mt-2 mb-8'>
                 <img className='w-[25px]' loading='lazy' srcSet={starImg}></img>
                 <img className='w-[25px]' loading='lazy' srcSet={starImg}></img>

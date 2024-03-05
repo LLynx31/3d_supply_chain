@@ -23,12 +23,12 @@ module.exports = {
      },
 
     fontSize: {
-      'smx':'15px',
+      'smx':'8px',
       sm:'12px', 
-      base:'15px',
-      lg: '20px', 
-      xl:'30px',
-      '2xl':'45px'
+      base:'14px',
+      lg: '17px', 
+      xl:'25px',
+      '2xl':'35px'
     },
     boxShadow: {
       '3xl': '1px 1px 25px 0px rgba(0, 0, 0, 0.09)',
