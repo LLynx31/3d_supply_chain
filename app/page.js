@@ -1,9 +1,10 @@
 'use client'
 
 import Article from "./ui/article";
-import Categories from "./ui/categorie";
+import {Categories} from "./ui/categorie";
 import Footer from "./ui/footer";
 import Header from "./ui/header";
+import LoadingSpinner from "./ui/loading";
 import Temoignages from "./ui/temoignage";
 
 import { useState, useRef, useEffect } from "react";
@@ -59,8 +60,23 @@ export default function Home() {
 
   })
 
+
+  const [dataProduct, setDataProduct] = useState(null)
+
+  useEffect(()=>{
+      fetch("https://api.3dsupplychains.com/api/produits?page=1")
+      .then((response)=>response.json())
+      .then((responseParse)=>setDataProduct(responseParse["hydra:member"]))
+    }, [])
+
+
+  if(dataProduct){
+    const listDataProduct = dataProduct.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1].valeur}></Article>)
   
 
+
+  
+  
 
   return (
 
@@ -120,18 +136,7 @@ export default function Home() {
               <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1>
               <p className="text-base ">Les produits les plus vendus de la plateforme</p>
               <div className="grid grid-cols-2 md:max-lg:grid-cols-3 lg:grid-cols-4 gap-5 mt-8"> 
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
+                {listDataProduct}
               </div>
             </div>
           
@@ -140,18 +145,7 @@ export default function Home() {
               <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
               <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
               <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-8"> 
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
+                {listDataProduct}
               </div>
             </div>
 
@@ -175,18 +169,7 @@ export default function Home() {
               <p className="text-base ">Les produits que nous devons liquider chap chap !</p>
               
               <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-8"> 
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
+                {listDataProduct}
               </div>
             </div>
             
@@ -279,4 +262,10 @@ export default function Home() {
     </>
     
   );
+} 
+else 
+{
+  return <><div ref={refArrivage}></div> <div ref={refBestSeller}></div> <div ref={refOffreFlash}></div><LoadingSpinner></LoadingSpinner></>
+}
+
 }

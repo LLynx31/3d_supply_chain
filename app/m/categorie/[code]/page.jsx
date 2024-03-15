@@ -1,16 +1,18 @@
 'use client'
 
-import Categories from "@/app/ui/categorie";
+import {SousCategories} from "@/app/ui/categorie";
 import Article from "@/app/ui/article";
 
 import { useState, useRef, useEffect } from "react";
 
-export default function Categorie(){
+export default function PageCategorie({params}){
 
   const [categorieInView, setCategorieInView] = useState('best seller')
-
+  
   const refBestSeller = useRef(null)
   const refArrivage = useRef(null)
+
+  const [dataCategorie, setDataCategorie] = useState(null)
 
   useEffect(()=>{
 
@@ -55,7 +57,7 @@ export default function Categorie(){
 
       <div className="px-8 pt-5">
       {/* Categorie */}
-      <Categories></Categories>
+      <SousCategories code={params.code} ></SousCategories>
 
       <div className="pt-1 gap-9 mt-8 flex">
 

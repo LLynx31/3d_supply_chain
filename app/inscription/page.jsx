@@ -1,9 +1,89 @@
 'use client'
 
+import { Donegal_One } from "next/font/google"
 import { useState } from "react"
-
+import { postData } from "../features/inscription"
 
 function FormInscription({succesIsGood}){
+
+    const [data, setData] = useState({
+        nom: "",
+        prenoms: "",
+        telephone1: "",
+        telephone2: "",
+        email: "",
+        typeUser: "/api/type_users/1",
+        plainPassword: ""
+    })
+
+    function updateNom(dataUpate){
+        setData(
+            {
+                ...data,
+                 nom: dataUpate
+            }
+            
+        )
+    }
+
+    function updatePrénom(dataUpate){
+        setData(
+            {
+                ...data,
+                 prenoms: dataUpate
+            }
+            
+        )
+    }
+
+
+    function updateTelephone1(dataUpate){
+        setData(
+            {
+                ...data,
+                 telephone1: dataUpate
+            }
+            
+        )
+    }
+
+
+    function updateTelephone2(dataUpate){
+        setData(
+            {
+                ...data,
+                 telephone2: dataUpate
+            }
+            
+        )
+    }
+
+
+    function updateEmail(dataUpate){
+        setData(
+            {
+                ...data,
+                 email: dataUpate
+            }
+            
+        )
+    }
+
+
+    function updatePlainPassword(dataUpate){
+        setData(
+            {
+                ...data,
+                 plainPassword: dataUpate
+            }
+            
+        )
+    }
+
+
+    
+      
+
     return(
         <>
             <h1 className="text-xl font-bold text-center">Création de compte</h1>
@@ -13,31 +93,42 @@ function FormInscription({succesIsGood}){
             <form>
                 <div className="w-full mt-5">
                     <div className="text-base">Nom </div>
-                    <input className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                    <input name="nom" value={data.nom} onChange={(e) => updateNom(e.target.value)} className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
                 </div>  
 
                 <div className="w-full mt-5">
                     <div className="text-base">Prénom </div>
-                    <input className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                    <input name="prenom"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
                 </div>    
 
                 <div className="w-full mt-5">
                     <div className="text-base">Email </div>
-                    <input className="w-full border border-gray-300 px-1 py-2" type="email" placeholder="Sagoe"></input>
+                    <input name="email" value={data.email} onChange={(e) => updateEmail(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="email" placeholder="Sagoe"></input>
                 </div> 
+                
 
                 <div className="w-full mt-5">
                     <div className="text-base">Mot de passe </div>
-                    <input className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="Sagoe"></input>
+                    <input  name="plainPassword" value={data.plainPassword} onChange={(e) => updatePlainPassword(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="Sagoe"></input>
                 </div>  
 
 
                 <div className="w-full mt-5">
                     <div className="text-base">Confirmation mot de passe </div>
-                    <input className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="Sagoe"></input>
+                    <input name="plainPassword" className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="Sagoe"></input>
                 </div> 
 
-                <button onClick={succesIsGood} className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">VALIDER</button>  
+                <div className="w-full mt-5">
+                    <div className="text-base">téléphone 1 </div>
+                    <input name="telephone1" value={data.telephone1} onChange={(e) => updateTelephone1(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                </div> 
+
+                <div className="w-full mt-5">
+                    <div className="text-base">téléphone 2 </div>
+                    <input name="telephone2" value={data.telephone2} onChange={(e) => updateTelephone2(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                </div> 
+
+                <button onClick={() => postData("https://api.3dsupplychains.com/api/users", data).finally((donnees)=> console.log(donnees))} className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">VALIDER</button>  
             </form> 
         </>
    

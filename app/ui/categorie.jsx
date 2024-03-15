@@ -2,13 +2,17 @@
 
 import Link from 'next/link';
 import { register } from 'swiper/element/bundle';
+import { useEffect, useState } from 'react';
 
 register()
 
-function Categorie({image, nom, className}){
+const imageCategorie = "/categorie.png"
+
+function Categorie({code, image, nom, className}){
 
     return (
-        <Link href="/m/categorie"><div className={"flex-col flex " + className}>
+        <Link href={"/m/categorie/" + code}>
+          <div className={"flex-col flex w-fit " + className}>
           <img
             loading="lazy"
             srcSet={image}
@@ -22,43 +26,81 @@ function Categorie({image, nom, className}){
       )
 }
 
-export default function Categories(){
+export  function Categories(){
 
-  const imageCategorie = "/categorie.png"
+  const [data, setData] = useState([])
+
+    useEffect(()=>{
+      fetch("https://api.3dsupplychains.com/api/categories")
+      .then((response)=>response.json())
+      .then((responseParse)=>setData(responseParse["hydra:member"]))
+    }, [])
+
+
+    let listCategorie
+    if(data.length > 0){
+      listCategorie = data.map(categorie =>
+        <swiper-slide key={categorie.code}>
+          <Categorie code={categorie.code} image={imageCategorie} nom={categorie.libelle}></Categorie>
+        </swiper-slide>
+      )
+
+    }
 
 
     return(
         <><div className='my-5 md:block hidden'>
-        <swiper-container space-between="10" slides-per-view="9" navigation="true" speed="500" loop="true" css-mode="true">
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-          <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+        <swiper-container space-between="10" slides-per-view={"9"} navigation="true" speed="500" css-mode="true">
+          {listCategorie}
+          
         </swiper-container>
       </div><div className='my-5 md:hidden'>
-          <swiper-container space-between="10" slides-per-view="5" navigation="true" speed="500" loop="true" css-mode="true">
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
-            <swiper-slide><Categorie image={imageCategorie} nom={"légumes"}></Categorie></swiper-slide>
+          <swiper-container space-between="10" slides-per-view="5" navigation="true" speed="500"  css-mode="true">
+            {listCategorie}
           </swiper-container>
         </div></>
         
     )
+}
+
+
+export function SousCategories({code}){
+
+  const [data, setData] = useState(null)
+
+    useEffect(()=>{
+      fetch("https://api.3dsupplychains.com/api/categories?page=1&code=" + code)
+      .then((response)=>response.json())
+      .then((responseParse)=>setData(responseParse["hydra:member"][0].sousCategories))
+    }, [])
+
+
+    
+    if(data){
+      const listCategorie = data.map(categorie =>
+        <swiper-slide key={categorie.code}>
+          <Categorie code={code + "/"+ "#" + categorie.code} image={imageCategorie} nom={categorie.libelle}></Categorie>
+        </swiper-slide>
+      )
+
+    
+
+
+    return(
+        <><div className='my-5 md:block hidden'>
+        <swiper-container space-between="10" slides-per-view={"9"} navigation="true" speed="500" css-mode="true">
+          {listCategorie}
+          
+        </swiper-container>
+      </div><div className='my-5 md:hidden'>
+          <swiper-container space-between="10" slides-per-view="5" navigation="true" speed="500"  css-mode="true">
+            {listCategorie}
+          </swiper-container>
+        </div></>
+        
+    )
+}else{
+  return <div></div>
+}
+
 }
