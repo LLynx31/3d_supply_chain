@@ -43,7 +43,7 @@ export default function ArticleView({params}){
 
         const listImageDataProduct = dataProduct.imageProduits.map(image => {
         const linkImage = "https://api.3dsupplychains.com/" + image.path
-        return <img loading="lazy" onClick={()=>setImageProduct(linkImage)} srcSet={linkImage} alt="boeuf" className="rounded-md w-[80px] h-[80px] my-3"></img>})
+        return <img loading="lazy" key={image.path} onClick={()=>setImageProduct(linkImage)} srcSet={linkImage} alt="boeuf" className="rounded-md w-[80px] h-[80px] my-3"></img>})
 
         let listDataProductSimilar = null 
 
