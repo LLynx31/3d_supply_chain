@@ -1,6 +1,7 @@
 'use client'
 
 import Article from "./ui/article";
+import BottomMenu from "./ui/bottomMenu";
 import {Categories} from "./ui/categorie";
 import Footer from "./ui/footer";
 import Header from "./ui/header";
@@ -259,6 +260,7 @@ export default function Home() {
 
       </div>
       <Footer></Footer>
+      <BottomMenu></BottomMenu>
     </>
     
   );

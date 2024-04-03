@@ -1,0 +1,1 @@
+export function extraitNombre(str){ return str.replace(/[^\d]/g, "")}

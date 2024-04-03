@@ -3,14 +3,14 @@
 import { withCoalescedInvoke } from "next/dist/lib/coalesced-function"
 import { useState } from "react"
 
-export default function ItemPanier(){
-    const imgBoeuf = "/boeuf.png"
+export default function ItemPanier({nom,description,prix,quantiteProduct,imageProduct}){
+    const linkImage = "https://api.3dsupplychains.com/" + imageProduct
     const imgClose = "/closePanier.png"
 
-    const [quantite, setQuantite] = useState(1)
+    const [quantite, setQuantite] = useState(quantiteProduct)
     const [vu, setVu] = useState('')
 
-    const prix = 50000
+
 
     function augmenteQuantite(){
         setQuantite(quantite + 1)
@@ -23,10 +23,10 @@ export default function ItemPanier(){
         <>
             <div className={`flex px-2 ${vu}`}>
             <div className="w-[45%] flex px-1">
-                <img alt="boeuf" loading="lazy" className="mr-1" width={55} srcSet={imgBoeuf}></img>
+                <img alt="boeuf" loading="lazy" className="mr-1" width={55} srcSet={linkImage}></img>
                 <div className="flex flex-col justify-center">
-                    <div className="text-base font-semibold ">Morceaux de viande-5 KG</div>
-                    <div className="text-sm  ">Lorem ipsum dolor sit amet consectetur adipisicing elit. </div>
+                    <div className="text-base font-semibold ">{nom}</div>
+                    <div className="text-sm  ">{description} </div>
                 </div>
             </div>
             <div className="w-[15%] text-base font-semibold  align-middle flex justify-center items-center"><div>{prix} FCFA</div></div>

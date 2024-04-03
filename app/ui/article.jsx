@@ -25,8 +25,8 @@ export default function Article({prix,poids,reduction,nom,image,code}){
             <div className="flex items-center bg-white justify-between px-1 py-1 h-[35%]">
                 <div className="flex  flex-col px-1">
                     <div className="flex flex-col items-center">
-                        <div className="font-bold w-fit px-2 py-1 mb-1 bg-jaune md:text-[11px] min-[1210px]:text-[12px] rounded-[5px] ">{reduction} <span className="text-[10px]">FCFA</span></div>
-                        <div className="font-bold w-fit  py-1 md:text-[11px] min-[1210px]:text-[12px] "><s>{prix} <span className="text-[10px]">FCFA</span></s></div>
+                        <div className="font-bold w-fit px-2 py-1 mb-1 bg-jaune md:text-[11px] min-[1210px]:text-[12px] rounded-[5px] ">{parseFloat(reduction)} <span className="text-[10px]">FCFA</span></div>
+                        <div className="font-bold w-fit  py-1 md:text-[11px] min-[1210px]:text-[12px] "><s>{parseInt(prix)} <span className="text-[10px]">FCFA</span></s></div>
                         </div>
                         <div className="md:text-[11px] text-[12px] px-2">5 KG</div>
 

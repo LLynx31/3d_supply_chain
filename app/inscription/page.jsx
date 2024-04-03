@@ -1,8 +1,7 @@
 'use client'
-
-import { Donegal_One } from "next/font/google"
 import { useState } from "react"
-import { postData } from "../features/inscription"
+import { postInscription } from "../features/inscription"
+import Link from "next/link"
 
 function FormInscription({succesIsGood}){
 
@@ -81,54 +80,63 @@ function FormInscription({succesIsGood}){
     }
 
 
+    async function actionForm(){
+        try {
+            const response = await postInscription(data)
+            succesIsGood(true)
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+        
+    }
     
       
 
     return(
         <>
             <h1 className="text-xl font-bold text-center">Création de compte</h1>
+            <p className="text-base text-center ">Vous avez déjà un compte ?  <Link href={"/"} className="text-base text-jaune underline">clickez ici puis sur l'icone de compte pour vous connecter</Link> </p>
 
-            <p className="text-lg text-center ">Veuillez remplir le formulaire</p>
-
-            <form>
+            <form action={actionForm}>
                 <div className="w-full mt-5">
                     <div className="text-base">Nom </div>
-                    <input name="nom" value={data.nom} onChange={(e) => updateNom(e.target.value)} className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                    <input name="nom" value={data.nom} onChange={(e) => updateNom(e.target.value)} className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="nom"></input>
                 </div>  
 
                 <div className="w-full mt-5">
-                    <div className="text-base">Prénom </div>
-                    <input name="prenom"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                    <div className="text-base">Prénoms </div>
+                    <input name="prenom"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="prenoms"></input>
                 </div>    
 
                 <div className="w-full mt-5">
                     <div className="text-base">Email </div>
-                    <input name="email" value={data.email} onChange={(e) => updateEmail(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="email" placeholder="Sagoe"></input>
+                    <input name="email" value={data.email} onChange={(e) => updateEmail(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="email" placeholder="email"></input>
                 </div> 
                 
 
                 <div className="w-full mt-5">
                     <div className="text-base">Mot de passe </div>
-                    <input  name="plainPassword" value={data.plainPassword} onChange={(e) => updatePlainPassword(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="Sagoe"></input>
+                    <input  name="plainPassword" value={data.plainPassword} onChange={(e) => updatePlainPassword(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="mot de passe"></input>
                 </div>  
 
 
                 <div className="w-full mt-5">
                     <div className="text-base">Confirmation mot de passe </div>
-                    <input name="plainPassword" className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="Sagoe"></input>
+                    <input name="plainPassword" className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="confirmer le mot de passe"></input>
                 </div> 
 
                 <div className="w-full mt-5">
                     <div className="text-base">téléphone 1 </div>
-                    <input name="telephone1" value={data.telephone1} onChange={(e) => updateTelephone1(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                    <input name="telephone1" value={data.telephone1} onChange={(e) => updateTelephone1(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="0101010101"></input>
                 </div> 
 
                 <div className="w-full mt-5">
                     <div className="text-base">téléphone 2 </div>
-                    <input name="telephone2" value={data.telephone2} onChange={(e) => updateTelephone2(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="Sagoe"></input>
+                    <input name="telephone2" value={data.telephone2} onChange={(e) => updateTelephone2(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="0202020202"></input>
                 </div> 
 
-                <button onClick={() => postData("https://api.3dsupplychains.com/api/users", data).finally((donnees)=> console.log(donnees))} className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">VALIDER</button>  
+                <button  className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">VALIDER</button>  
             </form> 
         </>
    
@@ -144,10 +152,10 @@ function SuccesInscription(){
             <p className="text-base text-center mb-3">Confirmation du compte</p>
             <div className={"flex py-2 justify-center items-center px-2 bg-teal-50 rounded-xl w-fit transition-[display] "}>
                 <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
-                <div className="text-teal-500">Vous avez reçu un mail, veuillez s’il vous plaît cliquer sur le lien pour la vérification de votre compte</div>
+                <div className="text-teal-500">Votre compte a bien été créé dirigez vous vers la page d'acceuille pour vous connecter avec votre adresse e-mail et votre mot de passe</div>
             </div>
 
-            <button className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md font-bold tracking-wider">Renvoyer</button>
+            {/*<button className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md font-bold tracking-wider">Renvoyer</button>*/}
 
             <button onClick={()=>{document.location.href = "/"}} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2 font-bold tracking-wider">Retourner à l'acceuil</button>
         </div>

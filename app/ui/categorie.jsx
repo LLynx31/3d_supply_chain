@@ -26,6 +26,32 @@ function Categorie({code, image, nom, className}){
       )
 }
 
+
+function SousCategorie({id, image, nom, className, setDataProduct}){
+
+  async function getProduct(){
+    setDataProduct(null)
+    fetch("https://api.3dsupplychains.com/api/produits?page=1&sousCategorie=" + id)
+          .then((response)=>response.json())
+          .then((responseParse) => setDataProduct(responseParse["hydra:member"]))
+          .catch((error)=> console.error(error))
+  }
+
+  return (
+      
+        <div className={"flex-col flex w-fit cursor-pointer " + className} onClick={()=>getProduct()}>
+        <img
+          loading="lazy"
+          srcSet={image}
+          className="h-full w-full object-cover object-center inset-0"
+        />
+        <div className="text-black text-base whitespace-nowrap bg-amber-300 justify-center items-stretchpx-7 py-2">
+          {nom}
+        </div>
+        </div>
+    )
+}
+
 export  function Categories(){
 
   const [data, setData] = useState([])
@@ -64,27 +90,12 @@ export  function Categories(){
 }
 
 
-export function SousCategories({code}){
-
-  const [data, setData] = useState(null)
-
-    useEffect(()=>{
-      fetch("https://api.3dsupplychains.com/api/categories?page=1&code=" + code)
-      .then((response)=>response.json())
-      .then((responseParse)=>setData(responseParse["hydra:member"][0].sousCategories))
-    }, [])
-
-
-    
-    if(data){
+export function SousCategories({code,data,setDataProduct}){
       const listCategorie = data.map(categorie =>
         <swiper-slide key={categorie.code}>
-          <Categorie code={code + "/"+ "#" + categorie.code} image={imageCategorie} nom={categorie.libelle}></Categorie>
+          <SousCategorie id={categorie["@id"]} setDataProduct={setDataProduct} image={imageCategorie} nom={categorie.libelle}></SousCategorie>
         </swiper-slide>
       )
-
-    
-
 
     return(
         <><div className='my-5 md:block hidden'>
@@ -99,8 +110,5 @@ export function SousCategories({code}){
         </div></>
         
     )
-}else{
-  return <div></div>
 }
 
-}

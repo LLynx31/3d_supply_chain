@@ -4,6 +4,7 @@ import {SousCategories} from "@/app/ui/categorie";
 import Article from "@/app/ui/article";
 
 import { useState, useRef, useEffect } from "react";
+import LoadingSpinner from "@/app/ui/loading";
 
 export default function PageCategorie({params}){
 
@@ -11,8 +12,6 @@ export default function PageCategorie({params}){
   
   const refBestSeller = useRef(null)
   const refArrivage = useRef(null)
-
-  const [dataCategorie, setDataCategorie] = useState(null)
 
   useEffect(()=>{
 
@@ -34,9 +33,6 @@ export default function PageCategorie({params}){
       });
     });
   
-  
-  
-  
     observerBestSeller.observe(refBestSeller.current)
     observerArrival.observe(refArrivage.current)
 
@@ -44,6 +40,28 @@ export default function PageCategorie({params}){
   })
 
 
+  const [dataSousCategorie, setDataSousCategorie] = useState(null)
+  const [dataProductSousCategorie, setDataProductSousCategorie] = useState(null)
+
+  useEffect(()=>{
+      fetch("https://api.3dsupplychains.com/api/categories?page=1&code=" + params.code)
+      .then((response)=>response.json())
+      .then((responseParse) =>
+        {
+          responseParse["hydra:member"][0] && setDataSousCategorie(responseParse["hydra:member"][0].sousCategories)
+          
+          fetch("https://api.3dsupplychains.com/api/produits?page=1&sousCategorie=" + responseParse["hydra:member"][0].sousCategories[0]["@id"])
+          .then((response)=>response.json())
+          .then((responseParse) => setDataProductSousCategorie(responseParse["hydra:member"]))
+          .catch((error)=> console.error(error))
+        })}
+       
+    , [])
+
+  
+  if (dataSousCategorie && dataProductSousCategorie){
+    
+    const listDataProduct = dataProductSousCategorie.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1].valeur}></Article>)
 
 
   return (
@@ -51,13 +69,13 @@ export default function PageCategorie({params}){
 
       <div className="text-xl flex flex-col justify-center items-center bg-amber-200 h-[200px] border-b border-b-gray-300">
         <div className="text-[13px] tracking-[.25em] ">Catégorie</div>
-        <div className="font-bold">Viande de porc</div>
+        <div className="font-bold">{params.code}</div>
       </div>
 
 
       <div className="px-8 pt-5">
       {/* Categorie */}
-      <SousCategories code={params.code} ></SousCategories>
+      <SousCategories data={dataSousCategorie} setDataProduct={setDataProductSousCategorie} code={params.code} ></SousCategories>
 
       <div className="pt-1 gap-9 mt-8 flex">
 
@@ -90,18 +108,7 @@ export default function PageCategorie({params}){
               <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1>
               <p className="text-base ">Les produits les plus vendus de la plateforme</p>
               <div  className="grid grid-cols-4 gap-5 mt-5"> 
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
+                {listDataProduct}
               </div>
             </div>
         
@@ -110,18 +117,7 @@ export default function PageCategorie({params}){
               <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
               <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
               <div  className="grid grid-cols-4 gap-5 mt-5"> 
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
-                <Article></Article>
+              {listDataProduct}
               </div>
             </div>
 
@@ -135,4 +131,7 @@ export default function PageCategorie({params}){
     </>
     
   )
+} else {
+  return <><div ref={refArrivage}></div> <div ref={refBestSeller}></div><LoadingSpinner></LoadingSpinner></>
+}
 }

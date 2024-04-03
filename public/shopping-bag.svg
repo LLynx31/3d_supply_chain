@@ -1,7 +1,5 @@
-<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="shopping-bag">
-<path id="Vector" d="M11 3.6665L5.5 10.9998V36.6665C5.5 37.639 5.88631 38.5716 6.57394 39.2592C7.26158 39.9469 8.19421 40.3332 9.16667 40.3332H34.8333C35.8058 40.3332 36.7384 39.9469 37.4261 39.2592C38.1137 38.5716 38.5 37.639 38.5 36.6665V10.9998L33 3.6665H11Z" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M5.5 11H38.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_3" d="M29.3332 18.3335C29.3332 20.2784 28.5606 22.1437 27.1853 23.5189C25.81 24.8942 23.9448 25.6668 21.9998 25.6668C20.0549 25.6668 18.1897 24.8942 16.8144 23.5189C15.4391 22.1437 14.6665 20.2784 14.6665 18.3335" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 6H21" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

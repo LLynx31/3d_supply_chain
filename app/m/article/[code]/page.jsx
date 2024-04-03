@@ -2,7 +2,9 @@
 import LoadingSpinner from "@/app/ui/loading"
 import Article from "../../../ui/article"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { postAddPanier } from "@/app/features/postData"
+
 
 export default function ArticleView({params}){
 
@@ -39,7 +41,21 @@ export default function ArticleView({params}){
 
     if (dataProduct) {
 
-        
+        async function ajoutePanier(){
+            try {
+                const etat = await postAddPanier(dataProduct['@id'],quantite)
+                if(etat == 'Ok'){
+                    setAjoutReussi('')
+                } else {
+                    console.log("error")
+                }
+            }catch(error){
+                console.error(error)
+            }
+        }
+    
+
+        console.log(dataProduct)
 
         const listImageDataProduct = dataProduct.imageProduits.map(image => {
         const linkImage = "https://api.3dsupplychains.com/" + image.path
@@ -65,7 +81,7 @@ export default function ArticleView({params}){
 
         <div className="relative px-8 pt-5">
 
-                <div className={"absolute right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
+                <div className={"fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
                     <div className="text-base">{dataProduct.nom} ajouté au panier avec succès</div>
                     <button onClick={()=> setAjoutReussi('hidden')}><img loading="lazy" srcSet={imgClose}></img></button>
@@ -103,7 +119,7 @@ export default function ArticleView({params}){
                             <button onClick={diminuQuantite}>-</button>{quantite}<button onClick={augmenteQuantite}>+</button>
                         </div>
 
-                        <button onClick={() => setAjoutReussi('')} className="flex justify-center items-center  text-base text-white w-full bg-rouge rounded-xl px-3 py-3 mt-5">
+                        <button onClick={ajoutePanier} className="flex justify-center items-center  text-base text-white w-full bg-rouge rounded-xl px-3 py-3 mt-5">
                             <img loading="lazy" alt="shopping cart" src={imgShoppingCart} className="h-[20px] w-[20px]"></img>
                             <div className="ml-5 text-base">Ajouter au panier</div>
                         </button>
