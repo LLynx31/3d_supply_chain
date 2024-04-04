@@ -84,28 +84,21 @@ export async function postAddPanier(product, quantite){
           }
     }
 
-    async function addExiste(panier,previousDetailsDocuments){
+    async function addExiste(){
 
         const formData = {
-
-            detailDocuments: [
-            
-            {
-                quantite: quantite,
-                produit: product
-            },
-            ...previousDetailsDocuments,
-        ]
+            quantite: quantite,
+            produit : product    
         }
 
         console.log(formData)
 
-        /*try {
+        try {
            
             
             //effectu le requete
-            const response = await fetch("https://api.3dsupplychains.com/api/documents",{
-                method: "PATCH",
+            const response = await fetch("https://api.3dsupplychains.com/api/detail_documents",{
+                method: "POST",
                 mode: "cors",
                 cache: "no-cache",
                 headers: {
@@ -129,7 +122,7 @@ export async function postAddPanier(product, quantite){
           } 
           catch (error) {
           console.log(error)
-          }*/
+          }
     }
 
         
@@ -138,8 +131,8 @@ export async function postAddPanier(product, quantite){
         if(panier['hydra:member'].length <= 0){
             return addNoExiste()
         } else {
-            console.log(panier['hydra:member'][0].detailDocuments)
-            addExiste(panier['hydra:member'][0]['@id'], panier['hydra:member'][0].detailDocuments)
+            //console.log(panier['hydra:member'][0].detailDocuments)
+            return addExiste()
         }
 
     

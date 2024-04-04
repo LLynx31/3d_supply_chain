@@ -67,20 +67,20 @@ export default function PageCategorie({params}){
   return (
     <>
 
-      <div className="text-xl flex flex-col justify-center items-center bg-amber-200 h-[200px] border-b border-b-gray-300">
+      <div className="text-xl mt-5 sm:mt-1 flex flex-col justify-center items-center bg-amber-200 h-[200px] border-b border-b-gray-300">
         <div className="text-[13px] tracking-[.25em] ">Catégorie</div>
         <div className="font-bold">{params.code}</div>
       </div>
 
 
-      <div className="px-8 pt-5">
+      <div className="px-3 sm:px-8 pt-5">
       {/* Categorie */}
       <SousCategories data={dataSousCategorie} setDataProduct={setDataProductSousCategorie} code={params.code} ></SousCategories>
 
       <div className="pt-1 gap-9 mt-8 flex">
 
         {/* barre de navigation */}
-        <div className="sticky top-5 h-fit items-stretch content-end flex-wrap flex max-w-[202px] flex-col ">
+        <div className="sticky hidden sm:block top-5 h-fit items-stretch content-end flex-wrap flex max-w-[202px] flex-col ">
             <div className="text-black text-xl font-bold w-full">
               Navigation
             </div>
@@ -107,8 +107,9 @@ export default function PageCategorie({params}){
           <div  className="mb-16">
               <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1>
               <p className="text-base ">Les produits les plus vendus de la plateforme</p>
-              <div  className="grid grid-cols-4 gap-5 mt-5"> 
+              <div  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-5"> 
                 {listDataProduct}
+           
               </div>
             </div>
         
@@ -116,7 +117,7 @@ export default function PageCategorie({params}){
           <div  className="mb-16">
               <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
               <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
-              <div  className="grid grid-cols-4 gap-5 mt-5"> 
+              <div  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-5"> 
               {listDataProduct}
               </div>
             </div>

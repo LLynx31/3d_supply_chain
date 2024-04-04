@@ -16,9 +16,9 @@ function Categorie({code, image, nom, className}){
           <img
             loading="lazy"
             srcSet={image}
-            className="h-full w-full object-cover object-center inset-0"
+            className="w-[100px] sm:w-full sm:h-full"
           />
-          <div className="text-black text-base whitespace-nowrap bg-amber-300 justify-center items-stretchpx-7 py-2">
+          <div className="text-black text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
             {nom}
           </div>
           </div>
@@ -43,9 +43,9 @@ function SousCategorie({id, image, nom, className, setDataProduct}){
         <img
           loading="lazy"
           srcSet={image}
-          className="h-full w-full object-cover object-center inset-0"
+          className="w-[100px] sm:w-full sm:h-full"
         />
-        <div className="text-black text-base whitespace-nowrap bg-amber-300 justify-center items-stretchpx-7 py-2">
+        <div className="text-black text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
           {nom}
         </div>
         </div>
@@ -80,10 +80,11 @@ export  function Categories(){
           {listCategorie}
           
         </swiper-container>
-      </div><div className='my-5 md:hidden'>
-          <swiper-container space-between="10" slides-per-view="5" navigation="true" speed="500"  css-mode="true">
+      </div>
+      <div className='my-5 md:hidden'>
+          <div className='grid grid-cols-4 gap-2'>
             {listCategorie}
-          </swiper-container>
+          </div>
         </div></>
         
     )
@@ -104,9 +105,9 @@ export function SousCategories({code,data,setDataProduct}){
           
         </swiper-container>
       </div><div className='my-5 md:hidden'>
-          <swiper-container space-between="10" slides-per-view="5" navigation="true" speed="500"  css-mode="true">
+        <div className='grid grid-cols-4 gap-2'>
             {listCategorie}
-          </swiper-container>
+          </div>
         </div></>
         
     )

@@ -1,9 +1,12 @@
 'use client'
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function BottomMenu(){
 
-    const [isMenuClicked, setMenuCliked] = useState('home')
+    const router = useRouter()
+
+    const [isMenuClicked, setMenuCliked] = useState('')
     const [menuOpen, setMenuOpen] = useState(false)
 
 
@@ -14,7 +17,7 @@ export default function BottomMenu(){
         </svg>
     </div>
     <div onClick={()=>{
-        document.location.href = "/m/recherche/1"
+        router.push("/m/recherche")
         setMenuCliked('search')
     }}>
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +26,7 @@ export default function BottomMenu(){
         </svg>
     </div>
     <div onClick={()=>{
-        document.location.href = "/"
+        router.push("/")
         setMenuCliked('home')
     }}>
         <svg   width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +35,7 @@ export default function BottomMenu(){
     </div>
     
     <div onClick={()=>{
-        document.location.href = "/m/panier"
+        router.push("/m/panier")
         setMenuCliked('panier')
     }}>
         <svg  width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +45,7 @@ export default function BottomMenu(){
         </svg>
     </div>
     <div onClick={()=>{
-        document.location.href = "/m/compte"
+        router.push("/m/compte")
         setMenuCliked('user')
     }}>
         <svg  width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

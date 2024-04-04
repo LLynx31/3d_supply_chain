@@ -19,11 +19,11 @@ export async function middleware(request) {
 
   //si l'utilisateur n'est pas connecté et se dirige vers dashbord
   if (!currentUser && request.nextUrl.pathname.startsWith('/m/compte')) {
-    return Response.redirect(new URL('/inscription', request.url))
+    return Response.redirect(new URL('/connexion', request.url))
   }
 
   if (!currentUser && request.nextUrl.pathname.startsWith('/m/panier')) {
-    return Response.redirect(new URL('/inscription', request.url))
+    return Response.redirect(new URL('/connexion', request.url))
   }
 
   //si l'utilisateur est connecté et se dirige vers inscription

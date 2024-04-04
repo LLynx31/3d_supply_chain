@@ -12,8 +12,12 @@ export default function Panier(){
         async function recupererPanier(){
             try {
                 const panier =  await getPanier()
-                console.log(panier['hydra:member'][0].detailDocuments[0].produit.imageProduits)
-                setDataPanier(panier['hydra:member'][0].detailDocuments)
+                //console.log(panier['hydra:member'])
+                if(panier['hydra:member'].length <= 0){
+                    setDataPanier(panier['hydra:member'])
+                }else{
+                    setDataPanier(panier['hydra:member'][0].detailDocuments)
+                }
             } catch (error) {
                 console.error(error)
             }
@@ -25,19 +29,19 @@ export default function Panier(){
     if (dataPanier) {
 
         console.log(dataPanier)
-        const listPanier = dataPanier.map(panier => <ItemPanier key={panier['@id']} imageProduct={panier.produit.imageProduits[0].path} nom={panier.produit.nom} description={panier.produit.description} prix={panier.prixUnitaire} quantiteProduct={panier.quantite}></ItemPanier>)
+        const listPanier = dataPanier.map(panier => <ItemPanier key={panier['@id']} imageProduct={panier.produit.imageProduits[0].path} nom={panier.produit.nom} description={panier.produit.description} prix={parseInt(panier.prixUnitaire)} quantiteProduct={panier.quantite}></ItemPanier>)
 
 
         return (
-            <div className="mt-8 px-8 pt-5">
-                <h1 className="text-center text-2xl font-bold">Mon panier</h1>
+            <div className="mt-8 px-3 sm:px-8 pt-5">
+                <h1 className="text-center text-xl font-bold">Mon panier</h1>
                 <hr></hr>
-                <div className="mt-3 flex">
-                    <div className="w-[68%] mr-5">
+                <div className="mt-3 flex flex-col lg:flex-row">
+                    <div className="lg:w-[68%] mr-5">
                         <div className="bg-gray-200 flex px-2 py-2 mb-4">
-                            <div className="w-[45%] text-base text-center">NOM DU PRODUIT</div>
+                            <div className="w-[35%] text-base text-center">NOM DU PRODUIT</div>
                             <div className="w-[15%] text-base text-center">PRIX</div>
-                            <div className="w-[20%] text-base text-center">QUANTITE</div>
+                            <div className="w-[30%] text-base text-center">QUANTITE</div>
                             <div className="w-[15%] text-base text-center ">TOTAL</div>
                         </div>
     
@@ -47,7 +51,7 @@ export default function Panier(){
     
                     </div>
     
-                    <div className="w-[32%] border rounded-lg border-gray-200 px-3 py-5 h-fit ">
+                    <div className="lg:w-[32%] border rounded-lg border-gray-200 px-3 py-5 h-fit ">
                         <div className="text-base">Entrez votre code promo</div>
     
                         <div className="w-full mt-5 flex ">

@@ -86,7 +86,7 @@ export default function Home() {
 
       <div className="z-0">
 
-        <div className="px-8 pt-5">
+        <div className="px-3 sm:px-8 pt-5">
 
         <div className="w-full h-[500px] overflow-hidden">
 
@@ -136,7 +136,7 @@ export default function Home() {
             <div  className="mb-16">
               <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1>
               <p className="text-base ">Les produits les plus vendus de la plateforme</p>
-              <div className="grid grid-cols-2 md:max-lg:grid-cols-3 lg:grid-cols-4 gap-5 mt-8"> 
+              <div className="grid grid-cols-2 md:max-lg:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 mt-8"> 
                 {listDataProduct}
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function Home() {
             <div  className="mb-16">
               <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
               <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
-              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-8"> 
+              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 mt-8"> 
                 {listDataProduct}
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function Home() {
 
               <p className="text-base ">Les produits que nous devons liquider chap chap !</p>
               
-              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-8"> 
+              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 mt-8"> 
                 {listDataProduct}
               </div>
             </div>
@@ -182,7 +182,7 @@ export default function Home() {
 
         <div className="flex flex-col items-center md:flex-row md:justify-center mt-36">
 
-        <div className="flex w-[370px] md:mr-8 items-center flex-col">
+        <div className="flex w-[370px] px-8 md:mr-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className="  w-[155px] h-[155px]"
               loading="lazy"
@@ -201,7 +201,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex w-[370px] my-8 md:my-0 md:mr-8 items-center flex-col">
+        <div className="flex w-[370px] px-8 my-8 md:my-0 md:mr-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className=" w-[155px] h-[155px]"
               loading="lazy"
@@ -221,7 +221,7 @@ export default function Home() {
         </div>
 
 
-        <div className="flex w-[370px] items-center flex-col">
+        <div className="flex w-[370px] px-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className="w-[155px] h-[155px]"
               loading="lazy"
@@ -248,7 +248,7 @@ export default function Home() {
         <div className="flex flex-col mt-20">
         <h2 className="text-2xl mb-[50px] text-center font-bold ">Témoignage</h2>
 
-        <div>
+        <div className="">
             <Temoignages></Temoignages>
         </div>
         </div>

@@ -44,7 +44,7 @@ export default function PageRecherche({params}){
         const listProduct = dataProduct.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1].valeur}></Article>)
 
         return(
-            <div className="mx-8 mt-8 grid grid-cols-2 sm:grid-cols-5">
+            <div className="mx-8 mt-8 gap-2 grid grid-cols-2 sm:grid-cols-5">
                 
                 {listProduct}
             </div>

@@ -70,8 +70,14 @@ export async function authentificate(formData){
     
      
 export async function deleteCookies() {
-      cookies().delete('session')
-      redirect("/");
+  try{
+    cookies().delete('session')
+    return 'OK'
+  }catch (error){
+    throw error
+  }
+         
+      
     }
 
 

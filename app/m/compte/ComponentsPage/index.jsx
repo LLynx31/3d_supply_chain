@@ -50,8 +50,8 @@ export default function ComponentPage({data}){
 
     return(
         
-            <div className="flex ">
-                <div className="flex flex-col w-[35%] border-r-gray-200 border-r">
+            <div className="flex flex-col sm:flex-row">
+                <div className="flex flex-col  sm:w-[35%] border-r-gray-200 border-r">
                     <div onClick={() => setSwipeOption('infoPerso')} className={swipeOption == 'infoPerso' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5 "}>Informations et coordonnées</div>
                     <div onClick={() => setSwipeOption('password')} className={swipeOption == 'password' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5  "}>Changer le mot de passe</div>
                     <div onClick={() => setSwipeOption('adresse')} className={swipeOption == 'adresse' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5  "}>Adresse</div>
@@ -59,7 +59,7 @@ export default function ComponentPage({data}){
                     
                 </div>
     
-                <div  className="flex flex-col w-[65%] min-h-[500px] py-5 px-8">
+                <div  className="flex flex-col sm:w-[65%] min-h-[500px] py-5 px-8">
                     <div className={"fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                             <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
                             <div className="text-base">Information sauvegarder, rafraichissez </div>

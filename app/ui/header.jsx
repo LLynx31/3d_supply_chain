@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState} from 'react';
 import {authentificate, deleteCookies, getuser }from "../features/authentification";
-import LoadingSpinner from "./loading";
-import {useFormStatus} from 'react-dom'
+import { useRouter } from "next/navigation";
+
 
 
 
@@ -16,12 +16,17 @@ function FormConnexion({forgetPassword,}){
     password:''
   })
 
+  const [etatButtonForm, setEtatButtonForm] = useState('valider')
   const [errorMessage, setErrorMessage] = useState(false) 
 
   async function login(){
     
     const error = await authentificate(dataForm)
-    setErrorMessage(error)
+    if(error){
+        setErrorMessage(error)
+        setEtatButtonForm('valider')
+    }
+    
   }
 
   return(
@@ -31,15 +36,15 @@ function FormConnexion({forgetPassword,}){
         <div className="w-full mt-3.5">
           {errorMessage && <div className="text-base text-center text-rouge">{errorMessage}</div>}
           <div className="text-base" name="email">Email</div>
-          <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=>{setDataForm({...dataForm, username: e.target.value})}} value={dataForm.username} type="email" placeholder="Sagoe"></input>
+          <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=>{setDataForm({...dataForm, username: e.target.value})}} value={dataForm.username} type="email" placeholder="Email"></input>
         </div>
         <div className="w-full mt-3.5">
           <div className="text-base" name="password">Mot de passe actuel</div>
-          <input value={dataForm.password} onChange={(e)=>{setDataForm({...dataForm, password: e.target.value})}} className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="Sagoe"></input>
+          <input value={dataForm.password} onChange={(e)=>{setDataForm({...dataForm, password: e.target.value})}} className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="password"></input>
         </div>
         <div className="cursor-pointer w-fit text-right text-jaune text-base underline" onClick={forgetPassword}>mot de passe oublié ?</div>
 
-        <button type="submit" className="mt-6 text-base w-full h-[40px] flex justify-center bg-jaune text-center py-2.5 rounded-md mb-2">Valider </button>
+        <button onClick={()=>{setEtatButtonForm('connexion en cours...'),setErrorMessage(true)}} type="submit" className="mt-6 text-base w-full h-[40px] flex justify-center bg-jaune text-center py-2.5 rounded-md mb-2">{etatButtonForm} </button>
      
 
     </form>
@@ -80,7 +85,7 @@ function PopupConnexion({className=" ", closePopup}){
             closePopup()}
         } className='w-full h-screen opacity-50 bg-slate-900'></div>
 
-      <div className="w-[500px] rounded absolute opacity-100  bg-white p-8">
+      <div className="w-[300px] sm:w-[500px] rounded absolute opacity-100  bg-white p-5  sm:p-8">
         <img className="w-[150px] mx-auto" loading='lazy' alt="Image" src={logo} />
           { !forgetPassword ? <FormConnexion forgetPassword={()=>{setForgetPassword(true)}}></FormConnexion> : <FormForgetPassword></FormForgetPassword>}
         <div className="text-base">Pas encore inscrit ? <Link href={"/inscription"} className="text-jaune text-base">Créer un compte</Link></div>
@@ -95,8 +100,18 @@ function PopupConnected({className=" ", closePopup}){
 
   const logo = "/logo.png"
 
+  const router = useRouter()
+
   async function deconnected(){
-    deleteCookies()
+    try {
+      await deleteCookies()
+      router.refresh()
+    } catch (error){
+      console.log(error)
+    }
+     
+
+   
   }
 
   return(
@@ -108,7 +123,7 @@ function PopupConnected({className=" ", closePopup}){
             closePopup()}
         } className='w-full h-screen opacity-50 bg-slate-900'></div>
 
-      <div className="w-[500px] rounded absolute opacity-100  bg-white p-8">
+      <div className="w-[300px] sm:w-[500px] rounded absolute opacity-100  bg-white p-8">
         <img className="w-[150px] mx-auto" loading='lazy' alt="Image" src={logo} />
         <Link href="/m/compte" className="mt-6 text-base w-full h-[40px] flex justify-center bg-jaune text-center py-2.5 rounded-md mb-2">Aller au compte </Link>
         <button onClick={deconnected} className="mt-6 text-base w-full h-[40px] flex justify-center bg-rouge text-center py-2.5 rounded-md mb-2">se deconnecter </button>
@@ -122,6 +137,8 @@ function PopupConnected({className=" ", closePopup}){
 
 
 export default function Header(){
+
+const router = useRouter()
 
 const logo = "/logo.png"
 const search = "/search.png"
@@ -177,7 +194,7 @@ const [isSearch, setSearch] = useState('')
             </Link>
 
             <div className="md:w-[400px] max-md:hidden max-[820px]:w-[400px] min-[870px]:w-[325px] h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
-              <div onClick={()=>document.location.href=isSearch} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
+              <div onClick={() =>router.push(isSearch,)} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
                   <img className="w-[24px] h-[24px]" alt="Search" src={search} />
               </div>
               <div className="font-sans h-[40px] font-normal text-black text-lg">

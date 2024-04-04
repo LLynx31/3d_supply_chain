@@ -4,9 +4,11 @@ import Article from "../../../ui/article"
 
 import { useState, useEffect, useContext } from "react"
 import { postAddPanier } from "@/app/features/postData"
-
+import { useRouter } from "next/navigation"
 
 export default function ArticleView({params}){
+
+    const router = useRouter()
 
     const imgBoeuf = "/boeuf.png"
     const imgShoppingCart = "/shopping-cart.png"
@@ -50,7 +52,8 @@ export default function ArticleView({params}){
                     console.log("error")
                 }
             }catch(error){
-                console.error(error)
+                    router.push('/connexion')
+  
             }
         }
     
@@ -79,7 +82,7 @@ export default function ArticleView({params}){
 
         return(
 
-        <div className="relative px-8 pt-5">
+        <div className="relative px-5 pt-5">
 
                 <div className={"fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
@@ -90,26 +93,26 @@ export default function ArticleView({params}){
                 <div className="text-base  font-semibold mb-5">Acceuil &gt; <span className="text-[#9ca3af] font-medium">{dataProduct.nom}</span>  </div>
 
                 {/* article, ses images et sa description */}
-                <div className="flex mb-12">
+                <div className="flex sm:flex-row gap-5 flex-col mb-12">
                 
                     {/* image en mignature */}
-                    <div className="flex flex-col mr-8 w-[120px]">
+                    <div className="flex sm:flex-col gap-1 flex-wrap w-full sm:w-[100px]">
                         {listImageDataProduct}
                     </div>
                     {/* fin image en mignature */}
 
                     {/* image en grandeur nature */}
-                    <img loading="lazy" srcSet={swipeImageProduct} alt="boeuf" className="w-[450px]"></img>
+                    <img loading="lazy" srcSet={swipeImageProduct} alt="boeuf" className="md:w-[310px] lg:w-[450px]"></img>
 
 
                     {/* description */}
-                    <div className="ml-8 w-fit">
-                        <h1 className="text-xl font-bold ">{dataProduct.nom}</h1>
+                    <div className=" w-fit">
+                        <h1 className="text-lg sm:text-xl font-bold ">{dataProduct.nom}</h1>
                         <div className="text-base  text-[#9ca3af]">{dataProduct.description}</div>
                     
                         {dataProduct.quantiteStock > 1 ? <div className="px-3 py-2 my-3 rounded-md bg-teal-50 border border-teal-300 text-base ">Disponibilité : <span className="text-teal-400">En stock</span></div> : <div className="px-3 py-2 my-3 rounded-md bg-red-50 border border-red-300 text-base ">Disponibilité : <span className="text-red-400">Indisponible</span></div>}
 
-                        <div className="text-xl ">{dataProduct.priceProduits[0].valeur} FCFA</div>
+                        <div className="text-lg ">{parseInt(dataProduct.priceProduits[0].valeur)} FCFA</div>
 
                         <p className="mt-3 text-base mb-8">
                             {dataProduct.description} 
@@ -131,7 +134,7 @@ export default function ArticleView({params}){
 
                 <div className="mt-5 h-[250px]">
 
-                    <div  className="border-b border-b-gray-300 flex">
+                    <div  className="border-b text-base border-b-gray-300 flex">
                         <div onClick={() => setSwipDescritption('description')} className={swipeDescription == 'description' ? "cursor-pointer px-2 py-2 border-b-2 border-b-rouge" : "cursor-pointer px-2 py-2 border-b-2 border-b-white"}>
                             Description
                         </div>
@@ -169,7 +172,7 @@ export default function ArticleView({params}){
                 {/* produit similaire */}
                 <div className="mt-16 mb-28">
                     <h1 className="text-2xl font-bold  mb-5">Produit similaire</h1>
-                    <div className="grid grid-cols-5 gap-4">
+                    <div className="grid gap-2 grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 sm:gap-4">
                         {listDataProductSimilar}
                     </div>
                 </div>
