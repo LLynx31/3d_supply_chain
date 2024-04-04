@@ -26,6 +26,10 @@ export async function middleware(request) {
     return Response.redirect(new URL('/connexion', request.url))
   }
 
+  if (!currentUser && request.nextUrl.pathname.startsWith('/m/checkout')) {
+    return Response.redirect(new URL('/connexion', request.url))
+  }
+
   //si l'utilisateur est connecté et se dirige vers inscription
   if (currentUser && request.nextUrl.pathname.startsWith('/inscription')) {
     return Response.redirect(new URL('/m/compte', request.url))

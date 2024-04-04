@@ -2,15 +2,17 @@
 
 import { withCoalescedInvoke } from "next/dist/lib/coalesced-function"
 import { useState } from "react"
+import deleteArticlePanier from "../features/deleteData"
+import { useRouter } from "next/navigation"
 
-export default function ItemPanier({nom,description,prix,quantiteProduct,imageProduct}){
+export default function ItemPanier({nom,description,prix,quantiteProduct,imageProduct,id}){
     const linkImage = "https://api.3dsupplychains.com/" + imageProduct
     const imgClose = "/closePanier.png"
 
     const [quantite, setQuantite] = useState(quantiteProduct)
     const [vu, setVu] = useState('')
 
-
+    const router = useRouter()
 
     function augmenteQuantite(){
         setQuantite(quantite + 1)
@@ -18,6 +20,18 @@ export default function ItemPanier({nom,description,prix,quantiteProduct,imagePr
 
     function diminuQuantite(){
         quantite > 1 && setQuantite(quantite - 1) 
+    }
+
+    async function supArticlePanier(){
+        try {
+
+            const response = await deleteArticlePanier(id)
+            setVu('hidden')     
+        } catch (error) {
+            console.log(error)
+        }
+        
+        
     }
     return (
         <>
@@ -36,7 +50,7 @@ export default function ItemPanier({nom,description,prix,quantiteProduct,imagePr
                 </div>
             </div>
             <div className="w-[15%] flex justify-center text-base items-center"><div>{prix * quantite} FCFA</div></div>
-            <div className="w-[5%] flex justify-center items-center"><button onClick={() => { setVu('hidden') } }><img loading="lazy" srcSet={imgClose}></img></button></div>
+            <div className="w-[5%] flex justify-center items-center"><button onClick={supArticlePanier }><img loading="lazy" srcSet={imgClose}></img></button></div>
 
 
             </div>
