@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState} from 'react';
 import {authentificate, deleteCookies, getuser }from "../features/authentification";
 import { useRouter } from "next/navigation";
+import { getPanier } from "../features/getData";
 
 
 
@@ -148,6 +149,7 @@ const shoppingBag = "/shopping-bag.svg"
 const [popupOpen, setPopupOpen] = useState('hidden')
 
 const [connected, setConnected] = useState(false)
+const [nbrArticlePanier, setNbrArticlePanier] = useState(0)
 
 const [isSearch, setSearch] = useState('')
 
@@ -163,6 +165,21 @@ const [isSearch, setSearch] = useState('')
     }
 
     verifieConnexion()
+    
+  },[])
+
+  useEffect(() => {
+    async function nbrArticlePanier(){
+      try {
+        const response = await getPanier()
+        setNbrArticlePanier(response['hydra:member'][0].detailDocuments.length)
+      } catch (error){
+        console.error(error)
+      }
+      
+    }
+
+    nbrArticlePanier()
     
   },[])
 
@@ -215,11 +232,11 @@ const [isSearch, setSearch] = useState('')
                 />
               </Link> 
 
-              <div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f6cb05] rounded-full">
+              {/*<div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f6cb05] rounded-full">
                 <div className="font-sans font-normal text-black ">
-                  0
+                  {nbrArticlePanier}
                 </div>
-              </div>
+    </div>*/}
             </div>
           </div>
 

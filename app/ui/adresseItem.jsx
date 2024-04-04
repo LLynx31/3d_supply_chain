@@ -12,6 +12,8 @@ function AdresseItem({adresse,nbr}){
     const [changeText, setChangeText] = useState("Changer")
     const [ajoutReussi, setAjoutReussi] = useState('hidden')
 
+    const [etatSauvegarde, setEtatSauvegarde] = useState('SAUVEGARDER')
+
     const imgDangerCircle = "/Danger_Circle.png"
     const imgClose = "/x.png"
 
@@ -26,6 +28,7 @@ function AdresseItem({adresse,nbr}){
         try {
             const response =  await pacthAdress(dataAdress,adresse['@id'])
             setAjoutReussi('')
+            setEtatSauvegarde('SAUVEGARDER')
         } catch (error) {
             console.log(error)
         }
@@ -70,7 +73,7 @@ function AdresseItem({adresse,nbr}){
                     <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.infoSup} onChange={e => setDataAdress({...dataAdress, infoSup: e.target.value})} type="text" placeholder=""></input>
                 </div>
 
-                <button type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">SAUVEGARDER</button>
+                <button onClick={()=>setEtatSauvegarde('SAUVEGARDE EN COURS...')} type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">{etatSauvegarde}</button>
         
             </form>
         </div>)
@@ -103,8 +106,11 @@ export function Adresse({Adress}){
 export function AddAdress(){
 
     const [ajoutReussi, setAjoutReussi] = useState('hidden')
+    const [etatSauvegarde, setEtatSauvegarde] = useState('AJOUTER')
 
     const [formAddAddressView, setFormAddAddressView] = useState(false)
+
+    const router = useRouter()
 
     const [dataAdress,setDataAdress] = useState({
         ville:"",
@@ -121,11 +127,11 @@ export function AddAdress(){
         try{
             console.log(dataForm)
             const response = await postAdress(dataForm) 
-            setAjoutReussi('')
             setDataAdress({ville:"",
             commune:"",
             infoSup:"",
             pays:""})
+            router.refresh()
         } 
         catch(error) {
             console.error(error)
@@ -165,7 +171,7 @@ export function AddAdress(){
                     <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.infoSup} onChange={e => setDataAdress({...dataAdress, infoSup: e.target.value})} type="text" placeholder=""></input>
                 </div>
 
-                <button type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">SAUVEGARDER</button>
+                <button onClick={()=>setEtatSauvegarde('AJOUT EN COURS...')} type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">{etatSauvegarde}</button>
             </form></>
     )
 }

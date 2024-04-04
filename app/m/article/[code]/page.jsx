@@ -45,9 +45,10 @@ export default function ArticleView({params}){
 
         async function ajoutePanier(){
             try {
-                const etat = await postAddPanier(dataProduct['@id'],quantite)
+                const etat = await postAddPanier(dataProduct['@id'],quantite)                
                 if(etat == 'Ok'){
                     setAjoutReussi('')
+                    
                 } else {
                     console.log("error")
                 }
@@ -87,7 +88,7 @@ export default function ArticleView({params}){
                 <div className={"fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
                     <div className="text-base">{dataProduct.nom} ajouté au panier avec succès</div>
-                    <button onClick={()=> setAjoutReussi('hidden')}><img loading="lazy" srcSet={imgClose}></img></button>
+                    <button onClick={()=> {setAjoutReussi('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
 
                 <div className="text-base  font-semibold mb-5">Acceuil &gt; <span className="text-[#9ca3af] font-medium">{dataProduct.nom}</span>  </div>

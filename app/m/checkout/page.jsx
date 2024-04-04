@@ -126,7 +126,7 @@ export default function CheckoutPage(){
                
                             </div>
         
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 p-5">
+                            <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 p-5">
                                 {listPanier}
                             </div>
                         </div>

@@ -10,6 +10,8 @@ export default function ComponentPage({data}){
     const [ajoutReussi, setAjoutReussi] = useState('hidden')
     const [ajoutPassword, setAjoutPassword] = useState('hidden')
 
+    const [etatSauvegarde, setEtatSauvegarde] = useState('SAUVEGARDER')
+
     const imgDangerCircle = "/Danger_Circle.png"
     const imgClose = "/x.png"
 
@@ -33,6 +35,7 @@ export default function ComponentPage({data}){
         try {
             const response =  await pacthUser(dataInfoSup,dataInfoSup.id)
             setAjoutReussi('')
+            setEtatSauvegarde('SAUVEGARDER')
         } catch (error) {
             
         }
@@ -42,6 +45,7 @@ export default function ComponentPage({data}){
         try {
             const response =  await postPassword(dataPassword)
             setAjoutPassword('')
+            setEtatSauvegarde('SAUVEGARDER')
         } catch (error) {
             console.log(error)
         }
@@ -96,7 +100,7 @@ export default function ComponentPage({data}){
                             <input value={dataInfoSup.telephone2} onChange={(e)=>setDataInfoSup({...dataInfoSup, telephone2: e.target.value})} className="w-full border border-gray-300 px-1 py-2"  placeholder={data['hydra:member'][0].telephone2}></input>
                         </div>
     
-                        <button type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">SAUVEGARDER</button>
+                        <button onClick={()=>setEtatSauvegarde('SAUVEGARDE EN COURS...')} type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">{etatSauvegarde}</button>
                         
                     </form>
     
@@ -127,7 +131,7 @@ export default function ComponentPage({data}){
                             <input className="w-full border border-gray-300 px-1 py-2"  placeholder=""></input>
                         </div>
     
-                        <button type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">METTRE A JOUR</button>
+                        <button onClick={()=>setEtatSauvegarde('SAUVEGARDE EN COURS...')} type="submit" className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">{etatSauvegarde}</button>
                         
                     </form>
     
