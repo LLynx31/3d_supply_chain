@@ -101,39 +101,39 @@ function FormInscription({succesIsGood}){
             <form action={actionForm}>
                 <div className="w-full mt-5">
                     <div className="text-base">Nom </div>
-                    <input name="nom" value={data.nom} onChange={(e) => updateNom(e.target.value)} className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="nom"></input>
+                    <input  name="nom" value={data.nom} onChange={(e) => updateNom(e.target.value)} className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="nom"></input>
                 </div>  
 
                 <div className="w-full mt-5">
                     <div className="text-base">Prénoms </div>
-                    <input name="prenom"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="prenoms"></input>
+                    <input  name="prenom"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="prenoms"></input>
                 </div>    
 
                 <div className="w-full mt-5">
                     <div className="text-base">Email </div>
-                    <input name="email" value={data.email} onChange={(e) => updateEmail(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="email" placeholder="email"></input>
+                    <input  name="email" value={data.email} onChange={(e) => updateEmail(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="email" placeholder="email"></input>
                 </div> 
                 
 
                 <div className="w-full mt-5">
                     <div className="text-base">Mot de passe </div>
-                    <input  name="plainPassword" value={data.plainPassword} onChange={(e) => updatePlainPassword(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="mot de passe"></input>
+                    <input   name="plainPassword" value={data.plainPassword} onChange={(e) => updatePlainPassword(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="password" placeholder="mot de passe"></input>
                 </div>  
 
 
                 <div className="w-full mt-5">
                     <div className="text-base">Confirmation mot de passe </div>
-                    <input name="plainPassword" className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="confirmer le mot de passe"></input>
+                    <input  name="plainPassword" className="w-full border border-gray-300 px-2 py-2" type="password" placeholder="confirmer le mot de passe"></input>
                 </div> 
 
                 <div className="w-full mt-5">
                     <div className="text-base">téléphone 1 </div>
-                    <input name="telephone1" value={data.telephone1} onChange={(e) => updateTelephone1(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="0101010101"></input>
+                    <input  name="telephone1" value={data.telephone1} onChange={(e) => updateTelephone1(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="0101010101"></input>
                 </div> 
 
                 <div className="w-full mt-5">
                     <div className="text-base">téléphone 2 </div>
-                    <input name="telephone2" value={data.telephone2} onChange={(e) => updateTelephone2(e.target.value)}  className="w-full border border-gray-300 px-1 py-2" type="text" placeholder="0202020202"></input>
+                    <input  name="telephone2" value={data.telephone2} onChange={(e) => updateTelephone2(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="0202020202"></input>
                 </div> 
 
                 <button  className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">VALIDER</button>  
@@ -170,11 +170,11 @@ export default function InscriptionPage(){
 
 
     return (
-        <div className="flex mt-8 mb-20"> 
-            <img loading="lazy" srcSet={bannerImg} className="h-[570px] w-[700px] mr-10">
+        <div className="flex gap-20 mt-8 mb-20"> 
+            <img loading="lazy" srcSet={bannerImg} className="hidden sm:block  w-1/2">
             </img>
 
-            <div className="w-full">{!succes ? <FormInscription succesIsGood={()=>setSucces(true)}></FormInscription> : <SuccesInscription></SuccesInscription> }</div>
+            <div className="w-[1/2]">{!succes ? <FormInscription succesIsGood={()=>setSucces(true)}></FormInscription> : <SuccesInscription></SuccesInscription> }</div>
         </div>
         )
      
