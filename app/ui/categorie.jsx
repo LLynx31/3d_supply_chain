@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { register } from 'swiper/element/bundle';
 import { useEffect, useState } from 'react';
+import {motion} from "framer-motion"
 
 register()
 
@@ -11,7 +12,8 @@ const imageCategorie = "/categorie.png"
 function Categorie({code, image, nom, className}){
 
     return (
-        <Link href={"/m/categorie/" + code}>
+      <motion.div whileHover={{scale:0.9}}>
+          <Link href={"/m/categorie/" + code}>
           <div className={"flex-col w-[90px] flex sm:w-fit h-max" + className}>
           <img
             loading="lazy"
@@ -23,6 +25,8 @@ function Categorie({code, image, nom, className}){
           </div>
           </div>
         </Link>
+      </motion.div>
+        
       )
 }
 
@@ -39,7 +43,7 @@ function SousCategorie({id, image, nom, className, setDataProduct}){
 
   return (
       
-        <div className={"flex-col flex w-fit cursor-pointer " + className} onClick={()=>getProduct()}>
+        <motion.div whileHover={{scale:0.9}} className={"flex-col flex w-fit cursor-pointer " + className} onClick={()=>getProduct()}>
         <img
           loading="lazy"
           srcSet={image}
@@ -48,7 +52,7 @@ function SousCategorie({id, image, nom, className, setDataProduct}){
         <div className="text-black overflow-hidden text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
           {nom}
         </div>
-        </div>
+        </motion.div>
     )
 }
 
@@ -75,7 +79,7 @@ export  function Categories(){
 
 
     return(
-        <><div className='my-5 md:block hidden'>
+        <><div className='my-5 py-5 md:block hidden'>
         <swiper-container space-between="10" slides-per-view={"9"} navigation="true" speed="500" css-mode="true">
           {listCategorie}
           

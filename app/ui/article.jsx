@@ -1,4 +1,8 @@
+'use client'
+
 import Link from "next/link"
+
+import {motion} from "framer-motion"
 
 export default function Article({prix,poids,reduction,nom,image,code}){
 
@@ -8,7 +12,7 @@ export default function Article({prix,poids,reduction,nom,image,code}){
     if(code) code =  Number(code.replace(/[^\d]/g, ""))
     return(
     <Link href={"/m/article/" + code}>
-    <div  className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  duration-300 relative rounded-[10px] h-[250px] shadow-3xl">
+    <motion.div whileHover={{scale:1.3}} className="relative rounded-[10px] h-[250px] shadow-3xl">
         <img
             loading="lazy"
             srcSet={"https://api.3dsupplychains.com/" + image}
@@ -42,7 +46,7 @@ export default function Article({prix,poids,reduction,nom,image,code}){
             </div>
         </div>
     
-    </div>
+    </motion.div>
     </Link>
     
     )

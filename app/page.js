@@ -183,7 +183,7 @@ export default function Home() {
 
         <div className="flex flex-col items-center md:flex-row md:justify-center mt-36">
 
-        <div className="flex w-[370px] px-8 md:mr-8 items-center flex-col">
+        <motion.div whileHover={{y:-20}} className="flex w-[370px] px-8 md:mr-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className="  w-[155px] h-[155px]"
               loading="lazy"
@@ -193,16 +193,16 @@ export default function Home() {
               <div className="absolute flex justify-center items-center top-[-20px] rounded-[50%] w-[35px] h-[35px] border-2 border-jaune p-1 bg-white text-sm  text-center font-bold"><div>1</div></div>
             </div>
 
-          <div className="font-bold  text-lg text-center">
-            Je passe ma commande
-          </div>
+            <div className="font-bold  text-lg text-center">
+              Je passe ma commande
+            </div>
 
-          <div className=" text-base text-center">
-            Depuis mon ordinateur ou mon téléphone, je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
-          </div>
-        </div>
+            <div className=" text-base text-center">
+              Depuis mon ordinateur ou mon téléphone, je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
+            </div>
+        </motion.div>
 
-        <div className="flex w-[370px] px-8 my-8 md:my-0 md:mr-8 items-center flex-col">
+        <motion.div whileHover={{y:-20}} className="flex w-[370px] px-8 my-8 md:my-0 md:mr-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className=" w-[155px] h-[155px]"
               loading="lazy"
@@ -220,10 +220,10 @@ export default function Home() {
           Depuis mon ordinateur ou mon téléphone, 
 je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
           </div>
-        </div>
+        </motion.div>
 
 
-        <div className="flex w-[370px] px-8 items-center flex-col">
+        <motion.div whileHover={{y:-20}} className="flex w-[370px] px-8 items-center flex-col">
             <div className="relative flex justify-center items-center rounded-[50%] border-solid border-4 border-jaune p-1 w-[170px] h-[170px] mb-3">
               <img className="w-[155px] h-[155px]"
               loading="lazy"
@@ -241,7 +241,7 @@ je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
             Faites vous plaisir avec votre produit
             fraîchement reçu
           </div>
-        </div>
+        </motion.div>
 
         </div>
 
