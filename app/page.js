@@ -10,6 +10,7 @@ import Temoignages from "./ui/temoignage";
 
 import { useState, useRef, useEffect } from "react";
 
+import { motion } from "framer-motion"
 
 
 export default function Home() {
@@ -81,7 +82,7 @@ export default function Home() {
 
   return (
 
-    <>
+    <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}}>
       <Header></Header>
 
       <div className="z-0">
@@ -212,11 +213,12 @@ export default function Home() {
             </div>
 
           <div className="font-bold  text-lg text-center">
-            Je passe ma commande
+            Je réceptionne
           </div>
 
           <div className=" text-base text-center">
-            Depuis mon ordinateur ou mon téléphone, je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
+          Depuis mon ordinateur ou mon téléphone, 
+je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
           </div>
         </div>
 
@@ -232,11 +234,12 @@ export default function Home() {
             </div>
 
           <div className="font-bold  text-lg text-center">
-            Je passe ma commande
+            Je consomme
           </div>
 
           <div className=" text-base text-center">
-            Depuis mon ordinateur ou mon téléphone, je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
+            Faites vous plaisir avec votre produit
+            fraîchement reçu
           </div>
         </div>
 
@@ -260,8 +263,8 @@ export default function Home() {
 
       </div>
       <Footer></Footer>
-      <BottomMenu></BottomMenu>
-    </>
+      
+    </motion.div>
     
   );
 } 

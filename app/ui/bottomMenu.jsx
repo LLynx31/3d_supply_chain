@@ -1,17 +1,35 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link";
+
 
 export default function BottomMenu(){
 
     const router = useRouter()
 
-    const [isMenuClicked, setMenuCliked] = useState('')
+    const [isMenuClicked, setMenuCliked] = useState('home')
     const [menuOpen, setMenuOpen] = useState(false)
 
+    const logo = "/logo.png"
 
-    const FirstMenu = () => <div className="sm:hidden flex justify-between items-center py-4 px-8 bg-white z-50 sticky bottom-0">
-    <div>
+    const [data, setData] = useState(null)
+
+    useEffect(()=>{
+      fetch("https://api.3dsupplychains.com/api/categories")
+      .then((response)=>response.json())
+      .then((responseParse)=>setData(responseParse["hydra:member"]))
+    }, [])
+
+    let listCategorie = data
+    if (data) {listCategorie = data.map(categorie => <div className="text-base px-8 py-2 border-b" onClick={()=> {setMenuOpen(false) 
+        router.push("/m/categorie/" + categorie.code)}}>{categorie.libelle} &gt;</div>)}
+
+
+    const FirstMenu = () => <div className="sm:hidden flex justify-between items-center py-6 px-8 bg-white z-50 sticky shadow-top bottom-0">
+    <div onClick={()=>{
+        setMenuOpen(true)
+    }}>
         <svg  width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 12H21M3 6H21M3 18H21" stroke={isMenuClicked == 'toggleMenu' ? "#F6CB05" : "black"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
@@ -56,7 +74,49 @@ export default function BottomMenu(){
 </div>
 
 
-    return (
-        <FirstMenu></FirstMenu>
-    )
+    const SecondMenu = () => <div className="h-screen fixed bg-white w-full z-40 top-0 sm:hidden flex pb-10 gap-2 flex-col ">
+        
+        <button onClick={()=>setMenuOpen(false)} className="w-8 h-8 flex mr-5 mt-5 self-end items-center justify-center rounded-md bg-gray-200 dark:bg-gray-700">
+            <svg
+                className="w-6 h-6 text-gray-700 dark:text-gray-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+                />
+            </svg>
+        </button>
+        <img className="w-[150px] mx-auto mb-8"  loading='lazy' alt="Image" src={logo} />
+        <div className="">
+            {listCategorie && listCategorie}
+        </div>
+
+        <div className="px-8 flex-col flex gap-2 mt-10">
+            <div className="text-base text-jaune text-center">
+                <button onClick={()=>{
+                    router.push("/m/FAQ")
+                    setMenuOpen(false)
+                }}>FAQ</button>
+            </div>
+            <div onClick={()=>{
+                    router.push("/m/quisommesnous")
+                    setMenuOpen(false)
+                }} className="text-base text-center text-jaune">
+                Qui sommes nous ?
+            </div >
+        </div>
+    
+</div> 
+
+    
+
+
+    return menuOpen ? <SecondMenu></SecondMenu> : <FirstMenu></FirstMenu>  
+    
 }

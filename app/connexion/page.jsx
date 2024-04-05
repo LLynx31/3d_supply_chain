@@ -4,7 +4,7 @@ import Link from "next/link";
 import {useState} from 'react';
 import { authentificate } from "../features/authentification";
 
-
+import { motion } from "framer-motion"
 
 
 
@@ -77,13 +77,13 @@ function PopupConnexion({className=" ", closePopup}){
   return(
 
 
-    <div className="flex mt-20 justify-center h-screen ">
+    <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="flex mt-20 justify-center h-screen ">
         <div className="bg-white p-5 w-[300px] sm:w-[500px]   sm:p-8">
             <Link href={"/"}><img className="w-[150px] mx-auto" loading='lazy' alt="Image" src={logo} /></Link>
             { !forgetPassword ? <FormConnexion forgetPassword={()=>{setForgetPassword(true)}}></FormConnexion> : <FormForgetPassword></FormForgetPassword>}
             <div className="text-base">Pas encore inscrit ? <Link href={"/inscription"} className="text-jaune text-base">Créer un compte</Link></div>
         </div>
-    </div>
+    </motion.div>
 
       
 

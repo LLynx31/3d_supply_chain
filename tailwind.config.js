@@ -34,7 +34,8 @@ module.exports = {
       '3xl': '0px 0px 8px 5px rgba(0, 0, 0, 0.09)',
       '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
       'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-      'lg':'10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)'
+      'lg':'10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+      'top':' 0px -57px 91px -47px rgba(0,0,0,0.37)'
     }
 
    

@@ -7,6 +7,8 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { deleteCookies } from "@/app/features/authentification"
 
+
+
 export default async function PageCompte(){
 
     console.log(cookies().get('session').value)

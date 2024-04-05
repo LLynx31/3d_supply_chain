@@ -5,6 +5,8 @@ import {AddAdress, Adresse}from "../../../ui/adresseItem"
 import { pacthUser } from "@/app/features/pacthData"
 import { postPassword } from "@/app/features/postData"
 
+import { motion } from "framer-motion"
+
 export default function ComponentPage({data}){
     const [swipeOption, setSwipeOption] = useState('infoPerso')
     const [ajoutReussi, setAjoutReussi] = useState('hidden')
@@ -54,7 +56,7 @@ export default function ComponentPage({data}){
 
     return(
         
-            <div className="flex flex-col sm:flex-row">
+            <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="flex flex-col sm:flex-row">
                 <div className="flex flex-col  sm:w-[35%] border-r-gray-200 border-r">
                     <div onClick={() => setSwipeOption('infoPerso')} className={swipeOption == 'infoPerso' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5 "}>Informations et coordonnées</div>
                     <div onClick={() => setSwipeOption('password')} className={swipeOption == 'password' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5  "}>Changer le mot de passe</div>
@@ -164,7 +166,7 @@ export default function ComponentPage({data}){
                     
     
                 </div>
-            </div>
+            </motion.div>
         
     )
 }

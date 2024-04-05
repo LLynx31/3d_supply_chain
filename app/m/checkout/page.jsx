@@ -8,6 +8,7 @@ import { ItemArticleCheckout } from "@/app/ui/itemArticleCheckout";
 import Link from "next/link";
 import { pacthPanier, validatePanier } from "@/app/features/pacthData";
 
+import { motion } from "framer-motion"
 
 export default function CheckoutPage(){
     const [dataPanier, setDataPanier] = useState(null)
@@ -84,7 +85,7 @@ export default function CheckoutPage(){
 
 
         return (
-            <div className="mt-8 px-3 flex-col flex  sm:px-8 pt-5">
+            <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="mt-8 px-3 flex-col flex  sm:px-8 pt-5">
                 <div className={"fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
                     <div className="text-base"> commande validé avec succès</div>
@@ -188,7 +189,7 @@ export default function CheckoutPage(){
                     
                 </div>
                 <button onClick={validation}  className="text-white text-base mt-10 w-fit px-5 mx-auto  bg-rouge text-center py-3 rounded-md">VALIDER MA COMMANDE</button>
-            </div>
+            </motion.div>
         )
     } else {
         return <LoadingSpinner></LoadingSpinner>

@@ -21,7 +21,7 @@ export default function LayoutM({children}){
                 </div>
 
             <Footer></Footer>
-            <BottomMenu></BottomMenu>
+            
             
        </div> 
         

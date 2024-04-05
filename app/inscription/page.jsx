@@ -3,6 +3,8 @@ import { useState } from "react"
 import { postInscription } from "../features/inscription"
 import Link from "next/link"
 
+import { motion } from "framer-motion"
+
 function FormInscription({succesIsGood}){
 
     const [data, setData] = useState({
@@ -170,12 +172,12 @@ export default function InscriptionPage(){
 
 
     return (
-        <div className="flex gap-20 mt-8 mb-20"> 
+        <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="flex gap-20 mt-8 mb-20"> 
             <img loading="lazy" srcSet={bannerImg} className="hidden sm:block  w-1/2">
             </img>
 
             <div className="w-[1/2]">{!succes ? <FormInscription succesIsGood={()=>setSucces(true)}></FormInscription> : <SuccesInscription></SuccesInscription> }</div>
-        </div>
+        </motion.div>
         )
      
 

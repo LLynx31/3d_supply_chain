@@ -6,12 +6,17 @@ import Article from "@/app/ui/article";
 import { useState, useRef, useEffect } from "react";
 import LoadingSpinner from "@/app/ui/loading";
 
+import { motion } from "framer-motion"
 export default function PageCategorie({params}){
 
   const [categorieInView, setCategorieInView] = useState('best seller')
   
+
+  const [nameCetgorie, setNameCetgorie] = useState('best seller')
+
   const refBestSeller = useRef(null)
   const refArrivage = useRef(null)
+  
 
   useEffect(()=>{
 
@@ -48,7 +53,11 @@ export default function PageCategorie({params}){
       .then((response)=>response.json())
       .then((responseParse) =>
         {
-          responseParse["hydra:member"][0] && setDataSousCategorie(responseParse["hydra:member"][0].sousCategories)
+          
+          if(responseParse["hydra:member"][0]) {
+            setDataSousCategorie(responseParse["hydra:member"][0].sousCategories)
+            setNameCetgorie(responseParse["hydra:member"][0].libelle)
+          } 
           
           fetch("https://api.3dsupplychains.com/api/produits?page=1&sousCategorie=" + responseParse["hydra:member"][0].sousCategories[0]["@id"])
           .then((response)=>response.json())
@@ -65,11 +74,11 @@ export default function PageCategorie({params}){
 
 
   return (
-    <>
+    <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}}>
 
       <div className="text-xl mt-5 sm:mt-1 flex flex-col justify-center items-center bg-amber-200 h-[200px] border-b border-b-gray-300">
         <div className="text-[13px] tracking-[.25em] ">Catégorie</div>
-        <div className="font-bold">{params.code}</div>
+        <div className="font-bold">{nameCetgorie}</div>
       </div>
 
 
@@ -129,7 +138,7 @@ export default function PageCategorie({params}){
 
       </div>
     </div>
-    </>
+    </motion.div>
     
   )
 } else {

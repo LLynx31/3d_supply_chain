@@ -106,6 +106,7 @@ function PopupConnected({className=" ", closePopup}){
   async function deconnected(){
     try {
       await deleteCookies()
+      closePopup()
       router.refresh()
     } catch (error){
       console.log(error)
@@ -160,8 +161,13 @@ const [isSearch, setSearch] = useState('')
 
   useEffect(() => {
     async function verifieConnexion(){
-      const connexion = await getuser()
-      setConnected(connexion)
+      try{
+        const connexion = await getuser()
+        setConnected(connexion)
+      }catch{
+        
+      }
+      
     }
 
     verifieConnexion()
@@ -199,22 +205,22 @@ const [isSearch, setSearch] = useState('')
               <Link href={"/"}><img className="w-[150px]" alt="Image" src={logo} /></Link>
 
             <Link href={"/m/quisommesnous"}>
-              <div className=" max-[870px]:hidden font-sans font-normal text-black text-lg">
+              <div className="hover:text-jaune max-[870px]:hidden font-sans font-normal text-black text-lg">
                 Qui sommes-nous ?
               </div>
             </Link>
 
             <Link href={"/m/FAQ"}>
-              <div className="max-[870px]:hidden font-sans font-normal text-black text-lg">
+              <div className="hover:text-jaune max-[870px]:hidden font-sans font-normal text-black text-lg">
                 FAQ
               </div>
             </Link>
 
             <div className="md:w-[400px] max-md:hidden max-[820px]:w-[400px] min-[870px]:w-[325px] h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
-              <div onClick={() =>router.push(isSearch,)} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
+              <div onClick={() =>router.push("/m/recherche/" + isSearch   )} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
                   <img className="w-[24px] h-[24px]" alt="Search" src={search} />
               </div>
-              <div className="font-sans h-[40px] font-normal text-black text-lg">
+              <div className="font-sans h-[40px font-normal text-black text-lg">
                 <input value={isSearch} onChange={(e)=>setSearch(e.target.value)} type="search" placeholder="Rechercher un produit"className="font-sans md:w-[352px] min-[870px]:w-[277px]  text-base p-1 h-full outline-0" ></input>
               </div>
               
@@ -243,13 +249,13 @@ const [isSearch, setSearch] = useState('')
           
       
 
-        <div className="px-8 py-1">
+        <div className="px-8 mt-5 py-1">
           <div className="w-[325px] md:hidden h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
-                <div className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
+                <div onClick={() =>router.push("/m/recherche/" + isSearch)} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
                     <img className="w-[24px] h-[24px]" alt="Search" src={search} />
                 </div>
                 <div className="font-sans h-[40px] font-normal text-black text-lg">
-                  <input type="search" placeholder="Rechercher un produit"className="font-sans w-[277px]  text-base p-1 h-full outline-0" ></input>
+                  <input value={isSearch} onChange={(e)=>setSearch(e.target.value)} type="search" placeholder="Rechercher un produit"className="font-sans w-[277px]  text-base p-1 h-full outline-0" ></input>
                 </div>
                 
               </div>

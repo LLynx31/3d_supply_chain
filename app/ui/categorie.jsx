@@ -12,13 +12,13 @@ function Categorie({code, image, nom, className}){
 
     return (
         <Link href={"/m/categorie/" + code}>
-          <div className={"flex-col flex w-fit " + className}>
+          <div className={"flex-col w-[90px] flex sm:w-fit h-max" + className}>
           <img
             loading="lazy"
             srcSet={image}
-            className="w-[100px] sm:w-full sm:h-full"
+            className=" w-full sm:h-full"
           />
-          <div className="text-black text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
+          <div className="text-black overflow-hidden text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
             {nom}
           </div>
           </div>
@@ -45,7 +45,7 @@ function SousCategorie({id, image, nom, className, setDataProduct}){
           srcSet={image}
           className="w-[100px] sm:w-full sm:h-full"
         />
-        <div className="text-black text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
+        <div className="text-black overflow-hidden text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
           {nom}
         </div>
         </div>

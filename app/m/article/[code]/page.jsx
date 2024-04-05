@@ -6,6 +6,8 @@ import { useState, useEffect, useContext } from "react"
 import { postAddPanier } from "@/app/features/postData"
 import { useRouter } from "next/navigation"
 
+import { motion } from "framer-motion"
+
 export default function ArticleView({params}){
 
     const router = useRouter()
@@ -83,7 +85,7 @@ export default function ArticleView({params}){
 
         return(
 
-        <div className="relative px-5 pt-5">
+        <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="relative px-5 pt-5">
 
                 <div className={"fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
@@ -180,7 +182,7 @@ export default function ArticleView({params}){
                 {/* fin produit similaire */}
 
 
-            </div> 
+            </motion.div> 
             
         )
     

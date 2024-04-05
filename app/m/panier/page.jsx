@@ -5,6 +5,9 @@ import LoadingSpinner from "@/app/ui/loading";
 import { useEffect,useState } from "react";
 import { useRouter } from "next/navigation";
 
+
+import { motion } from "framer-motion"
+
 export default function Panier(){
 
     const [dataPanier, setDataPanier] = useState(null)
@@ -29,12 +32,12 @@ export default function Panier(){
 
     if (dataPanier) {
 
-        
-        const listPanier = dataPanier[0].detailDocuments.map(panier => <ItemPanier id={panier['@id']} key={panier['@id']} imageProduct={panier.produit.imageProduits[0].path} nom={panier.produit.nom} description={panier.produit.description} prix={parseInt(panier.prixUnitaire)} quantiteProduct={panier.quantite}></ItemPanier>)
+       
+        const listPanier = dataPanier[0]?.detailDocuments.map(panier => <ItemPanier id={panier['@id']} key={panier['@id']} imageProduct={panier.produit.imageProduits[0].path} nom={panier.produit.nom} description={panier.produit.description} prix={parseInt(panier.prixUnitaire)} quantiteProduct={panier.quantite}></ItemPanier>)
 
 
         return (
-            <div className="mt-8 px-3 sm:px-8 pt-5">
+            <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="mt-8 px-3 sm:px-8 pt-5">
                 <h1 className="text-center text-xl font-bold">Mon panier</h1>
                 <hr></hr>
                 <div className="mt-3 flex items-center flex-col xlg:flex-row">
@@ -67,18 +70,18 @@ export default function Panier(){
                         <div className="mt-8">
                             <div className="flex justify-between mb-3">
                                 <div className="text-base ">sous-total</div>
-                                <div className="text-base font-bold">{parseInt(dataPanier[0].montantHt)} FCFA</div>
+                                <div className="text-base font-bold">{parseInt(dataPanier[0]?.montantHt)} FCFA</div>
                             </div>
     
     
                             <div className="flex justify-between mb-3">
                                 <div className="text-base ">livraison</div>
-                                <div className="text-base font-bold">1000 + {parseInt(dataPanier[0].montantHt)} FCFA</div>
+                                <div className="text-base font-bold">1000 + {parseInt(dataPanier[0]?.montantHt)} FCFA</div>
                             </div>
     
                             <div className="flex justify-between mb-8">
                                 <div className="text-base ">total</div>
-                                <div className="text-base font-bold">{parseInt(dataPanier[0].montantHt) + 1000} FCFA</div>
+                                <div className="text-base font-bold">{parseInt(dataPanier[0]?.montantHt) + 1000} FCFA</div>
                             </div>
     
                             <button onClick={()=>router.push("/m/checkout")}  className="text-white text-base w-full bg-rouge text-center py-3 rounded-md">verifier la commande</button>
@@ -90,7 +93,7 @@ export default function Panier(){
                     <button onClick={()=>router.push("/m/checkout")} className="text-white text-base w-fit px-5  bg-rouge text-center py-3 rounded-md">VERIFICATION DE LA COMMANDE</button>
                 </div>
                 
-            </div>
+            </motion.div>
         )
     } else {
         return <LoadingSpinner></LoadingSpinner>

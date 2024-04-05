@@ -6,6 +6,7 @@ import "./globals.css"
 import Footer from "./ui/footer";
 import Header from './ui/header';
 import { AuthProvider } from "./contextProvider";
+import BottomMenu from "./ui/bottomMenu";
 
 
 //image
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="fr">      
       <body className={`${poppins.className } bg-white antialiased`} >        
         {children}
+        <BottomMenu></BottomMenu>
         <SpeedInsights />
       </body>
     </html>
