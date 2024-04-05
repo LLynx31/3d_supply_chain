@@ -22,7 +22,7 @@ export default function BottomMenu(){
     }, [])
 
     let listCategorie = data
-    if (data) {listCategorie = data.map(categorie => <div className="text-base px-8 py-2 border-b" onClick={()=> {setMenuOpen(false) 
+    if (data) {listCategorie = data.map(categorie => <div key={categorie.code} className="text-base px-8 py-2 border-b" onClick={()=> {setMenuOpen(false) 
         router.push("/m/categorie/" + categorie.code)}}>{categorie.libelle} &gt;</div>)}
 
 
