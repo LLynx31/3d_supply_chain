@@ -70,7 +70,7 @@ export default function ArticleView({params}){
         let listDataProductSimilar = null 
 
         if(dataProductSimilar){
-            listDataProductSimilar = dataProductSimilar.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1].valeur}></Article>)
+            listDataProductSimilar = dataProductSimilar.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
         }
 
         console.log(swipeDescription)

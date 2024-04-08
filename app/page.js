@@ -73,7 +73,8 @@ export default function Home() {
 
 
   if(dataProduct){
-    const listDataProduct = dataProduct.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1].valeur}></Article>)
+    console.log(dataProduct)
+    const listDataProduct = dataProduct.map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0]?.valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
   
 
 
