@@ -74,7 +74,7 @@ export default function Home() {
 
   if(dataProduct){
     console.log(dataProduct)
-    const listDataProduct = dataProduct.map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0]?.valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
+    const listDataProduct = dataProduct.map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} prix={product.priceProduits[0]?.valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
   
 
 
@@ -138,7 +138,7 @@ export default function Home() {
             <div  className="mb-16">
               <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1>
               <p className="text-base ">Les produits les plus vendus de la plateforme</p>
-              <div className="grid grid-cols-2 md:max-lg:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 mt-8"> 
+              <div className="grid grid-cols-2 md:max-lg:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-5 mt-8"> 
                 {listDataProduct}
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function Home() {
             <div  className="mb-16">
               <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
               <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
-              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 mt-8"> 
+              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-5 mt-8"> 
                 {listDataProduct}
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function Home() {
 
               <p className="text-base ">Les produits que nous devons liquider chap chap !</p>
               
-              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 mt-8"> 
+              <div  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-5 mt-8"> 
                 {listDataProduct}
               </div>
             </div>

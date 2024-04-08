@@ -90,7 +90,7 @@ export default function Panier(){
                     </div>
                     
                     
-                    <button onClick={()=>router.push("/m/checkout")} className="text-white text-base w-fit px-5  bg-rouge text-center py-3 rounded-md">VERIFICATION DE LA COMMANDE</button>
+                    <button disabled={dataPanier[0]?.detailDocuments <= 0 ? true : false} onClick={()=>router.push("/m/checkout")} className="text-white text-base w-fit px-5  bg-rouge text-center py-3 rounded-md">VERIFICATION DE LA COMMANDE</button>
                 </div>
                 
             </motion.div>

@@ -27,12 +27,16 @@ export default function CheckoutPage(){
                 const panier =  await getPanier()
                 const adresse = await getAdresse()
                 //console.log(panier['hydra:member'])
+                    if(panier['hydra:member'][0].detailDocuments.length <= 0){
+                        return router.replace('/m/panier')
+                    }
               
                     setDataPanier(panier['hydra:member'])
                     setDataAdresse(adresse['hydra:member'])
  
             } catch (error) {
                 console.error(error)
+                router.back()
             }
         }
 

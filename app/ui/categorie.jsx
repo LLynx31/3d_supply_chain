@@ -56,7 +56,7 @@ function SousCategorie({id, image, nom, className, setDataProduct}){
     )
 }
 
-export  function Categories(){
+export function Categories(){
 
   const [data, setData] = useState([])
 
@@ -65,7 +65,6 @@ export  function Categories(){
       .then((response)=>response.json())
       .then((responseParse)=>setData(responseParse["hydra:member"]))
     }, [])
-
 
     let listCategorie
     if(data.length > 0){
@@ -96,6 +95,7 @@ export  function Categories(){
 
 
 export function SousCategories({code,data,setDataProduct}){
+      console.log(data)
       const listCategorie = data.map(categorie =>
         <swiper-slide key={categorie.code}>
           <SousCategorie id={categorie["@id"]} setDataProduct={setDataProduct} image={imageCategorie} nom={categorie.libelle}></SousCategorie>
@@ -104,6 +104,7 @@ export function SousCategories({code,data,setDataProduct}){
 
     return(
         <><div className='my-5 md:block hidden'>
+          <div className='text-base'>Sous categorie {}</div>
         <swiper-container space-between="10" slides-per-view={"9"} navigation="true" speed="500" css-mode="true">
           {listCategorie}
           

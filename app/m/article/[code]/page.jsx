@@ -7,6 +7,7 @@ import { postAddPanier } from "@/app/features/postData"
 import { useRouter } from "next/navigation"
 
 import { motion } from "framer-motion"
+import { Categories } from "@/app/ui/categorie"
 
 export default function ArticleView({params}){
 
@@ -26,6 +27,8 @@ export default function ArticleView({params}){
     const [dataProduct, setDataProduct] = useState(null)
 
     const [dataProductSimilar, setDataProductSimilar] = useState(null)
+
+    const [etatAjout, setEtatAJout] = useState('ajouter au panier')
 
     useEffect(()=>{
         const link = "https://api.3dsupplychains.com/api/produits/" + params.code
@@ -57,6 +60,8 @@ export default function ArticleView({params}){
             }catch(error){
                     router.push('/connexion')
   
+            } finally {
+                setEtatAJout('ajouter au panier')
             }
         }
     
@@ -70,7 +75,7 @@ export default function ArticleView({params}){
         let listDataProductSimilar = null 
 
         if(dataProductSimilar){
-            listDataProductSimilar = dataProductSimilar.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
+            listDataProductSimilar = dataProductSimilar.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
         }
 
         console.log(swipeDescription)
@@ -93,6 +98,7 @@ export default function ArticleView({params}){
                     <button onClick={()=> {setAjoutReussi('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
 
+                <Categories></Categories>
                 <div className="text-base  font-semibold mb-5">Acceuil &gt; <span className="text-[#9ca3af] font-medium">{dataProduct.nom}</span>  </div>
 
                 {/* article, ses images et sa description */}
@@ -125,9 +131,9 @@ export default function ArticleView({params}){
                             <button onClick={diminuQuantite}>-</button>{quantite}<button onClick={augmenteQuantite}>+</button>
                         </div>
 
-                        <button onClick={ajoutePanier} className="flex justify-center items-center  text-base text-white w-full bg-rouge rounded-xl px-3 py-3 mt-5">
+                        <button disabled={dataProduct.quantiteStock > 1 ? false : true} onClick={()=>{setEtatAJout('ajout en cours...'),ajoutePanier()}} className="flex justify-center items-center  text-base text-white w-full bg-rouge rounded-xl px-3 py-3 mt-5">
                             <img loading="lazy" alt="shopping cart" src={imgShoppingCart} className="h-[20px] w-[20px]"></img>
-                            <div className="ml-5 text-base">Ajouter au panier</div>
+                            <div className="ml-5 text-base">{etatAjout}</div>
                         </button>
                     </div>
                 </div>

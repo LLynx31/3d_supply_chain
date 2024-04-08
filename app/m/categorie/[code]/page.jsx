@@ -1,6 +1,6 @@
 'use client'
 
-import {SousCategories} from "@/app/ui/categorie";
+import {Categories, SousCategories} from "@/app/ui/categorie";
 import Article from "@/app/ui/article";
 
 import { useState, useRef, useEffect } from "react";
@@ -70,7 +70,7 @@ export default function PageCategorie({params}){
   
   if (dataSousCategorie && dataProductSousCategorie){
     
-    const listDataProduct = dataProductSousCategorie.map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
+    const listDataProduct = dataProductSousCategorie.map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
 
 
   return (
@@ -83,6 +83,7 @@ export default function PageCategorie({params}){
 
 
       <div className="px-3 sm:px-8 pt-5">
+        <Categories></Categories>
       {/* Categorie */}
       <SousCategories data={dataSousCategorie} setDataProduct={setDataProductSousCategorie} code={params.code} ></SousCategories>
 
@@ -116,7 +117,7 @@ export default function PageCategorie({params}){
           <div  className="mb-16">
               <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1>
               <p className="text-base ">Les produits les plus vendus de la plateforme</p>
-              <div  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-5"> 
+              <div  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 mt-5"> 
                 {listDataProduct}
            
               </div>
@@ -126,7 +127,7 @@ export default function PageCategorie({params}){
           <div  className="mb-16">
               <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
               <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
-              <div  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-5"> 
+              <div  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 mt-5"> 
               {listDataProduct}
               </div>
             </div>

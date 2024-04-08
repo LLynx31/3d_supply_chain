@@ -42,7 +42,7 @@ export default function PageRecherche(){
         )
     } else {
 
-        const listProduct = dataProduct.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1].valeur}></Article>)
+        const listProduct = dataProduct.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0].path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
 
         return(
             <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="mx-8 mt-8 grid grid-cols-2 gap-5 sm:grid-cols-5">

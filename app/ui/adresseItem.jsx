@@ -28,9 +28,10 @@ function AdresseItem({adresse,nbr}){
         try {
             const response =  await pacthAdress(dataAdress,adresse['@id'])
             setAjoutReussi('')
-            setEtatSauvegarde('SAUVEGARDER')
         } catch (error) {
             console.log(error)
+        } finally {
+            setEtatSauvegarde('SAUVEGARDER')
         }
     }
 
@@ -135,6 +136,8 @@ export function AddAdress(){
         } 
         catch(error) {
             console.error(error)
+        } finally {
+            setEtatSauvegarde('AJOUT')
         }
         
     }
@@ -144,7 +147,7 @@ export function AddAdress(){
         <>
             <div className={"fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " + ajoutReussi }>
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
-                    <div className="text-base">Adresse ajoutée, rafraichissez §</div>
+                    <div className="text-base">Adresse ajoutée, rafraichissez </div>
                     <button onClick={()=> setAjoutReussi('hidden')}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
                 

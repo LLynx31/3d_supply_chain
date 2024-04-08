@@ -37,9 +37,11 @@ export default function ComponentPage({data}){
         try {
             const response =  await pacthUser(dataInfoSup,dataInfoSup.id)
             setAjoutReussi('')
-            setEtatSauvegarde('SAUVEGARDER')
+            
         } catch (error) {
             
+        } finally {
+            setEtatSauvegarde('SAUVEGARDER')
         }
     }
 
@@ -47,9 +49,10 @@ export default function ComponentPage({data}){
         try {
             const response =  await postPassword(dataPassword)
             setAjoutPassword('')
-            setEtatSauvegarde('SAUVEGARDER')
         } catch (error) {
             console.log(error)
+        } finally {
+            setEtatSauvegarde('SAUVEGARDER')
         }
     }
 
