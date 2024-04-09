@@ -15,7 +15,10 @@ export async function middleware(request) {
     currentUser =  false
   }
   
-
+  //si l'utilisateur n'est pas connecté et se dirige vers dashbord
+  if (request.nextUrl.pathname == '/') {
+    return Response.redirect(new URL('/m/index', request.url))
+  }
 
   //si l'utilisateur n'est pas connecté et se dirige vers dashbord
   if (!currentUser && request.nextUrl.pathname.startsWith('/m/compte')) {

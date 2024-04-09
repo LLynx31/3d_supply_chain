@@ -1,19 +1,17 @@
-/*'use client'
+'use client'
 
-import Article from "./ui/article";
-import BottomMenu from "./ui/bottomMenu";
-import {Categories} from "./ui/categorie";
-import Footer from "./ui/footer";
-import Header from "./ui/header";
-import LoadingSpinner from "./ui/loading";
-import Temoignages from "./ui/temoignage";
+import Article from "../../ui/article";
+import {Categories} from "../../ui/categorie";
+
+import LoadingSpinner from "../../ui/loading";
+import Temoignages from "../../ui/temoignage";
 
 import { useState, useRef, useEffect } from "react";
 
 import { motion } from "framer-motion"
 
 
-export default function Home() {
+export default function PageIndex() {
 
   const banner ="/banner_home.jpeg"
   const processus1 = "/processus-1.png"
@@ -84,7 +82,7 @@ export default function Home() {
   return (
 
     <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}}>
-      <Header></Header>
+  
 
       <div className="z-0">
 
@@ -103,7 +101,7 @@ export default function Home() {
 
         <div className="pt-1 gap-9 mt-8 flex ">
 
-          {/* barre de navigation }
+          {/* barre de navigation */}
             <div className="sticky md:block hidden top-5 h-fit items-stretch content-end flex-wrap flex md:w-[200px] flex-col ">
             <div className="text-black text-xl font-bold w-full">
               Navigation
@@ -131,10 +129,10 @@ export default function Home() {
           </div>
 
 
-          {/* ventes }
+          {/* ventes */}
           <div className="flex flex-col gap-5">
 
-            {/* best seller }
+            {/* best seller */}
             <div  className="mb-16">
               <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1>
               <p className="text-base ">Les produits les plus vendus de la plateforme</p>
@@ -143,7 +141,7 @@ export default function Home() {
               </div>
             </div>
           
-            {/* nouveau arrivage}
+            {/* nouveau arrivage*/}
             <div  className="mb-16">
               <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
               <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
@@ -152,7 +150,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Offres flash }
+            {/* Offres flash */}
             <div >
               <div className="flex items-center ">
                 <img
@@ -180,7 +178,7 @@ export default function Home() {
 
         </div>
 
-        {/* processus }
+        {/* processus */}
 
         <div className="flex flex-col items-center md:flex-row md:justify-center mt-36">
 
@@ -246,9 +244,9 @@ je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
 
         </div>
 
-        {/* fin-processus }
+        {/* fin-processus */}
 
-        {/* témoignage }
+        {/* témoignage */}
         <div className="flex flex-col mt-20">
         <h2 className="text-2xl mb-[50px] text-center font-bold ">Témoignage</h2>
 
@@ -256,14 +254,13 @@ je fini mon marché j’ajoute mon adresse de livraison et je valide mon panier
             <Temoignages></Temoignages>
         </div>
         </div>
-        {/* fin-témoignage }
+        {/* fin-témoignage */}
         
       </div>
       
 
 
       </div>
-      <Footer></Footer>
       
     </motion.div>
     
@@ -274,4 +271,4 @@ else
   return <><div ref={refArrivage}></div> <div ref={refBestSeller}></div> <div ref={refOffreFlash}></div><LoadingSpinner></LoadingSpinner></>
 }
 
-}*/
+}
