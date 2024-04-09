@@ -221,7 +221,7 @@ const [isSearch, setSearch] = useState('')
                   <img className="w-[24px] h-[24px]" alt="Search" src={search} />
               </div>
               <div className="font-sans h-[40px font-normal text-black text-lg">
-                <input value={isSearch} onChange={(e)=>setSearch(e.target.value)} type="search" placeholder="Rechercher un produit"className="font-sans md:w-[352px] min-[870px]:w-[277px]  text-base p-1 h-full outline-0" ></input>
+                <input value={isSearch} onChange={(e)=>{setSearch(e.target.value),router.push("/m/recherche/" + e.target.value)}} type="search" placeholder="Rechercher un produit"className="font-sans md:w-[352px] min-[870px]:w-[277px]  text-base p-1 h-full outline-0" ></input>
               </div>
               
             </div>

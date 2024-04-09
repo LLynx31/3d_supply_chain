@@ -8,43 +8,20 @@ export default function Footer() {
     const linkedin = "/linkedin.svg"
     const twitter = "/twitter.svg"
   return (
-    <div className="bg-yellow-400 mt-36 p-8 max-md:px-5">
+    <div className="bg-yellow-400 mt-36 p-5 max-md:px-5">
       <div className="gap-3 flex justify-between max-lg:flex-col max-md:items-stretch max-md:gap-0">
 
         <div className="flex flex-col items-stretch w-fit  max-md:ml-0">
           <div className="mt-8 max-md:max-w-full max-md:mt-10">
             <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
               <div className="flex flex-col items-stretch w-[57%] max-md:w-full max-md:ml-0">
-                <div className="flex grow flex-col items-center mt-2.5 max-md:mt-10">
+                <div className="flex grow flex-col justify-center items-center mt-2.5 max-md:mt-10">
                   <img
                     loading="lazy"
                     srcSet= {logo}
                     className="aspect-[2.43] object-contain object-center w-[233px] overflow-hidden"
                   />
-                  <div className="self-stretch h-[43px] flex items-stretch justify-between gap-5 mt-6 pr-14 max-md:pr-5">
-                    <div className="w-[43px]  flex justify-center items-center rounded-[100%] bg-white">
-                        <img
-                      loading="lazy"
-                      srcSet={facebook}
-                      className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full "
-                        />
-                    </div>
-
-                    <div className="w-[43px] flex justify-center items-center rounded-[100%] bg-white">
-                    <img
-                      loading="lazy"
-                      srcSet={linkedin}
-                      className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full"
-                    />
-                    </div>
-                    
-                    <div className="w-[43px] flex justify-center items-center rounded-[100%] bg-white"><img
-                      loading="lazy"
-                      srcSet={twitter}
-                      className="aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full "
-                    /></div>
-                    
-                  </div>
+                  
                 </div>
               </div>
               <div className="flex flex-col w-fit ml-5 max-md:w-full max-md:ml-0">
@@ -101,21 +78,35 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-stretch w-fit max-md:ml-0">
-          <div className="flex flex-col items-stretch my-auto max-md:mt-10">
+        <div className="flex flex-col  max-md:ml-0">
+          <div className="flex flex-col gap-5  my-auto max-md:mt-10">
             <div className="text-black text-lg font-bold whitespace-nowrap">
-              Télécharger l’application
+              Nos réseaux
             </div>
-            <img
-              loading="lazy"
-              srcSet={downloadApple}
-              className=" object-contain object-center overflow-hidden w-[230px] max-w-full mt-6 self-start rounded-[10px]"
-            />
-            <img
-              loading="lazy"
-              srcSet={downloadAndroid}
-              className=" object-contain object-center  overflow-hidden w-[230px] max-w-full mt-8 self-start rounded-[10px]"
-            />
+            <div className="flex justify-between w-[150px]">
+              <div className="w-[43px] h-[43px]  flex justify-center items-center rounded-[100%] bg-white">
+                          <img
+                        loading="lazy"
+                        srcSet={facebook}
+                        className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full "
+                          />
+                      </div>
+
+                      <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white">
+                      <img
+                        loading="lazy"
+                        srcSet={linkedin}
+                        className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full"
+                      />
+                      </div>
+                      
+                      <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white"><img
+                        loading="lazy"
+                        srcSet={twitter}
+                        className="aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full "
+                      /></div>
+            </div>
+              
           </div>
         </div>
       </div>
