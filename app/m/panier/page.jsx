@@ -33,7 +33,7 @@ export default function Panier(){
     if (dataPanier) {
 
        
-        const listPanier = dataPanier[0]?.detailDocuments.map(panier => <ItemPanier id={panier['@id']} key={panier['@id']} imageProduct={panier.produit.imageProduits[0].path} nom={panier.produit.nom} description={panier.produit.description} prix={parseInt(panier.prixUnitaire)} quantiteProduct={panier.quantite}></ItemPanier>)
+        const listPanier = dataPanier[0]?.detailDocuments.map(panier => <ItemPanier id={panier['@id']} key={panier['@id']} imageProduct={panier.produit.imageProduits["hydra:member"][0]?.path} nom={panier.produit.nom} description={panier.produit.description} prix={parseInt(panier.prixUnitaire)} quantiteProduct={panier.quantite}></ItemPanier>)
 
 
         return (

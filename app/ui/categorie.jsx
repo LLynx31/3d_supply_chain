@@ -17,7 +17,7 @@ function Categorie({code, image, nom, className}){
           <div className={"flex-col w-[90px] flex sm:w-fit h-max" + className}>
           <img
             loading="lazy"
-            srcSet={image}
+            srcSet={"https://api.3dsupplychains.com/" + image}
             className=" w-full sm:h-full"
           />
           <div className="text-black overflow-hidden text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
@@ -70,7 +70,7 @@ export function Categories(){
     if(data.length > 0){
       listCategorie = data.map(categorie =>
         <swiper-slide key={categorie.code}>
-          <Categorie code={categorie.code} image={imageCategorie} nom={categorie.libelle}></Categorie>
+          <Categorie code={categorie.code} image={categorie.coverImagePath} nom={categorie.libelle}></Categorie>
         </swiper-slide>
       )
 
@@ -78,7 +78,7 @@ export function Categories(){
 
 
     return(
-        <><div className='my-5 py-5 md:block hidden'>
+        <motion.div initial={{opacity:0, y:50}} whileInView={{opacity:1, y:0}} transition={{duration:0.3,delay:0.2}}><div className='my-5 py-5 md:block hidden'>
         <swiper-container space-between="10" slides-per-view={"9"} navigation="true" speed="500" css-mode="true">
           {listCategorie}
           
@@ -88,7 +88,7 @@ export function Categories(){
           <div className='grid grid-cols-4 gap-2'>
             {listCategorie}
           </div>
-        </div></>
+        </div></motion.div>
         
     )
 }
@@ -103,7 +103,7 @@ export function SousCategories({code,data,setDataProduct}){
       )
 
     return(
-        <><div className='my-5 md:block hidden'>
+        <motion.div initial={{opacity:0, y:50}} whileInView={{opacity:1, y:0}} transition={{duration:0.3}}><div className='my-5 md:block hidden'>
           <div className='text-base'>Sous categorie {}</div>
         <swiper-container space-between="10" slides-per-view={"9"} navigation="true" speed="500" css-mode="true">
           {listCategorie}
@@ -113,7 +113,7 @@ export function SousCategories({code,data,setDataProduct}){
         <div className='grid grid-cols-4 gap-2'>
             {listCategorie}
           </div>
-        </div></>
+        </div></motion.div>
         
     )
 }

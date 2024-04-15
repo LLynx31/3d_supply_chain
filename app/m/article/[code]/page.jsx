@@ -36,9 +36,9 @@ export default function ArticleView({params}){
         .then((response)=>response.json())
         .then((responseParse)=>{
             setDataProduct(responseParse)
-            setImageProduct("https://api.3dsupplychains.com/" + responseParse.imageProduits[0].path)
+            setImageProduct("https://api.3dsupplychains.com/" + responseParse.imageProduits["hydra:member"][0]?.path)
 
-            fetch("https://api.3dsupplychains.com/api/produits?page=1&sousCategorie=" + responseParse.sousCategorie.code + "&order%5BtotalVente%5D=asc")
+            fetch("https://api.3dsupplychains.com/api/produits?page=1&sousCategorie=" + responseParse.sousCategorie['@id'])
             .then((response)=>response.json())
             .then((responseParse)=> setDataProductSimilar(responseParse["hydra:member"]))
         })
@@ -66,16 +66,16 @@ export default function ArticleView({params}){
         }
     
 
-        console.log(dataProduct)
+        //console.log(dataProduct)
 
-        const listImageDataProduct = dataProduct.imageProduits.map(image => {
+        const listImageDataProduct = dataProduct.imageProduits["hydra:member"].map(image => {
         const linkImage = "https://api.3dsupplychains.com/" + image.path
         return <img loading="lazy" key={image.path} onClick={()=>setImageProduct(linkImage)} srcSet={linkImage} alt="boeuf" className="rounded-md w-[80px] h-[80px] my-3"></img>})
 
         let listDataProductSimilar = null 
 
         if(dataProductSimilar){
-            listDataProductSimilar = dataProductSimilar.map(product => <Article code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
+            listDataProductSimilar = dataProductSimilar.map(product => <Article  poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>)
         }
 
         console.log(swipeDescription)
@@ -111,7 +111,7 @@ export default function ArticleView({params}){
                     {/* fin image en mignature */}
 
                     {/* image en grandeur nature */}
-                    <img loading="lazy" srcSet={swipeImageProduct} alt="boeuf" className="md:w-[310px] lg:w-[450px]"></img>
+                    <img loading="lazy" srcSet={swipeImageProduct} alt={dataProduct.nom} className="md:w-[310px] lg:w-[450px]"></img>
 
 
                     {/* description */}
@@ -121,7 +121,7 @@ export default function ArticleView({params}){
                     
                         {dataProduct.quantiteStock > 1 ? <div className="px-3 py-2 my-3 rounded-md bg-teal-50 border border-teal-300 text-base ">Disponibilité : <span className="text-teal-400">En stock</span></div> : <div className="px-3 py-2 my-3 rounded-md bg-red-50 border border-red-300 text-base ">Disponibilité : <span className="text-red-400">Indisponible</span></div>}
 
-                        <div className="text-lg ">{parseInt(dataProduct.priceProduits[0].valeur)} FCFA</div>
+                        <div className="text-lg ">{parseInt(dataProduct.newPrice)} FCFA</div>
 
                         <p className="mt-3 text-base mb-8">
                             {dataProduct.description} 

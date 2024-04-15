@@ -98,7 +98,7 @@ function FormInscription({succesIsGood}){
     return(
         <>
             <h1 className="text-xl font-bold text-center">Création de compte</h1>
-            <p className="text-base text-center ">Vous avez déjà un compte ?  <Link href={"/"} className="text-base text-jaune underline">clickez ici puis sur l'icone de compte pour vous connecter</Link> </p>
+            <p className="text-base text-center ">Vous avez déjà un compte ?  <Link href={"/connexion"} className="text-base text-jaune underline">clickez ici pour vous connecter</Link> </p>
 
             <form action={actionForm}>
                 <div className="w-full mt-5">
@@ -166,14 +166,14 @@ function SuccesInscription(){
 
 
 export default function InscriptionPage(){
-    const bannerImg = '/banner_home.jpeg'
+    const bannerImg = '/barniere_site_3D_supply_chain_VERTICALE.jpg'
 
     const [succes, setSucces] = useState(false) 
 
 
     return (
         <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="flex gap-20 mt-8 mb-20"> 
-            <img loading="lazy" srcSet={bannerImg} className="hidden sm:block  w-1/2">
+            <img loading="lazy" srcSet={bannerImg} className="hidden sm:block">
             </img>
 
             <div className="w-[1/2]">{!succes ? <FormInscription succesIsGood={()=>setSucces(true)}></FormInscription> : <SuccesInscription></SuccesInscription> }</div>

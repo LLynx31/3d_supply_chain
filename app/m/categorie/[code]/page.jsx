@@ -70,7 +70,7 @@ export default function PageCategorie({params}){
   
   if (dataSousCategorie && dataProductSousCategorie){
     
-    const listDataProduct = dataProductSousCategorie.map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
+    const listDataProduct = dataProductSousCategorie.map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>)
 
 
   return (

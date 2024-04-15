@@ -42,7 +42,7 @@ export async function getPanier(){
 
 }
 
-export async function getProduct(query){
+export async function getProductSearch(query){
     //effectu le requete
     const response = await fetch("https://api.3dsupplychains.com/api/produits?page=1&nom=" + query)
 
@@ -54,7 +54,9 @@ export async function getProduct(query){
 
     return response.json()
 }
- 
+
+
+
 
 export async function getAdresse(){
     //effectu le requete
@@ -71,3 +73,30 @@ export async function getAdresse(){
 
     return response.json()
 }
+
+export async function getAllPromotion(){
+    //effectu le requete
+    const response = await fetch("https://api.3dsupplychains.com/api/promotions?typePromotion.code[]=PAR_CATEGORIE&typePromotion.code[]=PAR_SOUS_CATEGORIE")
+
+
+    if (!response.ok){
+        const error =  await response.json()
+        throw error
+    }
+
+    return response.json()
+}
+
+export async function getProductPromotion(){
+    //effectu le requete
+    const response = await fetch("https://api.3dsupplychains.com/api/promotions?typePromotion.code[]=PAR_CATEGORIE&typePromotion.code[]=PAR_SOUS_CATEGORIE")
+
+
+    if (!response.ok){
+        const error =  await response.json()
+        throw error
+    }
+
+    return response.json()
+}
+

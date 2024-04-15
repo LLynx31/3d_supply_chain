@@ -1,6 +1,6 @@
 'use client'
 
-import { getProduct } from "@/app/features/getData"
+import { getProduct, getProductSearch } from "@/app/features/getData"
 import Article from "@/app/ui/article"
 import LoadingSpinner from "@/app/ui/loading"
 import { useEffect,useState } from "react"
@@ -14,7 +14,7 @@ export default function PageRecherche({params}){
     useEffect(()=>{
         async function rechercherProduit(){
             try {
-                const response = await getProduct(params.code)
+                const response = await getProductSearch(params.code)
                 if(response['hydra:member'].length <= 0){
                     setDataProduct('nothing')
                 } 
