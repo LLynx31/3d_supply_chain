@@ -127,7 +127,7 @@ export default function PageIndex() {
 
   if (dataProduct && dataPromotion) {
     console.log(dataPromotion);
-    const listDataProduct = dataProduct["hydra:member"].map(product => <Article poids={product.description2} code={product["@id"]} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>);
+    const listDataProduct = dataProduct["hydra:member"].map(product => <Article poids={product.description2} code={product.id} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>);
 
     const listPromotion = dataPromotion.map(promotion => <Promotion key={promotion['@id']} nom={promotion.libelle} reduction={promotion.pourcentage} image={promotion.medias[0].path} code={promotion.categorie ? promotion.categorie.libelle : promotion.sousCategorie.libelle}></Promotion>);
 
