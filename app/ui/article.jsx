@@ -10,7 +10,6 @@ export default function Article({price,poids,newPrice,nom,image,code}){
     const imgArticle = "/viande.png"
     const shoppingCart = "/shopping-cart.png"
 
-    if(code) code =  Number(code.replace(/[^\d]/g, ""))
     return(
     <Link className="h-fit" href={"/m/article/" + code}>
     <motion.div whileHover={{scale:1.1}} className="relative rounded-[10px] h-[250px] shadow-3xl">

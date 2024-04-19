@@ -20,6 +20,7 @@ export default function ArticleView({params}){
 
     const [quantite, setQuantite] = useState(1)
     const [ajoutReussi, setAjoutReussi] = useState('hidden')
+    const [ajoutEchec, setAjoutEchec] = useState('hidden')
 
     const [swipeDescription, setSwipDescritption] = useState('description')
 
@@ -50,12 +51,16 @@ export default function ArticleView({params}){
 
         async function ajoutePanier(){
             try {
-                const etat = await postAddPanier(dataProduct['@id'],quantite)                
+                console.log(dataProduct.id)
+                const etat = await postAddPanier(dataProduct.id,quantite)
+                console.log(etat)                
                 if(etat == 'Ok'){
                     setAjoutReussi('')
                     
                 } else {
                     console.log("error")
+                    setAjoutEchec('')
+
                 }
             }catch(error){
                     router.push('/connexion')
@@ -96,6 +101,12 @@ export default function ArticleView({params}){
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
                     <div className="text-base">{dataProduct.nom} ajouté au panier avec succès</div>
                     <button onClick={()=> {setAjoutReussi('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
+                </div>
+
+                <div className={"fixed right-7 flex py-2 justify-center px-2 bg-red-100 rounded-xl w-fit transition-[display] " + ajoutEchec }>
+                    <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
+                    <div className="text-base"> echec </div>
+                    <button onClick={()=> {setAjoutEchec('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
 
                 <Categories></Categories>

@@ -48,7 +48,7 @@ export async function postAddPanier(product, quantite){
                 detailDocuments: [
                 {
                     quantite: quantite,
-                    produit: product
+                    produit: '/api/produits/'+product
                 }
                 ],
                 typeDocument: "/api/type_documents/3",

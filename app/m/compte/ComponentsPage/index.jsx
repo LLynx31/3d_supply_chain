@@ -6,8 +6,10 @@ import { pacthUser } from "@/app/features/pacthData"
 import { postPassword } from "@/app/features/postData"
 
 import { motion } from "framer-motion"
+import LigneCommandes from "@/app/ui/ligneCommande"
+import { extraitNombre, formatISODate } from "@/app/features/tools"
 
-export default function ComponentPage({data}){
+export default function ComponentPage({data,commandes}){
     const [swipeOption, setSwipeOption] = useState('infoPerso')
     const [ajoutReussi, setAjoutReussi] = useState('hidden')
     const [ajoutPassword, setAjoutPassword] = useState('hidden')
@@ -55,6 +57,12 @@ export default function ComponentPage({data}){
             setEtatSauvegarde('SAUVEGARDER')
         }
     }
+
+
+
+    const listLigneCommande = commandes.map(commande => {
+        console.log(commande.detailDocuments)
+        return <LigneCommandes key={commande['@id']} detailsCommandes={commande.detailDocuments} numCommande={extraitNombre(commande['@id'])} total={parseInt(commande.montantTTC)} statut={commande.status == 'VALIDATED' ? 'validé' : 'en attente'} date={formatISODate(commande.date)}></LigneCommandes>})
 
 
     return(
@@ -156,14 +164,16 @@ export default function ComponentPage({data}){
     
                     <div id="commande" className={swipeOption == 'commandes' ? "" : "hidden"}>
     
-                    <div className="bg-gray-200 flex px-2 py-2 mb-4">
+                        <div className="bg-gray-200 flex px-2 py-2 mb-4">
                             <div className="w-[20%] text-base text-center ">N° de commande</div>
                             <div className="w-[20%] text-base text-center">Date</div>
                             <div className="w-[20%] text-base text-center">Total</div>
                             <div className="w-[20%] text-base text-center">Statut</div>
                             <div className="w-[20%] text-base text-center">Action</div>
+
                         </div>
-                        
+
+                        {listLigneCommande}
                     </div>
     
                     

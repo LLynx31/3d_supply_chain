@@ -14,13 +14,13 @@ function Categorie({code, image, nom, className}){
     return (
       <motion.div whileHover={{scale:0.9}}>
           <Link href={"/m/categorie/" + code}>
-          <div className={"flex-col w-[90px] flex sm:w-fit h-max" + className}>
+          <div className={"flex-col w-[100px]  sm:w-[150px]  flex sm:w-fit h-max" + className}>
           <img
             loading="lazy"
             srcSet={"https://api.3dsupplychains.com/" + image}
-            className=" w-full sm:h-full"
+            className=" sm:w-[150px] sm:h-full"
           />
-          <div className="text-black overflow-hidden text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
+          <div className="text-black overflow-hidden text-wrap   text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
             {nom}
           </div>
           </div>
@@ -46,7 +46,7 @@ function SousCategorie({id, image, nom, className, setDataProduct}){
         <motion.div whileHover={{scale:0.9}} className={"flex-col flex w-fit cursor-pointer " + className} onClick={()=>getProduct()}>
         <img
           loading="lazy"
-          srcSet={image}
+          srcSet={"https://api.3dsupplychains.com/" + image}
           className="w-[100px] sm:w-full sm:h-full"
         />
         <div className="text-black overflow-hidden text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
@@ -79,13 +79,15 @@ export function Categories(){
 
     return(
         <motion.div initial={{opacity:0, y:50}} whileInView={{opacity:1, y:0}} transition={{duration:0.3,delay:0.2}}><div className='my-5 py-5 md:block hidden'>
-        <swiper-container space-between="10" slides-per-view={"9"} navigation="true" speed="500" css-mode="true">
+        {/*<swiper-container space-between="10" slides-per-view={"2"} navigation="true" speed="500" css-mode="true">
           {listCategorie}
-          
-        </swiper-container>
+    </swiper-container>*/}
+          <div className='flex gap-3'>
+            {listCategorie}
+          </div>
       </div>
       <div className='my-5 md:hidden'>
-          <div className='grid grid-cols-4 gap-2'>
+          <div className='flex gap-3'>
             {listCategorie}
           </div>
         </div></motion.div>
@@ -98,7 +100,7 @@ export function SousCategories({code,data,setDataProduct}){
       console.log(data)
       const listCategorie = data.map(categorie =>
         <swiper-slide key={categorie.code}>
-          <SousCategorie id={categorie["@id"]} setDataProduct={setDataProduct} image={imageCategorie} nom={categorie.libelle}></SousCategorie>
+          <SousCategorie id={categorie["@id"]} setDataProduct={setDataProduct} image={categorie.coverImagePath} nom={categorie.libelle}></SousCategorie>
         </swiper-slide>
       )
 

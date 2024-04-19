@@ -9,16 +9,17 @@ import { motion } from "framer-motion"
 export default function PageRecherche(){
 
     const [dataProduct, setDataProduct] = useState(null)
+    const [pageView, setPageView] = useState('1')
 
     useEffect(()=>{
         async function rechercherProduit(){
             try {
-                const response = await getProductSearch("")
+                const response = await getProductSearch("",pageView)
                 if(response['hydra:member'].length <= 0){
                     setDataProduct('nothing')
                 } 
                 else {
-                    setDataProduct(response['hydra:member'])
+                    setDataProduct(response)
                 }
             } catch (error) {
                 
@@ -42,12 +43,22 @@ export default function PageRecherche(){
         )
     } else {
 
-        const listProduct = dataProduct.map(product => <Article code={product.id} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
+        const listProduct = dataProduct['hydra:member'].map(product => <Article poids={product.description2} code={product.id} key={product.id} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>)
 
         return(
             <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="mx-8 mt-8 grid grid-cols-2 gap-5 sm:grid-cols-5">
                 
                 {listProduct}
+                <div className="py-5">
+                    {/*dataProduct['hydra:view']['hydra:next'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
+
+                      setPageView(dataProduct['hydra:view']['hydra:next']);
+                    }}>suivant</button>}
+                    {dataProduct['hydra:view']['hydra:previous'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
+
+                      setPageView(dataProduct['hydra:view']['hydra:previous']);
+                    }}>precedant</button>*/}
+                  </div>
             </motion.div>
         )
     }

@@ -10,16 +10,17 @@ import { motion } from "framer-motion"
 export default function PageRecherche({params}){
 
     const [dataProduct, setDataProduct] = useState(null)
+    const [pageView, setPageView] = useState('1')
 
     useEffect(()=>{
         async function rechercherProduit(){
             try {
-                const response = await getProductSearch(params.code)
+                const response = await getProductSearch(params.code,pageView)
                 if(response['hydra:member'].length <= 0){
                     setDataProduct('nothing')
                 } 
                 else {
-                    setDataProduct(response['hydra:member'])
+                    setDataProduct(response)
                 }
             } catch (error) {
                 
@@ -43,10 +44,11 @@ export default function PageRecherche({params}){
         )
     } else {
 
-        const listProduct = dataProduct.map(product => <Article code={product.id} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} prix={product.priceProduits[0].valeur} reduction={product.priceProduits[1]?.valeur}></Article>)
+        //console.log(dataProduct)
+        const listProduct = dataProduct['hydra:member'].map(product => <Article poids={product.description2} code={product.id} key={product.id} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>)
 
         return(
-            <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="mx-8 mt-8 gap-2 grid grid-cols-2 sm:grid-cols-5">
+            <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="mx-8 mt-8 gap-8 grid grid-cols-2 sm:grid-cols-5">
                 
                 {listProduct}
             </motion.div>

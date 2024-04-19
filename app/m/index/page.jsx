@@ -53,28 +53,31 @@ export default function PageIndex() {
       });
     });
 
-    const observerOffreFlash = new IntersectionObserver((entries, observer) => {
+    /*const observerOffreFlash = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           // L'élément est en vue
           setCategorieInView('offre flash');
         }
       });
-    });
+    });*/
 
     observerPromo.observe(refPromotion.current);
     observerBestSeller.observe(refBestSeller.current);
     observerArrival.observe(refArrivage.current);
-    observerOffreFlash.observe(refOffreFlash.current);
+    //observerOffreFlash.observe(refOffreFlash.current);
 
 
   });
 
 
-  const [dataProduct, setDataProduct] = useState(null);
+  const [dataProductBestSeller, setDataProductBestSeller] = useState(null);
+  const [dataProductNewArrivage, setDataProductNewArrivage] = useState(null);
+
+
   const [dataPromotion, setDataPromotion] = useState(null);
 
-  const [pageViewBestSeller, setPageViewBestSeller] = useState("/api/produits?page=1");
+  const [pageViewBestSeller, setPageViewBestSeller] = useState("/api/produits?page=1order%5BtotalVente%5D=desc");
   const [pageViewNewArrivage, setPageViewNewArrivage] = useState("/api/produits?page=1");
   const [pageViewOffreFlash, setPageViewOffreFlash] = useState("/api/produits?page=1");
 
@@ -84,7 +87,7 @@ export default function PageIndex() {
     fetch("https://api.3dsupplychains.com" + pageViewBestSeller)
       .then((response) => response.json())
       //.then((responseParse)=>console.log(responseParse))
-      .then((responseParse) => setDataProduct(responseParse));
+      .then((responseParse) => setDataProductBestSeller(responseParse));
 
   }, [pageViewBestSeller]);
 
@@ -93,19 +96,19 @@ export default function PageIndex() {
     fetch("https://api.3dsupplychains.com" + pageViewNewArrivage)
       .then((response) => response.json())
       //.then((responseParse)=>console.log(responseParse))
-      .then((responseParse) => setDataProduct(responseParse));
+      .then((responseParse) => setDataProductNewArrivage(responseParse));
 
   }, [pageViewNewArrivage]);
 
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetch("https://api.3dsupplychains.com" + pageViewOffreFlash)
       .then((response) => response.json())
       //.then((responseParse)=>console.log(responseParse))
       .then((responseParse) => setDataProduct(responseParse));
 
-  }, [pageViewOffreFlash]);
+  }, [pageViewOffreFlash]);*/
 
 
 
@@ -125,9 +128,11 @@ export default function PageIndex() {
 
 
 
-  if (dataProduct && dataPromotion) {
-    console.log(dataPromotion);
-    const listDataProduct = dataProduct["hydra:member"].map(product => <Article poids={product.description2} code={product.id} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>);
+  if (dataProductBestSeller && dataPromotion && dataProductNewArrivage) {
+    //console.log(dataPromotion);
+    const listDataProductBestSeller = dataProductBestSeller["hydra:member"].map(product => <Article poids={product.description2} code={product.id} key={product.id} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>);
+
+    const listDataProductNewArrivage = dataProductNewArrivage["hydra:member"].map(product => <Article poids={product.description2} code={product.id} key={product.id} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>);
 
     const listPromotion = dataPromotion.map(promotion => <Promotion key={promotion['@id']} nom={promotion.libelle} reduction={promotion.pourcentage} image={promotion.medias[0].path} code={promotion.categorie ? promotion.categorie.libelle : promotion.sousCategorie.libelle}></Promotion>);
 
@@ -181,12 +186,12 @@ export default function PageIndex() {
                     Nouveaux arrivages
                   </div>
                 </div>
-                <div className="items-center flex gap-1.5 mt-2.5 px-2">
+                {/*<div className="items-center flex gap-1.5 mt-2.5 px-2">
                   <div className={categorieInView == 'offre flash' ? "bg-rouge flex w-[8px] shrink-0 h-[8px]  flex-col my-auto rounded-[50%]" : "bg-white flex w-[8px] shrink-0 h-[8px]  flex-col my-auto rounded-[50%]"} />
                   <div className="text-black text-base font-medium self-stretch">
                     Offres Flash
                   </div>
-                </div>
+    </div>*/}
 
 
               </div>
@@ -210,19 +215,19 @@ export default function PageIndex() {
                     <h1 ref={refBestSeller} className="text-xl font-bold ">Les best sellers</h1> 
 
                     <div className="py-5">
-                    {dataProduct['hydra:view']['hydra:next'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
+                    {dataProductBestSeller['hydra:view']['hydra:next'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
 
-                      setPageViewBestSeller(dataProduct['hydra:view']['hydra:next']);
+                      setPageViewBestSeller(dataProductBestSeller['hydra:view']['hydra:next']);
                     }}>suivant</button>}
-                    {dataProduct['hydra:view']['hydra:previous'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
+                    {dataProductBestSeller['hydra:view']['hydra:previous'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
 
-                      setPageViewBestSeller(dataProduct['hydra:view']['hydra:previous']);
+                      setPageViewBestSeller(dataProductBestSeller['hydra:view']['hydra:previous']);
                     }}>precedant</button>}
                   </div>
                   </div>
                   <p className="text-base ">Les produits les plus vendus de la plateforme</p>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-5 mt-8">
-                    {listDataProduct}
+                    {listDataProductBestSeller}
                   </div>
 
                   
@@ -235,25 +240,25 @@ export default function PageIndex() {
                     <h1 ref={refArrivage} className="text-xl font-bold ">Nouveaux arrivages</h1>
                     <div className="py-5">
 
-                      {dataProduct['hydra:view']['hydra:next'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
+                      {dataProductNewArrivage['hydra:view']['hydra:next'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
 
-                        setPageViewNewArrivage(dataProduct['hydra:view']['hydra:next']);
+                        setPageViewNewArrivage(dataProductNewArrivage['hydra:view']['hydra:next']);
                       }}>suivant</button>}
-                      {dataProduct['hydra:view']['hydra:previous'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
+                      {dataProductNewArrivage['hydra:view']['hydra:previous'] && <button className="text-base px-3 py-1 bg-jaune rounded text-black" onClick={() => {
 
-                        setPageViewNewArrivage(dataProduct['hydra:view']['hydra:previous']);
+                        setPageViewNewArrivage(dataProductNewArrivage['hydra:view']['hydra:previous']);
                       }}>precedant</button>}
                     </div>
                   </div>
                   
                   <p className="text-base ">Les produits qui viennent d'arriver en stock</p>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-5 mt-8">
-                    {listDataProduct}
+                    {listDataProductNewArrivage}
                   </div>
                 </div>
 
                 {/* Offres flash */}
-                <div>
+                {/*<div>
                   <div className="flex items-center ">
                     <img
                       loading="lazy"
@@ -283,7 +288,7 @@ export default function PageIndex() {
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-5 mt-8">
                     {listDataProduct}
                   </div>
-                </div>
+                  </div>*/}
 
               </div>
 

@@ -26,7 +26,7 @@ export async function getUser(){
 export async function getPanier(){
 
     //effectu le requete
-    const response = await fetch("https://api.3dsupplychains.com/api/documents?page=1",{
+    const response = await fetch("https://api.3dsupplychains.com/api/documents?page=1&typeDocument=%2Fapi%2Ftype_documents%2F3",{
         headers: {Authorization: 'Bearer '+ cookies().get('session')?.value}
       
     })
@@ -42,9 +42,30 @@ export async function getPanier(){
 
 }
 
-export async function getProductSearch(query){
+
+
+export async function getCommandes(){
+
     //effectu le requete
-    const response = await fetch("https://api.3dsupplychains.com/api/produits?page=1&nom=" + query)
+    const response = await fetch("https://api.3dsupplychains.com/api/documents?page=1&typeDocument=%2Fapi%2Ftype_documents%2F2",{
+        headers: {Authorization: 'Bearer '+ cookies().get('session')?.value}
+      
+    })
+
+
+    if (!response.ok){
+        const error =  await response.json()
+        throw error
+    }
+
+    return await response.json()
+
+
+}
+
+export async function getProductSearch(query,page){
+    //effectu le requete
+    const response = await fetch("https://api.3dsupplychains.com/api/produits?nom=" + query + "&page=" + page)
 
 
     if (!response.ok){

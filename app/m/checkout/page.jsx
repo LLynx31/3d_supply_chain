@@ -63,7 +63,7 @@ export default function CheckoutPage(){
         //execution de la requete*/
         try{
             const response = await pacthPanier(e)
-            console.log(response)
+            //console.log(response)
         } catch (error) {
             console.log(error)
         }

@@ -164,7 +164,7 @@ const [isSearch, setSearch] = useState('')
       try{
         const connexion = await getuser()
         setConnected(connexion)
-      }catch{
+      }catch (error){
         
       }
       
@@ -185,7 +185,7 @@ const [isSearch, setSearch] = useState('')
       
     }
 
-    nbrArticlePanier()
+
     
   },[])
 
