@@ -49,7 +49,7 @@ export default function LigneCommandes({numCommande,date,total,statut,detailsCom
                     return setView({etat:'',action:'fermer'})
                 }
 
-                return setView({etat:'hidden',action:'voir plus'})
+                return setView({etat:'hidden',action:'details'})
             }}>{view.action}</button></div>
         </div>
         <DetailsCommande detailsCommandes={detailsCommandes} view={view.etat}></DetailsCommande>
