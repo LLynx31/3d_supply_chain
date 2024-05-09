@@ -204,7 +204,7 @@ export default function PageIndex() {
                   <h1 ref={refPromotion} className="text-xl font-bold ">Promotion</h1>
                   <p className="text-base ">Découvrez les produits en promotion sur plateforme</p>
                   <div className="grid grid-cols-2 md:max-lg:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-5 mt-8">
-                    {listPromotion}
+                    {listPromotion.length > 0 ? listPromotion : <div className="text-base text-slate-500">Aucune promotion en cours</div> }
                   </div>
 
                 </div>

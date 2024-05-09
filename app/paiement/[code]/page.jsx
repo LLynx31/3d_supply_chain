@@ -12,7 +12,7 @@ export default function page({ params }) {
     <><Alert variant="filled" className="w-[300px] " severity="success">paiement effectué avec succès</Alert>
     <Link href={"/"} className="text-base underline">retrouvez plus d'article</Link></>
   );
-  const error = <><Alert variant="filled" className="w-[300px] " severity="error">le paiement echoué</Alert><Link href={"/m/quisommesnous"} className="text-base underline">essayer de nous contacter</Link></>
+  const error = <><Alert variant="filled" className="w-[300px] " severity="error">le paiement a echoué</Alert><Link href={"/m/quisommesnous"} className="text-base underline">essayer de nous contacter</Link></>
 
   return (
     <div className="h-screen w-full gap-5 flex flex-col justify-center items-center">
