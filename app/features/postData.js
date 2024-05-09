@@ -88,7 +88,7 @@ export async function postAddPanier(product, quantite){
 
         const formData = {
             quantite: quantite,
-            produit : product    
+            produit : '/api/produits/'+product 
         }
 
         console.log(formData)

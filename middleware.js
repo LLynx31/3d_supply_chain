@@ -25,6 +25,10 @@ export async function middleware(request) {
     return Response.redirect(new URL('/connexion', request.url))
   }
 
+  if (!currentUser && request.nextUrl.pathname.startsWith('/paiement')) {
+    return Response.redirect(new URL('/connexion', request.url))
+  }
+
   if (!currentUser && request.nextUrl.pathname.startsWith('/m/panier')) {
     return Response.redirect(new URL('/connexion', request.url))
   }

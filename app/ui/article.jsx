@@ -29,7 +29,7 @@ export default function Article({price,poids,newPrice,nom,image,code}){
             <div className="flex items-center bg-white justify-between px-1 py-1 h-[35%]">
                 <div className="flex  flex-col px-1">
                     <div className="flex flex-col items-center">
-                        <div className="font-bold w-fit px-2 py-1 mb-1 bg-jaune text-[11px] min-[1210px]:text-[12px] rounded-[5px] ">{newPrice} <span className="text-[10px]">FCFA</span></div>
+                        <div className="font-bold w-fit px-2 py-1 mb-1 bg-jaune text-[11px] min-[1210px]:text-[12px] rounded-[5px] ">{newPrice} <span className="text-[10px]">EURO</span></div>
                         { parseInt(newPrice) !== parseInt(price) && <div className="font-bold w-fit  py-1 text-[11px] min-[1210px]:text-[12px] "><s>{parseInt(price)} <span className="text-[10px]">FCFA</span></s></div>}
                         </div>
                         <div className="md:text-[11px] text-[12px] px-2">{poids} -</div>

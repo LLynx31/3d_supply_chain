@@ -43,10 +43,10 @@ export default function ItemPanier({nom,description,prix,quantiteProduct,imagePr
                     <div className="text-sm  ">{description} </div>
                 </div>
             </div>
-            <div className="w-[15%] text-base font-semibold  align-middle flex justify-center items-center"><div>{prix} FCFA</div></div>
+            <div className="w-[15%] text-base font-semibold  align-middle flex justify-center items-center"><div>{prix} EURO</div></div>
             <div className="w-[30%] flex justify-center items-center">
-                <div className="flex w-[70px] justify-between items-center px-1 border border-gray-300 py-1">
-                    <button onClick={diminuQuantite}>-</button>{quantite}<button onClick={augmenteQuantite}>+</button>
+                <div className="flex w-[70px] justify-center items-center px-1 borderborder-gray-300 py-1">
+                    {/*<button onClick={diminuQuantite}>-</button>*/}{quantite}{/*<button onClick={augmenteQuantite}>+</button>*/}
                 </div>
             </div>
             <div className="w-[15%] flex justify-center text-base items-center"><div>{prix * quantite} FCFA</div></div>

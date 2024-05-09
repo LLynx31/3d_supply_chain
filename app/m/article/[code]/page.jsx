@@ -105,7 +105,7 @@ export default function ArticleView({params}){
 
                 <div className={"fixed right-7 flex py-2 justify-center px-2 bg-red-100 rounded-xl w-fit transition-[display] " + ajoutEchec }>
                     <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
-                    <div className="text-base"> echec </div>
+                    <div className="text-base"> produit non ajouté au panier </div>
                     <button onClick={()=> {setAjoutEchec('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
 
@@ -132,7 +132,7 @@ export default function ArticleView({params}){
                     
                         {dataProduct.quantiteStock > 1 ? <div className="px-3 py-2 my-3 rounded-md bg-teal-50 border border-teal-300 text-base ">Disponibilité : <span className="text-teal-400">En stock</span></div> : <div className="px-3 py-2 my-3 rounded-md bg-red-50 border border-red-300 text-base ">Disponibilité : <span className="text-red-400">Indisponible</span></div>}
 
-                        <div className="text-lg ">{parseInt(dataProduct.newPrice)} FCFA</div>
+                        <div className="text-lg ">{parseInt(dataProduct.newPrice)} EURO</div>
 
                         <p className="mt-3 text-base mb-8">
                             {dataProduct.description} 

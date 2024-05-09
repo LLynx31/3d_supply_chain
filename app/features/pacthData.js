@@ -155,7 +155,7 @@ export async function validatePanier(){
             const error =  await response.json()
             throw error
         }
-        return response
+        return await response.json()
 
     } catch (error) {
         console.log(error)
