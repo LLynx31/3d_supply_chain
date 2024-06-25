@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 export default function Footer() {
     
@@ -28,11 +29,14 @@ export default function Footer() {
                 <div className="flex flex-col items-between max-md:mt-10">
                   <div className="text-black text-lg font-bold">A propos</div>
                   <div className="text-black text-base whitespace-nowrap mt-4">
-                    Conditions générales
+                    <Link target="_blank" href={"/mentions-legales.pdf"}>Mention légale</Link> 
                   </div>
-                  <div className="text-black text-base mt-6">FAQ</div>
+                  <div className="text-black text-base whitespace-nowrap mt-4">
+                    <Link target="_blank" href={"/Conditions_générales_de_vente.pdf"}>Conditions générales</Link>
+                  </div>
+                  <div className="text-black text-base mt-6"> <Link href={"FAQ"}>FAQ</Link> </div>
                   <div className="text-black text-base whitespace-nowrap mt-7">
-                    Qui sommes-nous ?
+                    <Link href={"quisommesnous"}>Qui sommes-nous ?</Link>
                   </div>
                 </div>
               </div>
