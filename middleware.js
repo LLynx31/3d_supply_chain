@@ -41,6 +41,10 @@ export async function middleware(request) {
   if (currentUser && request.nextUrl.pathname.startsWith('/inscription')) {
     return Response.redirect(new URL('/m/compte', request.url))
   }
+
+  if (currentUser && request.nextUrl.pathname.startsWith('/connexion')) {
+    return Response.redirect(new URL('/m/compte', request.url))
+  }
 }
  
 export const config = {

@@ -1,14 +1,20 @@
 'use client'
 
 import Link from "next/link";
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import { authentificate } from "../features/authentification";
 
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation";
+import { AuthContext } from "../contextProvider";
 
 
 
 function FormConnexion({forgetPassword,}){
+
+  const authentification = useContext(AuthContext)
+
+  const router =  useRouter()
 
   const [dataForm, setDataForm] = useState({
     username:'',
@@ -20,12 +26,16 @@ function FormConnexion({forgetPassword,}){
 
   async function login(){
     
-    const error = await authentificate(dataForm)
-    if(error){
-        setErrorMessage(error)
+    const response = await authentificate(dataForm)
+    if(!response){
+
+        setErrorMessage("Mail ou mot de passe incorrect")
         setEtatButtonForm('valider')
+        return null
     }
-    
+
+    authentification.setConnected(true)
+    router.replace('m/compte')
   }
 
   return(

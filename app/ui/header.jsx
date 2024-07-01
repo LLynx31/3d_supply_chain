@@ -1,16 +1,21 @@
 'use client'
 
 import Link from "next/link";
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useContext} from 'react';
 import {authentificate, deleteCookies, getuser }from "../features/authentification";
 import { useRouter } from "next/navigation";
 import { getPanier } from "../features/getData";
+import { AuthContext } from "../contextProvider";
 
 
 
 
 
 function FormConnexion({forgetPassword,}){
+
+  const authentification = useContext(AuthContext)
+
+  const router =  useRouter()
 
   const [dataForm, setDataForm] = useState({
     username:'',
@@ -22,12 +27,16 @@ function FormConnexion({forgetPassword,}){
 
   async function login(){
     
-    const error = await authentificate(dataForm)
-    if(error){
-        setErrorMessage(error)
+    const response = await authentificate(dataForm)
+    if(!response){
+
+        setErrorMessage("Mail ou mot de passe incorrect")
         setEtatButtonForm('valider')
+        return null
     }
-    
+
+    authentification.setConnected(true)
+    router.replace('compte')
   }
 
   return(
@@ -102,12 +111,15 @@ function PopupConnected({className=" ", closePopup}){
   const logo = "/logo.png"
 
   const router = useRouter()
+  
+  const authentification = useContext(AuthContext)
 
   async function deconnected(){
     try {
       await deleteCookies()
       closePopup()
-      router.refresh()
+
+      router.push('/connexion')
     } catch (error){
       console.log(error)
     }
@@ -149,7 +161,7 @@ const shoppingBag = "/shopping-bag.svg"
 
 const [popupOpen, setPopupOpen] = useState('hidden')
 
-const [connected, setConnected] = useState(false)
+//const [connected, setConnected] = useState(false)
 const [nbrArticlePanier, setNbrArticlePanier] = useState(0)
 
 const [isSearch, setSearch] = useState('')
@@ -159,7 +171,7 @@ const [isSearch, setSearch] = useState('')
     setPopupOpen('hidden')
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function verifieConnexion(){
       try{
         const connexion = await getuser()
@@ -172,9 +184,9 @@ const [isSearch, setSearch] = useState('')
 
     verifieConnexion()
     
-  },[])
+  },[])*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function nbrArticlePanier(){
       try {
         const response = await getPanier()
@@ -185,14 +197,15 @@ const [isSearch, setSearch] = useState('')
       
     }
 
-
     
-  },[])
+  },[])*/
+
+  const authentification = useContext(AuthContext)
 
     return(
       <div className="">
         
-        {connected ? <PopupConnected className={popupOpen} closePopup={closePopup} ></PopupConnected> : <PopupConnexion className={popupOpen} closePopup={closePopup} ></PopupConnexion>}
+        {authentification.connected ? <PopupConnected className={popupOpen} closePopup={closePopup} ></PopupConnected> : <PopupConnexion className={popupOpen} closePopup={closePopup} ></PopupConnexion>}
                 
               <div className="w-full flex items-center justify-center h-[56px] bg-[#f6cb05]">
                   <p className="text-center font-normal text-black text-base">
@@ -216,7 +229,7 @@ const [isSearch, setSearch] = useState('')
               </div>
             </Link>
 
-            <div className="md:w-[400px] max-md:hidden max-[820px]:w-[400px] min-[870px]:w-[325px] h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
+            <div className="md:w-[400px] max-md:hidden max-[820px]:w-[400px] min-[870px]:w-[325px] h-[42px] flex border-[0.3px] border-solid rounded-[5px]">
               <div onClick={() =>router.push("/m/recherche/" + isSearch   )} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
                   <img className="w-[24px] h-[24px]" alt="Search" src={search} />
               </div>
@@ -250,7 +263,7 @@ const [isSearch, setSearch] = useState('')
       
 
         <div className="px-8 mt-5 py-1">
-          <div className="w-[325px] md:hidden h-[42px] flex border-[0.3px] border-solid border-[0.3px] border-solid rounded-[5px]">
+          <div className="w-[325px] md:hidden h-[42px] flex border-[0.3px] border-solid rounded-[5px]">
                 <div onClick={() =>router.push("/m/recherche/" + isSearch)} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
                     <img className="w-[24px] h-[24px]" alt="Search" src={search} />
                 </div>

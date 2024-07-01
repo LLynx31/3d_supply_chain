@@ -44,7 +44,7 @@ export async function authentificate(formData){
         if (code === 401) {
 
             //s'il est existe on retourne une erreur
-            return "Email ou mot de passe incorrect"
+            return false
         } else {
 
         //sinon on enregistre le cookies de session
@@ -60,7 +60,7 @@ export async function authentificate(formData){
         
     
         //on redirige l'utilisateur vers la page de compte
-        redirect("/m/compte");
+        return true
         
       }
 

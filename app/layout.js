@@ -22,8 +22,11 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="fr">      
-      <body className={`${poppins.className } bg-white antialiased`} >        
-        {children}
+      <body className={`${poppins.className } bg-white antialiased`} >       
+        <AuthProvider >
+          {children}
+        </AuthProvider> 
+        
         <BottomMenu></BottomMenu>
         <SpeedInsights />
       </body>

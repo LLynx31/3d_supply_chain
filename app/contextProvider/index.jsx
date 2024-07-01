@@ -1,13 +1,30 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { getuser } from "../features/authentification";
 
 
 export const AuthContext = createContext()
 
 export function AuthProvider({children}){
-    const [tokken, setTokken] = useState("")
+  const [connected, setConnected] = useState(false)
+
+  useEffect(() => {
+    async function verifieConnexion(){
+      try{
+        const connexion = await getuser()
+        setConnected(connexion)
+        console.log('refresh')
+      }catch (error){
+        
+      }
+      
+    }
+
+    verifieConnexion()
+    
+  })
 
     return(
-      <AuthContext.Provider value={{tokken, setTokken}}>
+      <AuthContext.Provider value={{connected, setConnected}}>
         {children}
       </AuthContext.Provider>  
     )
