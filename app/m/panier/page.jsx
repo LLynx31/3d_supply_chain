@@ -18,7 +18,7 @@ export default function Panier(){
         async function recupererPanier(){
             try {
                 const panier =  await getPanier()
-                console.log(panier['hydra:member'])
+                //console.log(panier['hydra:member'])
               
                     setDataPanier(panier['hydra:member'])
  
@@ -76,12 +76,12 @@ export default function Panier(){
     
                             <div className="flex justify-between mb-3">
                                 <div className="text-base ">livraison</div>
-                                <div className="text-base font-bold">1000 + {parseInt(dataPanier[0]?.montantHt)} FCFA</div>
+                                <div className="text-base font-bold">10 + {parseInt(dataPanier[0]?.montantHt)} EURO</div>
                             </div>
     
                             <div className="flex justify-between mb-8">
                                 <div className="text-base ">total</div>
-                                <div className="text-base font-bold">{parseInt(dataPanier[0]?.montantHt) + 1000} FCFA</div>
+                                <div className="text-base font-bold">{parseInt(dataPanier[0]?.montantHt) + 10} EURO</div>
                             </div>
     
                             <button onClick={()=>router.push("/m/checkout")}  className="text-white text-base w-full bg-rouge text-center py-3 rounded-md">verifier la commande</button>

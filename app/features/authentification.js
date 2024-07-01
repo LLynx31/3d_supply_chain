@@ -6,6 +6,7 @@ import { getUser } from "./getData"
 
 
 
+
 export async function authentificate(formData){
 
 
@@ -90,4 +91,26 @@ export async function getuser(){
     return false
   }
   
+}
+
+
+export async function resetPassword(dataForm){
+  try {
+    const response = await fetch("https://api.3dsupplychains.com/api/users/set_new_password",{
+      method: "POST",
+      body: JSON.stringify(dataForm),
+      headers: {
+                  "Content-Type": "application/json",
+                  accept: 'application/json',
+              }, 
+    })
+
+    if(!response.ok){
+      const error = await response.json()
+      throw error
+    }
+    return response.json()
+  } catch(e) {
+    return e
+  }
 }

@@ -51,9 +51,9 @@ export default function ArticleView({params}){
 
         async function ajoutePanier(){
             try {
-                console.log(dataProduct.id)
+                //console.log(dataProduct.id)
                 const etat = await postAddPanier(dataProduct.id,quantite)
-                console.log(etat)                
+                //console.log(etat)                
                 if(etat == 'Ok'){
                     setAjoutReussi('')
                     
@@ -83,7 +83,7 @@ export default function ArticleView({params}){
             listDataProductSimilar = dataProductSimilar.map(product => <Article  poids={product.description2} code={product.id} key={product["@id"]} nom={product.nom} image={product.imageProduits[0]?.path} price={product.price} newPrice={product.newPrice}></Article>)
         }
 
-        console.log(swipeDescription)
+        //console.log(swipeDescription)
 
         function augmenteQuantite(){
             setQuantite(quantite + 1)
