@@ -164,7 +164,7 @@ function SuccesInscription(){
 
             {/*<button className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md font-bold tracking-wider">Renvoyer</button>*/}
 
-            <button onClick={()=>{document.location.href = "/"}} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2 font-bold tracking-wider">Valider l'inscription</button>
+            <button onClick={()=>{document.location.href = "/confirmeMail"}} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2 font-bold tracking-wider">Valider l'inscription</button>
         </div>
     )
 }

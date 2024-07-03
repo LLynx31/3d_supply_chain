@@ -8,10 +8,6 @@ import { getPanier } from "../features/getData";
 import { AuthContext } from "../contextProvider";
 import { sendCode, verifyCode } from "../features/postData";
 
-
-
-
-
 function FormConnexion({forgetPassword,}){
 
   const authentification = useContext(AuthContext)
