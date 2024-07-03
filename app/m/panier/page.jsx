@@ -70,7 +70,7 @@ export default function Panier(){
                         <div className="mt-8">
                             <div className="flex justify-between mb-3">
                                 <div className="text-base ">sous-total</div>
-                                <div className="text-base font-bold">{parseInt(dataPanier[0]?.montantHt)} FCFA</div>
+                                <div className="text-base font-bold">{parseInt(dataPanier[0]?.montantHt)} EURO</div>
                             </div>
     
     
