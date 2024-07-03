@@ -109,7 +109,7 @@ export async function resetPassword(dataForm){
       const error = await response.json()
       throw error
     }
-    return response.json()
+    return true
   } catch(e) {
     return e
   }

@@ -8,6 +8,9 @@ import { resetPassword } from "../features/authentification"
 export default function resetPasswordPage(){
     const logo = "/logo.png"
 
+    const [isSuccesChange, setSuccesChange] = useState(false)
+    const [isErrorCode, setErrorCode] = useState(false)
+
     const [dataForm, setData] = useState({
         email: "",
         newPassword: "",
@@ -15,15 +18,18 @@ export default function resetPasswordPage(){
 
     const [isTextButton, setTextButton] = useState("Rénitialiser le mot de passe")
    
-    useEffect(()=>{
-        console.log(dataForm)
-    },[dataForm])
 
     async function reintialiserPassword(){
         setTextButton('Chargement...')
         const response = await resetPassword(dataForm)
-        setTextButton('Rénitialiser le mot de passe')
 
+        if (response === true){
+          if(isErrorCode) setErrorCode(false)
+          setTextButton('Rénitialiser le mot de passe')
+          return setSuccesChange(true)
+        }
+        
+        setErrorCode(true)
         console.log(response)
     }
   
@@ -39,7 +45,8 @@ export default function resetPasswordPage(){
       <h1 className="text-lg text-center font-bold">Rénitialisation du mot de passe</h1>
         <p className="text-base text-center font-light">Veuillez entrer le nouveau mot de passe</p>
         <div className="w-full mt-3.5">
-          
+        {isSuccesChange && <div className="text-base text-center text-green-600">Votre mote de passe a été modifié avec succès. <Link href={"/connexion"} className="underline ">Cliquez ici pour vous connecter avec vos nouveaux identifiants.</Link></div>}
+        {isErrorCode && <div className="text-base text-center text-rouge">E-mail incorrecte. Veuillez entrer votre e-mail actuelle. </div>}
           <div className="text-base" name="email">Email</div>
           <input className="w-full border border-gray-300 px-1 py-2" value={dataForm.email} type="email" placeholder="Email" onChange={(e)=>setData({...dataForm, email: e.target.value})}></input>
         </div>

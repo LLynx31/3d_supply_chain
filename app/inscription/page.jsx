@@ -5,7 +5,7 @@ import Link from "next/link"
 
 import { motion } from "framer-motion"
 
-function FormInscription({succesIsGood}){
+function FormInscription({setSucces, setLose, isLose}){
 
     const [data, setData] = useState({
         nom: "",
@@ -16,6 +16,9 @@ function FormInscription({succesIsGood}){
         typeUser: "/api/type_users/1",
         plainPassword: ""
     })
+
+
+    const [isTextButton, setTextButton] = useState("VALIDER")
 
     function updateNom(dataUpate){
         setData(
@@ -83,14 +86,16 @@ function FormInscription({succesIsGood}){
 
 
     async function actionForm(){
-        try {
+            setTextButton("CONNEXION...")
             const response = await postInscription(data)
-            succesIsGood(true)
-            console.log(response)
-        } catch (error) {
-            console.error(error)
-        }
-        
+            if(response === true){
+                if(isLose) setLose(false)
+                    setTextButton("VALIDER")
+                return setSucces(true)
+            }
+            
+            setLose(true)
+            setTextButton("VALIDER")
     }
     
       
@@ -138,7 +143,7 @@ function FormInscription({succesIsGood}){
                     <input  name="telephone2" value={data.telephone2} onChange={(e) => updateTelephone2(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="0202020202"></input>
                 </div> 
 
-                <button  className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">VALIDER</button>  
+                <button  className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md">{isTextButton}</button>  
             </form> 
         </>
    
@@ -154,12 +159,12 @@ function SuccesInscription(){
             <p className="text-base text-center mb-3">Confirmation du compte</p>
             <div className={"flex py-2 justify-center items-center px-2 bg-teal-50 rounded-xl w-fit transition-[display] "}>
                 <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
-                <div className="text-teal-500">Votre compte a bien été créé dirigez vous vers la page d'acceuille pour vous connecter avec votre adresse e-mail et votre mot de passe</div>
+                <div className="text-teal-500">Un code a été envoyé à l'adresse mail utilié, utilisé le pour valider l'inscription. </div>
             </div>
 
             {/*<button className="mt-6 text-white w-full bg-rouge text-center py-2.5 rounded-md font-bold tracking-wider">Renvoyer</button>*/}
 
-            <button onClick={()=>{document.location.href = "/"}} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2 font-bold tracking-wider">Retourner à l'acceuil</button>
+            <button onClick={()=>{document.location.href = "/"}} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2 font-bold tracking-wider">Valider l'inscription</button>
         </div>
     )
 }
@@ -169,14 +174,16 @@ export default function InscriptionPage(){
     const bannerImg = '/barniere_site_3D_supply_chain_VERTICALE.jpg'
 
     const [succes, setSucces] = useState(false) 
-
+    const [lose, setLose] = useState(false)
 
     return (
         <motion.div initial={{opacity: 0, y:50}} animate={{opacity:1, y:0}} transition={{duration:0.3}} className="flex gap-20 mt-8 mb-20"> 
             <img loading="lazy" srcSet={bannerImg} className="hidden sm:block">
             </img>
 
-            <div className="w-[1/2]">{!succes ? <FormInscription succesIsGood={()=>setSucces(true)}></FormInscription> : <SuccesInscription></SuccesInscription> }</div>
+            <div className="w-[1/2]">{!succes ? <FormInscription isLose={lose} setLose={setLose}  setSucces={setSucces}></FormInscription> : <SuccesInscription></SuccesInscription> }
+            {lose && <div className="text-base my-3 text-center text-rouge">Ce mail est déjà associé à un compte.</div>}</div>
+     
         </motion.div>
         )
      

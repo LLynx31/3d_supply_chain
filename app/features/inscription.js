@@ -1,9 +1,10 @@
 "use server"
 
 export async function postInscription(donnees = {}) {
-        
-    // Les options par défaut sont indiquées par *
-    const response = await fetch("https://api.3dsupplychains.com/api/users", {
+
+  try {
+     // Les options par défaut sont indiquées par *
+     const response = await fetch("https://api.3dsupplychains.com/api/users", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -22,6 +23,10 @@ export async function postInscription(donnees = {}) {
       throw error
     }
 
-    return response.json(); // transforme la réponse JSON reçue en objet JavaScript natif
+    return true; // transforme la réponse JSON reçue en objet JavaScript natif
 
+  } catch (error) {
+    return error
   }
+      
+}

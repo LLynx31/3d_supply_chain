@@ -37,6 +37,7 @@ export default function CheckoutPage() {
 
         setDataPanier(panier["hydra:member"]);
         setDataAdresse(adresse["hydra:member"]);
+
       } catch (error) {
         console.error(error);
         router.back();

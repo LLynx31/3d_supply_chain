@@ -76,6 +76,28 @@ export async function sendCode(isEmail){
     }
   }
 
+export async function verifyCodeConfirmeMail(dataForm){
+    try {
+      const response = await fetch("https://api.3dsupplychains.com/api/users/confirm_email",{
+        method: "POST",
+        body: JSON.stringify(dataForm),
+        headers: {
+                    "Content-Type": "application/json",
+                    accept: 'application/json',
+                }, 
+      })
+
+      if(!response.ok){
+        const error = await response.json()
+        throw error
+      }
+      return true
+    } catch(e) {
+      return e
+    }
+  }
+
+
 export async function postAddPanier(product, quantite){
 
     async function addNoExiste(){

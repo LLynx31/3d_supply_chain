@@ -150,7 +150,7 @@ export default function PageIndex() {
 
           <div className="px-3 sm:px-8 pt-5">
 
-            <div className="w-full  overflow-hidden">
+            <div className="w-full min-h-[500px]  overflow-hidden">
 
               <img className="object-bottom w-full h-full mb-8"
                 loading="lazy"

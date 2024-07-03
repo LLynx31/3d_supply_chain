@@ -6,6 +6,7 @@ import {authentificate, deleteCookies, getuser }from "../features/authentificati
 import { useRouter } from "next/navigation";
 import { getPanier } from "../features/getData";
 import { AuthContext } from "../contextProvider";
+import { sendCode, verifyCode } from "../features/postData";
 
 
 
@@ -49,7 +50,7 @@ function FormConnexion({forgetPassword,}){
           <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=>{setDataForm({...dataForm, username: e.target.value})}} value={dataForm.username} type="email" placeholder="Email"></input>
         </div>
         <div className="w-full mt-3.5">
-          <div className="text-base" name="password">Mot de passe actuel</div>
+          <div className="text-base" name="password">Mot de passe</div>
           <input value={dataForm.password} onChange={(e)=>{setDataForm({...dataForm, password: e.target.value})}} className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="password"></input>
         </div>
         <div className="cursor-pointer w-fit text-right text-jaune text-base underline" onClick={forgetPassword}>mot de passe oublié ?</div>
@@ -62,22 +63,71 @@ function FormConnexion({forgetPassword,}){
 }
 
 function FormForgetPassword(){
+
+  const router = useRouter()
+  const [isSend, setSend] = useState(false)
+
+  const [isData, setData] = useState({email: "", code:""})
+
+  const [isTextButton, setTextButton] = useState("Valider")
+  const [isErrorCode, setErrorCode] = useState(false)
+  
+
+  async function recevoirCode(){
+    setTextButton("Envoie...")
+    const response = await sendCode(isData.email)
+      if(response !== true){
+        console.log(response)
+      }
+    setTextButton("Valider")
+    setSend(true)
+  }
+
+  async function verifierCode(){
+    setTextButton("Envoie...")
+    const response = await verifyCode(isData)
+    setTextButton("Valider")
+    
+    if(response === true) {
+      return router.push("/resetPassword")
+    }
+
+    setErrorCode(true)
+
+
+  }
+
   return( 
     <>
       <h1 className="text-lg text-center font-bold">Mot de passe oublié</h1>
         <p className="text-base text-center font-light">Renseignez votre email pour reintialiser votre mot de passe</p>
         <div className="w-full mt-3.5">
+          {
+            !isSend ? <>
           <div className="text-base">Email</div>
-          <input className="w-full border border-gray-300 px-1 py-2" type="email" placeholder="Sagoe"></input>
+          <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=> setData({...isData, email:e.target.value})} type="email" placeholder="example@gmail.com"></input>
+          <button onClick={recevoirCode} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2">{isTextButton}</button>
+          </> : 
+          <>
+            {isErrorCode && <div className="text-base text-center text-rouge">Code incorrect</div>}
+            <div className="text-base my-2 text-blue-600">
+              Un mail contenant un code de rénitialisation a été envoyé a l'adresse indiquée.
+            </div>
+            <div className="text-base">Entrez le code que vous avez reçu</div>
+            <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=> setData({...isData, code:e.target.value})} type="email" placeholder="code"></input>
+            <button onClick={verifierCode} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2" >{isTextButton}</button>
+          </> 
+          
+          } 
+          
         </div>
      
 
-        <button className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2">Valider</button>
+       
 
     </>
   )
 }
-
 
 function PopupConnexion({className=" ", closePopup}){
 
