@@ -104,9 +104,8 @@ export default function ArticleView({params}){
                 </div>
 
                 <div className={"fixed right-7 flex py-2 justify-center px-2 bg-red-100 rounded-xl w-fit transition-[display] " + ajoutEchec }>
-                    <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
-                    <div className="text-base"> produit non ajouté au panier </div>
-                    <button onClick={()=> {setAjoutEchec('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
+                    <div className="text-base w-[300px] text-justify"> Produit non ajouté au panier. Il semble que vous n'avez pas ajouté d'adresse de livraison. Rendez vous dans votre compte pour ajouter une adresse. Si le problème persiste contacté le service client.  </div>
+                    <button className=" ml-2" onClick={()=> {setAjoutEchec('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
 
                 <Categories></Categories>
