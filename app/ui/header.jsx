@@ -255,7 +255,7 @@ const [isSearch, setSearch] = useState('')
                 
               <div className="w-full flex items-center justify-center h-[56px] bg-[#f6cb05]">
                   <p className="text-center font-normal text-black text-base">
-                    Dans le cadre des fêtes de fin d’années, profitez de -40% sur tous nos produits
+                    Bienvenue, vous trouverez sur ce site des produits frais et surgelés. N'hésitez à passer commande ! 
                   </p>
                 </div>
               

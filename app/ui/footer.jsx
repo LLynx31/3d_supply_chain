@@ -1,17 +1,15 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export default function Footer() {
-    
-    const logo = "/logo.png"
-    const downloadApple = "/download_apple.png"
-    const downloadAndroid = "/download_android.png"
-    const facebook = "/facebook.svg"
-    const linkedin = "/linkedin.svg"
-    const twitter = "/twitter.svg"
+  const logo = "/logo.png";
+  const downloadApple = "/download_apple.png";
+  const downloadAndroid = "/download_android.png";
+  const facebook = "/facebook.svg";
+  const linkedin = "/linkedin.svg";
+  const twitter = "/twitter.svg";
   return (
     <div className="bg-yellow-400 mt-36 p-5 max-md:px-5">
       <div className="gap-3 flex justify-between max-lg:flex-col max-md:items-stretch max-md:gap-0">
-
         <div className="flex flex-col items-stretch w-fit  max-md:ml-0">
           <div className="mt-8 max-md:max-w-full max-md:mt-10">
             <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -19,22 +17,31 @@ export default function Footer() {
                 <div className="flex grow flex-col justify-center items-center mt-2.5 max-md:mt-10">
                   <img
                     loading="lazy"
-                    srcSet= {logo}
+                    srcSet={logo}
                     className="aspect-[2.43] object-contain object-center w-[233px] overflow-hidden"
                   />
-                  
                 </div>
               </div>
               <div className="flex flex-col w-fit ml-5 max-md:w-full max-md:ml-0">
                 <div className="flex flex-col items-between max-md:mt-10">
                   <div className="text-black text-lg font-bold">A propos</div>
                   <div className="text-black text-base whitespace-nowrap mt-4">
-                    <Link target="_blank" href={"/mentions-legales.pdf"}>Mention légale</Link> 
+                    <Link target="_blank" href={"/mentions-legales.pdf"}>
+                      Mention légale
+                    </Link>
                   </div>
                   <div className="text-black text-base whitespace-nowrap mt-4">
-                    <Link target="_blank" href={"/Conditions_générales_de_vente.pdf"}>Conditions générales</Link>
+                    <Link
+                      target="_blank"
+                      href={"/Conditions_générales_de_vente.pdf"}
+                    >
+                      Conditions générales
+                    </Link>
                   </div>
-                  <div className="text-black text-base mt-6"> <Link href={"FAQ"}>FAQ</Link> </div>
+                  <div className="text-black text-base mt-6">
+                    {" "}
+                    <Link href={"FAQ"}>FAQ</Link>{" "}
+                  </div>
                   <div className="text-black text-base whitespace-nowrap mt-7">
                     <Link href={"quisommesnous"}>Qui sommes-nous ?</Link>
                   </div>
@@ -55,8 +62,7 @@ export default function Footer() {
                   className="aspect-square object-contain object-center w-6 overflow-hidden shrink-0 max-w-full"
                 />
                 <div className="text-black text-base grow shrink basis-auto">
-                  Siège situé à Yopougon Niangon sud
-                  <br />à gauche
+                  3 rue Paul Sérusier ,22200, Guingamp, France
                 </div>
               </div>
               <div className="flex items-stretch justify-between gap-1.5 mt-8">
@@ -66,7 +72,7 @@ export default function Footer() {
                   className="aspect-square object-contain object-center w-6 overflow-hidden shrink-0 max-w-full"
                 />
                 <div className="text-black text-base self-center grow shrink basis-auto my-auto">
-                  (+225) 05 95 01 35 28
+                  +33 7 73 46 37 42
                 </div>
               </div>
               <div className="flex items-stretch justify-between gap-1 mt-8">
@@ -89,33 +95,32 @@ export default function Footer() {
             </div>
             <div className="flex justify-between w-[150px]">
               <div className="w-[43px] h-[43px]  flex justify-center items-center rounded-[100%] bg-white">
-                          <img
-                        loading="lazy"
-                        srcSet={facebook}
-                        className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full "
-                          />
-                      </div>
+                <img
+                  loading="lazy"
+                  srcSet={facebook}
+                  className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full "
+                />
+              </div>
 
-                      <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white">
-                      <img
-                        loading="lazy"
-                        srcSet={linkedin}
-                        className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full"
-                      />
-                      </div>
-                      
-                      <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white"><img
-                        loading="lazy"
-                        srcSet={twitter}
-                        className="aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full "
-                      /></div>
+              <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white">
+                <img
+                  loading="lazy"
+                  srcSet={linkedin}
+                  className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full"
+                />
+              </div>
+
+              <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white">
+                <img
+                  loading="lazy"
+                  srcSet={twitter}
+                  className="aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full "
+                />
+              </div>
             </div>
-              
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-
