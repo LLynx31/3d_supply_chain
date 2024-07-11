@@ -21,6 +21,8 @@ export default function Panier(){
                 //console.log(panier['hydra:member'])
               
                     setDataPanier(panier['hydra:member'])
+
+                    
  
             } catch (error) {
                 console.error(error)

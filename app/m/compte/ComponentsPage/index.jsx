@@ -71,7 +71,7 @@ export default function ComponentPage({data,commandes}){
                 <div className="flex flex-col  sm:w-[35%] border-r-gray-200 border-r">
                     <div onClick={() => setSwipeOption('infoPerso')} className={swipeOption == 'infoPerso' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5 "}>Informations et coordonnées</div>
                     <div onClick={() => setSwipeOption('password')} className={swipeOption == 'password' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5  "}>Changer le mot de passe</div>
-                    <div onClick={() => setSwipeOption('adresse')} className={swipeOption == 'adresse' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5  "}>Adresse</div>
+                    <div onClick={() => setSwipeOption('adresse')} className={swipeOption == 'adresse' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5  "}>Adresse de livraison</div>
                     <div onClick={() => setSwipeOption('commandes')} className={swipeOption == 'commandes' ? "px-6 bg-red-100 text-base text-rouge py-3.5 border-r-4 border-rouge" : "px-6 text-base py-3.5 "}>Commandes</div>
                     
                 </div>
@@ -88,12 +88,12 @@ export default function ComponentPage({data,commandes}){
     
                         <div className="pt-3.5 flex justify-between">
                             <div className="w-1/2">
-                                <div className="text-base">nom</div>
+                                <div className="text-base">nom de l'entreprise</div>
                                 <input value={dataInfoSup.nom} onChange={(e)=>setDataInfoSup({...dataInfoSup, nom: e.target.value})} className="w-full border border-gray-300 px-1 py-2" placeholder={data['hydra:member'][0].nom}></input>
                             </div>
     
                             <div className="w-1/2 ml-8">
-                                <div className="text-base">prénom</div>
+                                <div className="text-base">numéro de capis</div>
                                 <input value={dataInfoSup.prenoms} onChange={(e)=>setDataInfoSup({...dataInfoSup, prenoms: e.target.value})} className="w-full border border-gray-300 px-1 py-2" placeholder={data['hydra:member'][0].prenoms}></input>
                             </div>
                         </div>
@@ -152,7 +152,7 @@ export default function ComponentPage({data,commandes}){
     
                     <div id="adresse" className={swipeOption == 'adresse' ? "" : "hidden"}>
     
-                        <h1 className="font-bold text-lg">Adresse</h1>
+                        <h1 className="font-bold text-lg">Adresse </h1>
     
                         <Adresse Adress={data['hydra:member'][0].adresses}></Adresse>
     

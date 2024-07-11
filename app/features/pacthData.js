@@ -135,6 +135,46 @@ export async function pacthPanier(adresse){
 }
 
 
+
+export async function pacthQuantiteProduitPanier(id,quantite){
+
+    const formData = {
+        quantite: quantite
+    }
+    console.log(formData)
+    try {
+        const idDetailsCommande = extraitNombre(id)
+        //effectu le requete
+        const response = await fetch("https://api.3dsupplychains.com/api/detail_documents/" + idDetailsCommande,{
+        method: "PATCH",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+            Authorization: 'Bearer '+ cookies().get('session').value,
+            "Content-Type": "application/json",
+        },
+            
+        redirect: "follow",
+        referrerPolicy: "origin",
+        body: JSON.stringify(formData),
+      
+    })
+
+        //on verifie qu'il n'y pas d'erreur
+        if (!response.ok){
+            const error =  await response.json()
+            throw error
+        }
+        return true
+
+    } catch (error) {
+       return error
+    } 
+    
+    
+}
+
+
 export async function validatePanier(){
 
     try {

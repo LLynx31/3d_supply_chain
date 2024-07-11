@@ -20,7 +20,7 @@ export default function ArticleView({params}){
 
     const [quantite, setQuantite] = useState(1)
     const [ajoutReussi, setAjoutReussi] = useState('hidden')
-    const [ajoutEchec, setAjoutEchec] = useState('hidden')
+    const [ajoutEchec, setAjoutEchec] = useState({ui:'hidden',message:""})
 
     const [swipeDescription, setSwipDescritption] = useState('description')
 
@@ -50,7 +50,7 @@ export default function ArticleView({params}){
     if (dataProduct) {
 
         async function ajoutePanier(){
-            try {
+    
                 //console.log(dataProduct.id)
                 const etat = await postAddPanier(dataProduct.id,quantite)
                 //console.log(etat)                
@@ -58,16 +58,11 @@ export default function ArticleView({params}){
                     setAjoutReussi('')
                     
                 } else {
-                    console.log("error")
-                    setAjoutEchec('')
-
+                    console.log(etat)
+                    setAjoutEchec({ui:'',message:etat.message})
                 }
-            }catch(error){
-                    router.push('/connexion')
-  
-            } finally {
+        
                 setEtatAJout('ajouter au panier')
-            }
         }
     
 
@@ -103,9 +98,9 @@ export default function ArticleView({params}){
                     <button onClick={()=> {setAjoutReussi('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
 
-                <div className={"fixed right-7 flex py-2 justify-center px-2 bg-red-100 rounded-xl w-fit transition-[display] " + ajoutEchec }>
-                    <div className="text-base w-[300px] text-justify"> Produit non ajouté au panier. Il semble que vous n'avez pas ajouté d'adresse de livraison. Rendez vous dans votre compte pour ajouter une adresse. Si le problème persiste contacté le service client.  </div>
-                    <button className=" ml-2" onClick={()=> {setAjoutEchec('hidden')}}><img loading="lazy" srcSet={imgClose}></img></button>
+                <div className={"fixed right-7 flex py-2 justify-center px-2 bg-red-100 rounded-xl w-fit transition-[display] " + ajoutEchec.ui }>
+                    <div className="text-base w-[300px] text-justify">Article non ajouté. {ajoutEchec.message}  </div>
+                    <button className=" ml-2" onClick={()=> {setAjoutEchec({...ajoutEchec,ui:'hidden'})}}><img loading="lazy" srcSet={imgClose}></img></button>
                 </div>
 
                 <Categories></Categories>

@@ -11,13 +11,16 @@ export async function getUser(){
       
     })
 
-
+    // on vérifie la reponse
     if (!response.ok){
+        
+        //si elle est mauvaise on déclenche une erreur
         const error =  await response.json()
         throw error
     }
 
-    return response.json()
+    //on retourne la réponses
+    return await response.json()
 
 
 }
