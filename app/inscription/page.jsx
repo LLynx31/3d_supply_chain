@@ -116,8 +116,8 @@ function FormInscription({setSucces, setLose, isLose}){
                 </div>  
 
                 <div className="w-full mt-5">
-                    <div className="text-base">Numéro de capis </div>
-                    <input  name="Numéro de capis"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="Numéro de capis"></input>
+                    <div className="text-base">Numéro de Kbis </div>
+                    <input  name="Numéro de Kbis"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="Numéro de capis"></input>
                 </div>    
 
                 <div className="w-full mt-5">

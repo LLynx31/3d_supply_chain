@@ -93,7 +93,7 @@ export default function ComponentPage({data,commandes}){
                             </div>
     
                             <div className="w-1/2 ml-8">
-                                <div className="text-base">numéro de capis</div>
+                                <div className="text-base">numéro de Kbis</div>
                                 <input value={dataInfoSup.prenoms} onChange={(e)=>setDataInfoSup({...dataInfoSup, prenoms: e.target.value})} className="w-full border border-gray-300 px-1 py-2" placeholder={data['hydra:member'][0].prenoms}></input>
                             </div>
                         </div>
