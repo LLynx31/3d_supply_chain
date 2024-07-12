@@ -1,12 +1,17 @@
 import { getUser } from "./app/features/getData";
 import { sendCodeVerifyMail } from "./app/features/postData";
+import { cookies } from "next/headers";
 
 export async function middleware(request) {
+
+  const cookiesStore  =  cookies()
+
   let currentUser = null;
 
   // On essaie de récupérer l'utilisateur connecté
   try {
     currentUser = await getUser();
+    //console.log(currentUser)
   } catch {
     currentUser = false;
   }
@@ -39,13 +44,22 @@ export async function middleware(request) {
     !currentUser["hydra:member"][0].emailVerified &&
     protectedPaths_2.some((path) => pathname.startsWith(path))
   ) {
+    
+    if(!cookiesStore.has('emailVerificationSent')){
+      const response = await sendCodeVerifyMail(
+        currentUser["hydra:member"][0].email
+      );
+      console.log("email sent")
+      if (response === true) {
+        return Response.redirect(new URL("/confirmeMail", request.url));
+      }
 
-    const response =  await sendCodeVerifyMail(currentUser["hydra:member"][0].email)
-    console.log(response)
-    if(response === true){
-      return Response.redirect(new URL("/confirmeMail", request.url));
+      return Response.redirect(new URL("/404", request.url));
     }
-    return Response.redirect(new URL("/404", request.url));
+    
+    //console.log(response)
+    return Response.redirect(new URL("/confirmeMail", request.url));
+   
   }
 
   // Redirections pour les utilisateurs connectés
@@ -63,7 +77,6 @@ export async function middleware(request) {
     return Response.redirect(new URL("/m/compte", request.url));
   }
 }
-
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
