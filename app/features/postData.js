@@ -33,10 +33,35 @@ export async function postAdress(formData) {
 }
 
 export async function sendCode(isEmail) {
-  console.log(JSON.stringify({ email: isEmail }));
+  //console.log(JSON.stringify({ email: isEmail }));
   try {
     const response = await fetch(
       "https://api.3dsupplychains.com/api/users/send_reset_code",
+      {
+        method: "POST",
+        body: JSON.stringify({ email: isEmail }),
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw error;
+    }
+    return true;
+  } catch (e) {
+    return e;
+  }
+}
+
+export async function sendCodeVerifyMail(isEmail) {
+  console.log(JSON.stringify({ email: isEmail }));
+  try {
+    const response = await fetch(
+      "https://api.3dsupplychains.com/api/users/send_email_verify_code",
       {
         method: "POST",
         body: JSON.stringify({ email: isEmail }),

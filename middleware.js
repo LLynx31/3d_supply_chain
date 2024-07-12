@@ -1,4 +1,5 @@
 import { getUser } from "./app/features/getData";
+import { sendCodeVerifyMail } from "./app/features/postData";
 
 export async function middleware(request) {
   let currentUser = null;
@@ -38,7 +39,13 @@ export async function middleware(request) {
     !currentUser["hydra:member"][0].emailVerified &&
     protectedPaths_2.some((path) => pathname.startsWith(path))
   ) {
-    return Response.redirect(new URL("/confirmeMail", request.url));
+
+    const response =  await sendCodeVerifyMail(currentUser["hydra:member"][0].email)
+    console.log(response)
+    if(response === true){
+      return Response.redirect(new URL("/confirmeMail", request.url));
+    }
+    return Response.redirect(new URL("/404", request.url));
   }
 
   // Redirections pour les utilisateurs connectés
@@ -56,6 +63,7 @@ export async function middleware(request) {
     return Response.redirect(new URL("/m/compte", request.url));
   }
 }
+
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
