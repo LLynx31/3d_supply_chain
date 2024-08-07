@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { getUser } from "./getData";
 
 export async function authentificate(formData) {
@@ -45,7 +44,7 @@ export async function authentificate(formData) {
       path: "/",
       secure: true,
       name: "session",
-      value: responseParse.token,
+      value: responseParse?.token,
     });
 
     //on redirige l'utilisateur vers la page de compte

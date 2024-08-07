@@ -1,220 +1,304 @@
-'use client'
+"use client";
 
 import Link from "next/link";
-import { useEffect, useState, useContext} from 'react';
-import {authentificate, deleteCookies, getuser }from "../features/authentification";
+import { useEffect, useState, useContext } from "react";
+import {
+  authentificate,
+  deleteCookies,
+  getuser,
+} from "../features/authentification";
 import { useRouter } from "next/navigation";
 import { getPanier } from "../features/getData";
 import { AuthContext } from "../contextProvider";
 import { sendCode, verifyCode } from "../features/postData";
 
-function FormConnexion({forgetPassword,}){
+function FormConnexion({ forgetPassword }) {
+  const authentification = useContext(AuthContext);
 
-  const authentification = useContext(AuthContext)
-
-  const router =  useRouter()
+  const router = useRouter();
 
   const [dataForm, setDataForm] = useState({
-    username:'',
-    password:''
-  })
+    username: "",
+    password: "",
+  });
 
-  const [etatButtonForm, setEtatButtonForm] = useState('valider')
-  const [errorMessage, setErrorMessage] = useState(false) 
+  const [etatButtonForm, setEtatButtonForm] = useState("valider");
+  const [errorMessage, setErrorMessage] = useState(false);
 
-  async function login(){
-    
-    const response = await authentificate(dataForm)
-    if(!response){
-
-        setErrorMessage("Mail ou mot de passe incorrect")
-        setEtatButtonForm('valider')
-        return null
+  async function login() {
+    const response = await authentificate(dataForm);
+    if (!response) {
+      setErrorMessage("Mail ou mot de passe incorrect");
+      setEtatButtonForm("valider");
+      return null;
     }
 
-    authentification.setConnected(true)
-    router.replace('compte')
+    authentification.setConnected(true);
+    router.replace("compte");
   }
 
-  return(
+  return (
     <form action={login}>
       <h1 className="text-lg text-center font-bold">Connexion a mon compte</h1>
-        <p className="text-base text-center font-light">Veuillez renseigner vos informations</p>
-        <div className="w-full mt-3.5">
-          {errorMessage && <div className="text-base text-center text-rouge">{errorMessage}</div>}
-          <div className="text-base" name="email">Email</div>
-          <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=>{setDataForm({...dataForm, username: e.target.value})}} value={dataForm.username} type="email" placeholder="Email"></input>
+      <p className="text-base text-center font-light">
+        Veuillez renseigner vos informations
+      </p>
+      <div className="w-full mt-3.5">
+        {errorMessage && (
+          <div className="text-base text-center text-rouge">{errorMessage}</div>
+        )}
+        <div className="text-base" name="email">
+          Email
         </div>
-        <div className="w-full mt-3.5">
-          <div className="text-base" name="password">Mot de passe</div>
-          <input value={dataForm.password} onChange={(e)=>{setDataForm({...dataForm, password: e.target.value})}} className="w-full border border-gray-300 px-1 py-2" type="password" placeholder="password"></input>
+        <input
+          className="w-full border border-gray-300 px-1 py-2"
+          onChange={(e) => {
+            setDataForm({ ...dataForm, username: e.target.value });
+          }}
+          value={dataForm.username}
+          type="email"
+          placeholder="Email"
+        ></input>
+      </div>
+      <div className="w-full mt-3.5">
+        <div className="text-base" name="password">
+          Mot de passe
         </div>
-        <div className="cursor-pointer w-fit text-right text-jaune text-base underline" onClick={forgetPassword}>mot de passe oublié ?</div>
+        <input
+          value={dataForm.password}
+          onChange={(e) => {
+            setDataForm({ ...dataForm, password: e.target.value });
+          }}
+          className="w-full border border-gray-300 px-1 py-2"
+          type="password"
+          placeholder="password"
+        ></input>
+      </div>
+      <div
+        className="cursor-pointer w-fit text-right text-jaune text-base underline"
+        onClick={forgetPassword}
+      >
+        mot de passe oublié ?
+      </div>
 
-        <button onClick={()=>{setEtatButtonForm('connexion en cours...'),setErrorMessage(true)}} type="submit" className="mt-6 text-base w-full h-[40px] flex justify-center bg-jaune text-center py-2.5 rounded-md mb-2">{etatButtonForm} </button>
-     
-
+      <button
+        onClick={() => {
+          setEtatButtonForm("connexion en cours..."), setErrorMessage(true);
+        }}
+        type="submit"
+        className="mt-6 text-base w-full h-[40px] flex justify-center bg-jaune text-center py-2.5 rounded-md mb-2"
+      >
+        {etatButtonForm}{" "}
+      </button>
     </form>
-  )
+  );
 }
 
-function FormForgetPassword(){
+function FormForgetPassword() {
+  const router = useRouter();
+  const [isSend, setSend] = useState(false);
 
-  const router = useRouter()
-  const [isSend, setSend] = useState(false)
+  const [isData, setData] = useState({ email: "", code: "" });
 
-  const [isData, setData] = useState({email: "", code:""})
+  const [isTextButton, setTextButton] = useState("Valider");
+  const [isErrorCode, setErrorCode] = useState(false);
 
-  const [isTextButton, setTextButton] = useState("Valider")
-  const [isErrorCode, setErrorCode] = useState(false)
-  
-
-  async function recevoirCode(){
-    setTextButton("Envoie...")
-    const response = await sendCode(isData.email)
-      if(response !== true){
-        console.log(response)
-      }
-    setTextButton("Valider")
-    setSend(true)
+  async function recevoirCode() {
+    setTextButton("Envoie...");
+    const response = await sendCode(isData.email);
+    if (response !== true) {
+      console.log(response);
+    }
+    setTextButton("Valider");
+    setSend(true);
   }
 
-  async function verifierCode(){
-    setTextButton("Envoie...")
-    const response = await verifyCode(isData)
-    setTextButton("Valider")
-    
-    if(response === true) {
-      return router.push("/resetPassword")
+  async function verifierCode() {
+    setTextButton("Envoie...");
+    const response = await verifyCode(isData);
+    setTextButton("Valider");
+
+    if (response === true) {
+      return router.push("/resetPassword");
     }
 
-    setErrorCode(true)
-
-
+    setErrorCode(true);
   }
 
-  return( 
+  return (
     <>
       <h1 className="text-lg text-center font-bold">Mot de passe oublié</h1>
-        <p className="text-base text-center font-light">Renseignez votre email pour reintialiser votre mot de passe</p>
-        <div className="w-full mt-3.5">
-          {
-            !isSend ? <>
-          <div className="text-base">Email</div>
-          <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=> setData({...isData, email:e.target.value})} type="email" placeholder="example@gmail.com"></input>
-          <button onClick={recevoirCode} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2">{isTextButton}</button>
-          </> : 
+      <p className="text-base text-center font-light">
+        Renseignez votre email pour reintialiser votre mot de passe
+      </p>
+      <div className="w-full mt-3.5">
+        {!isSend ? (
           <>
-            {isErrorCode && <div className="text-base text-center text-rouge">Code incorrect</div>}
+            <div className="text-base">Email</div>
+            <input
+              className="w-full border border-gray-300 px-1 py-2"
+              onChange={(e) => setData({ ...isData, email: e.target.value })}
+              type="email"
+              placeholder="example@gmail.com"
+            ></input>
+            <button
+              onClick={recevoirCode}
+              className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2"
+            >
+              {isTextButton}
+            </button>
+          </>
+        ) : (
+          <>
+            {isErrorCode && (
+              <div className="text-base text-center text-rouge">
+                Code incorrect
+              </div>
+            )}
             <div className="text-base my-2 text-blue-600">
-              Un mail contenant un code de rénitialisation a été envoyé a l'adresse indiquée.
+              Un mail contenant un code de rénitialisation a été envoyé a
+              l'adresse indiquée.
             </div>
             <div className="text-base">Entrez le code que vous avez reçu</div>
-            <input className="w-full border border-gray-300 px-1 py-2" onChange={(e)=> setData({...isData, code:e.target.value})} type="email" placeholder="code"></input>
-            <button onClick={verifierCode} className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2" >{isTextButton}</button>
-          </> 
-          
-          } 
-          
-        </div>
-     
-
-       
-
+            <input
+              className="w-full border border-gray-300 px-1 py-2"
+              onChange={(e) => setData({ ...isData, code: e.target.value })}
+              type="email"
+              placeholder="code"
+            ></input>
+            <button
+              onClick={verifierCode}
+              className="mt-6 text-base w-full bg-jaune text-center py-2.5 rounded-md mb-2"
+            >
+              {isTextButton}
+            </button>
+          </>
+        )}
+      </div>
     </>
-  )
+  );
 }
 
-function PopupConnexion({className=" ", closePopup}){
+function PopupConnexion({ className = " ", closePopup }) {
+  const logo = "/logo.png";
 
-  const logo = "/logo.png"
+  const [forgetPassword, setForgetPassword] = useState(false);
 
-  const [forgetPassword, setForgetPassword] = useState(false)
-
-  return(
-
-    
-    <div className={'fixed flex justify-center items-center  h-screen w-full z-10 ' + className}>
-      <div onClick={
-          ()=>{
-            if(forgetPassword) setForgetPassword(false)
-            closePopup()}
-        } className='w-full h-screen opacity-50 bg-slate-900'></div>
+  return (
+    <div
+      className={
+        "fixed flex justify-center items-center  h-screen w-full z-10 " +
+        className
+      }
+    >
+      <div
+        onClick={() => {
+          if (forgetPassword) setForgetPassword(false);
+          closePopup();
+        }}
+        className="w-full h-screen opacity-50 bg-slate-900"
+      ></div>
 
       <div className="w-[300px] sm:w-[500px] rounded absolute opacity-100  bg-white p-5  sm:p-8">
-        <img className="w-[150px] mx-auto" loading='lazy' alt="Image" src={logo} />
-          { !forgetPassword ? <FormConnexion forgetPassword={()=>{setForgetPassword(true)}}></FormConnexion> : <FormForgetPassword></FormForgetPassword>}
-        <div className="text-base">Pas encore inscrit ? <Link href={"/inscription"} className="text-jaune text-base">Créer un compte</Link></div>
+        <img
+          className="w-[150px] mx-auto"
+          loading="lazy"
+          alt="Image"
+          src={logo}
+        />
+        {!forgetPassword ? (
+          <FormConnexion
+            forgetPassword={() => {
+              setForgetPassword(true);
+            }}
+          ></FormConnexion>
+        ) : (
+          <FormForgetPassword></FormForgetPassword>
+        )}
+        <div className="text-base">
+          Pas encore inscrit ?{" "}
+          <Link href={"/inscription"} className="text-jaune text-base">
+            Créer un compte
+          </Link>
+        </div>
       </div>
-
     </div>
-  )
+  );
 }
 
+function PopupConnected({ className = " ", closePopup }) {
+  const logo = "/logo.png";
 
-function PopupConnected({className=" ", closePopup}){
+  const router = useRouter();
 
-  const logo = "/logo.png"
+  const authentification = useContext(AuthContext);
 
-  const router = useRouter()
-  
-  const authentification = useContext(AuthContext)
-
-  async function deconnected(){
+  async function deconnected() {
     try {
-      await deleteCookies()
-      closePopup()
+      await deleteCookies();
+      closePopup();
 
-      router.push('/connexion')
-    } catch (error){
-      console.log(error)
+      router.push("/connexion");
+    } catch (error) {
+      console.log(error);
     }
-     
-
-   
   }
 
-  return(
-
-    
-    <div className={'fixed flex justify-center items-center  h-screen w-full z-10 ' + className}>
-      <div onClick={
-          ()=>{
-            closePopup()}
-        } className='w-full h-screen opacity-50 bg-slate-900'></div>
+  return (
+    <div
+      className={
+        "fixed flex justify-center items-center  h-screen w-full z-10 " +
+        className
+      }
+    >
+      <div
+        onClick={() => {
+          closePopup();
+        }}
+        className="w-full h-screen opacity-50 bg-slate-900"
+      ></div>
 
       <div className="w-[300px] sm:w-[500px] rounded absolute opacity-100  bg-white p-8">
-        <img className="w-[150px] mx-auto" loading='lazy' alt="Image" src={logo} />
-        <Link href="/m/compte" className="mt-6 text-base w-full h-[40px] flex justify-center bg-jaune text-center py-2.5 rounded-md mb-2">Aller au compte </Link>
-        <button onClick={deconnected} className="mt-6 text-base w-full h-[40px] flex justify-center bg-rouge text-center py-2.5 rounded-md mb-2">se deconnecter </button>
+        <img
+          className="w-[150px] mx-auto"
+          loading="lazy"
+          alt="Image"
+          src={logo}
+        />
+        <Link
+          href="/m/compte"
+          className="mt-6 text-base w-full h-[40px] flex justify-center bg-jaune text-center py-2.5 rounded-md mb-2"
+        >
+          Aller au compte{" "}
+        </Link>
+        <button
+          onClick={deconnected}
+          className="mt-6 text-base w-full h-[40px] flex justify-center bg-rouge text-white text-center py-2.5 rounded-md mb-2"
+        >
+          se deconnecter{" "}
+        </button>
       </div>
-
     </div>
-  )
+  );
 }
 
+export default function Header() {
+  const router = useRouter();
 
+  const logo = "/logo.png";
+  const search = "/search.png";
+  const user = "/user.png";
+  const shoppingBag = "/shopping-bag.svg";
 
+  const [popupOpen, setPopupOpen] = useState("hidden");
 
-export default function Header(){
+  //const [connected, setConnected] = useState(false)
+  const [nbrArticlePanier, setNbrArticlePanier] = useState(0);
 
-const router = useRouter()
+  const [isSearch, setSearch] = useState("");
 
-const logo = "/logo.png"
-const search = "/search.png"
-const user = "/user.png"
-const shoppingBag = "/shopping-bag.svg"
-
-const [popupOpen, setPopupOpen] = useState('hidden')
-
-//const [connected, setConnected] = useState(false)
-const [nbrArticlePanier, setNbrArticlePanier] = useState(0)
-
-const [isSearch, setSearch] = useState('')
-
-  function closePopup(){
-  
-    setPopupOpen('hidden')
+  function closePopup() {
+    setPopupOpen("hidden");
   }
 
   /*useEffect(() => {
@@ -246,79 +330,110 @@ const [isSearch, setSearch] = useState('')
     
   },[])*/
 
-  const authentification = useContext(AuthContext)
+  const authentification = useContext(AuthContext);
 
-    return(
-      <div className="">
-        
-        {authentification.connected ? <PopupConnected className={popupOpen} closePopup={closePopup} ></PopupConnected> : <PopupConnexion className={popupOpen} closePopup={closePopup} ></PopupConnexion>}
-                
-              <div className="w-full flex items-center justify-center h-[56px] bg-[#f6cb05]">
-                  <p className="text-center font-normal text-black text-base">
-                    Bienvenue, vous trouverez sur ce site des produits frais et surgelés. N'hésitez à passer commande ! 
-                  </p>
-                </div>
-              
-        <div className="sticky top-0 px-8 py-1 flex items-center justify-between w-full bg-white">
-        
-              <Link href={"/"}><img className="w-[150px]" alt="Image" src={logo} /></Link>
+  return (
+    <div className="">
+      {authentification.connected ? (
+        <PopupConnected
+          className={popupOpen}
+          closePopup={closePopup}
+        ></PopupConnected>
+      ) : (
+        <PopupConnexion
+          className={popupOpen}
+          closePopup={closePopup}
+        ></PopupConnexion>
+      )}
 
-            <Link href={"/m/quisommesnous"}>
-              <div className="hover:text-jaune max-[870px]:hidden font-sans font-normal text-black text-lg">
-                Qui sommes-nous ?
-              </div>
-            </Link>
+      <div className="w-full flex items-center justify-center h-[56px] bg-[#f6cb05]">
+        <p className="text-center font-normal text-black text-base">
+          Bienvenue, vous trouverez sur ce site des produits frais et surgelés.
+          N'hésitez à passer commande !
+        </p>
+      </div>
 
-            <Link href={"/m/FAQ"}>
-              <div className="hover:text-jaune max-[870px]:hidden font-sans font-normal text-black text-lg">
-                FAQ
-              </div>
-            </Link>
+      <div className="sticky top-0 px-8 py-1 flex items-center justify-between w-full bg-white">
+        <Link href={"/"}>
+          <img className="w-[150px]" alt="Image" src={logo} />
+        </Link>
 
-            <div className="md:w-[400px] max-md:hidden max-[820px]:w-[400px] min-[870px]:w-[325px] h-[42px] flex border-[0.3px] border-solid rounded-[5px]">
-              <div onClick={() =>router.push("/m/recherche/" + isSearch   )} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
-                  <img className="w-[24px] h-[24px]" alt="Search" src={search} />
-              </div>
-              <div className="font-sans h-[40px font-normal text-black text-lg">
-                <input value={isSearch} onChange={(e)=>{setSearch(e.target.value),router.push("/m/recherche/" + e.target.value)}} type="search" placeholder="Rechercher un produit"className="font-sans md:w-[352px] min-[870px]:w-[277px]  text-base p-1 h-full outline-0" ></input>
-              </div>
-              
-            </div>
+        <Link href={"/m/quisommesnous"}>
+          <div className="hover:text-jaune max-[870px]:hidden font-sans font-normal text-black text-lg">
+            Qui sommes-nous ?
+          </div>
+        </Link>
 
+        <Link href={"/m/FAQ"}>
+          <div className="hover:text-jaune max-[870px]:hidden font-sans font-normal text-black text-lg">
+            FAQ
+          </div>
+        </Link>
 
-            <img onClick={() => setPopupOpen("")} className="w-[30px] cursor-pointer h-[30px]" alt="User" src={user} />
+        <div className="md:w-[400px] max-md:hidden max-[820px]:w-[400px] min-[870px]:w-[325px] h-[42px] flex border-[0.3px] border-solid rounded-[5px]">
+          <div
+            onClick={() => router.push("/m/recherche/" + isSearch)}
+            className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0"
+          >
+            <img className="w-[24px] h-[24px]" alt="Search" src={search} />
+          </div>
+          <div className="font-sans h-[40px font-normal text-black text-lg">
+            <input
+              value={isSearch}
+              onChange={(e) => {
+                setSearch(e.target.value),
+                  router.push("/m/recherche/" + e.target.value);
+              }}
+              type="search"
+              placeholder="Rechercher un produit"
+              className="font-sans md:w-[352px] min-[870px]:w-[277px]  text-base p-1 h-full outline-0"
+            ></input>
+          </div>
+        </div>
 
-            <div className="flex items-center justify-center">
-              <Link href={"/m/panier"}>
-                <img
-                  className="w-[30px] h-[30px]"
-                  alt="Shopping bag"
-                  src={shoppingBag}
-                />
-              </Link> 
+        <img
+          onClick={() => setPopupOpen("")}
+          className="w-[30px] cursor-pointer h-[30px]"
+          alt="User"
+          src={user}
+        />
 
-              {/*<div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f6cb05] rounded-full">
+        <div className="flex items-center justify-center">
+          <Link href={"/m/panier"}>
+            <img
+              className="w-[30px] h-[30px]"
+              alt="Shopping bag"
+              src={shoppingBag}
+            />
+          </Link>
+
+          {/*<div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f6cb05] rounded-full">
                 <div className="font-sans font-normal text-black ">
                   {nbrArticlePanier}
                 </div>
     </div>*/}
-            </div>
-          </div>
-
-          
-      
-
-        <div className="px-8 mt-5 py-1">
-          <div className="w-[325px] md:hidden h-[42px] flex border-[0.3px] border-solid rounded-[5px]">
-                <div onClick={() =>router.push("/m/recherche/" + isSearch)} className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0">
-                    <img className="w-[24px] h-[24px]" alt="Search" src={search} />
-                </div>
-                <div className="font-sans h-[40px] font-normal text-black text-lg">
-                  <input value={isSearch} onChange={(e)=>setSearch(e.target.value)} type="search" placeholder="Rechercher un produit"className="font-sans w-[277px]  text-base p-1 h-full outline-0" ></input>
-                </div>
-                
-              </div>
         </div>
-   </div>
-    )
+      </div>
+
+      <div className="px-8 mt-5 py-1">
+        <div className="w-[325px] md:hidden h-[42px] flex border-[0.3px] border-solid rounded-[5px]">
+          <div
+            onClick={() => router.push("/m/recherche/" + isSearch)}
+            className="w-[52px] bg-[#f6cb05] flex items-center justify-center rounded-[5px_0px_0px_5px] h-[41px] top-0 left-0"
+          >
+            <img className="w-[24px] h-[24px]" alt="Search" src={search} />
+          </div>
+          <div className="font-sans h-[40px] font-normal text-black text-lg">
+            <input
+              value={isSearch}
+              onChange={(e) => setSearch(e.target.value)}
+              type="search"
+              placeholder="Rechercher un produit"
+              className="font-sans w-[277px]  text-base p-1 h-full outline-0"
+            ></input>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

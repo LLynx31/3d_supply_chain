@@ -34,15 +34,12 @@ export async function getPanier(){
       
     })
 
-
     if (!response.ok){
         const error =  await response.json()
         throw error
     }
 
     return response.json()
-
-
 }
 
 

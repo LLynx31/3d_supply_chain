@@ -9,9 +9,13 @@ import { pacthQuantiteProduitPanier } from "../features/pacthData";
 export default function ItemPanier({
   nom,
   description,
-  prix,
+  montantBrut,
+  tva,
+  remise,
+  montantTTC,
   quantiteProduct,
   imageProduct,
+  prixUniatire,
   id,
 }) {
   const linkImage = "https://api.3dsupplychains.com/" + imageProduct;
@@ -19,12 +23,25 @@ export default function ItemPanier({
 
   const [quantite, setQuantite] = useState(quantiteProduct);
   const [vu, setVu] = useState("");
+  const [isDataArticle, setDataArticle] = useState({
+    montantBrut: montantBrut,
+    tva: tva,
+    remise: remise,
+    montantTTC: montantTTC,
+  });
 
   const router = useRouter();
 
   async function augmenteQuantite() {
     const response = await pacthQuantiteProduitPanier(id, quantite + 1);
-    if (response === true) {
+    if (response) {
+      //console.log(response);
+      setDataArticle({
+        montantBrut: response.montantBrut,
+        tva: response.montantTva,
+        remise: response.montantRemise ? response.montantRemise : 0,
+        montantTTC: response.montantTtc,
+      })
       return setQuantite(quantite + 1);
     }
 
@@ -34,7 +51,14 @@ export default function ItemPanier({
   async function diminuQuantite() {
     if (quantite > 1) {
       const response = await pacthQuantiteProduitPanier(id, quantite - 1);
-      if (response === true) {
+      if (response) {
+        //console.log(response);
+        setDataArticle({
+          montantBrut: response.montantBrut,
+          tva: response.montantTva,
+          remise: response.montantRemise ? response.montantRemise : 0,
+          montantTTC: response.montantTtc,
+        })
         return setQuantite(quantite - 1);
       }
 
@@ -62,14 +86,24 @@ export default function ItemPanier({
             srcSet={linkImage}
           ></img>
           <div className="flex flex-col justify-center">
-            <div className="text-base font-semibold mt-1 sm:mt-0">{nom}</div>
-            <div className="text-sm hidden sm:block">{description} </div>
+            <div className="text-base font-semibold mt-1 sm:mt-0">
+              {nom}
+            </div>
+            <div className="text-sm hidden sm:block">
+              {description}{" "}
+            </div>
           </div>
         </div>
         <div className="w-[15%] text-base font-semibold  align-middle flex justify-center items-center">
-          <div>{prix} EURO</div>
+          <div>{isDataArticle.montantBrut} EURO</div>
         </div>
-        <div className="w-[30%] flex justify-center items-center">
+        <div className="w-[10%] text-base font-semibold  align-middle flex justify-center items-center">
+          <div>{isDataArticle.remise ? isDataArticle.remise : 0} EURO</div>
+        </div>
+        <div className="w-[10%] text-base font-semibold  align-middle flex justify-center items-center">
+          <div>{isDataArticle.tva} EURO</div>
+        </div>
+        <div className="w-[10%] flex justify-center items-center">
           <div className="flex w-[70px] justify-between items-center px-1 border border-gray-300 py-1">
             <button onClick={diminuQuantite}>-</button>
             {quantite}
@@ -77,7 +111,7 @@ export default function ItemPanier({
           </div>
         </div>
         <div className="w-[15%] flex justify-center text-base items-center">
-          <div>{prix * quantite} EURO</div>
+          <div>{isDataArticle.montantTTC} EURO</div>
         </div>
         <div className="w-[5%] flex justify-center items-center">
           <button onClick={supArticlePanier}>

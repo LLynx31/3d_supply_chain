@@ -165,7 +165,7 @@ export async function pacthQuantiteProduitPanier(id,quantite){
             const error =  await response.json()
             throw error
         }
-        return true
+        return await response.json()
 
     } catch (error) {
        return error

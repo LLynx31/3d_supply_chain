@@ -30,7 +30,7 @@ export default function CheckoutPage() {
       try {
         const panier = await getPanier();
         const adresse = await getAdresse();
-        //console.log(panier['hydra:member'])
+        console.log(panier["hydra:member"]);
         if (panier["hydra:member"][0].detailDocuments.length <= 0) {
           return router.replace("/m/panier");
         }
@@ -38,9 +38,8 @@ export default function CheckoutPage() {
         setDataPanier(panier["hydra:member"]);
         setDataAdresse(adresse["hydra:member"]);
 
-
-        if(adresse["hydra:member"].length > 0) {
-          await updateAdresseLivraison(adresse["hydra:member"][0]["@id"])
+        if (adresse["hydra:member"].length > 0) {
+          await updateAdresseLivraison(adresse["hydra:member"][0]["@id"]);
         }
       } catch (error) {
         console.error(error);
@@ -50,8 +49,6 @@ export default function CheckoutPage() {
 
     recupererPanier();
   }, []);
-
-
 
   async function updateAdresseLivraison(e) {
     //preparation des données
@@ -94,7 +91,7 @@ export default function CheckoutPage() {
         key={panier["@id"]}
         image={panier.produit.imageProduits[0].path}
         nom={panier.produit.nom}
-        prix={parseInt(panier.prixUnitaire)}
+        prix={parseFloat(panier.montantTtc)}
         qte={panier.quantite}
       ></ItemArticleCheckout>
     ));
@@ -226,18 +223,39 @@ export default function CheckoutPage() {
               </div>*/}
 
               <div className="flex justify-between mb-3">
-                <div className="text-base ">livraison de 5%</div>
+                <div className="text-base ">Frais de livraison</div>
                 <div className="text-base font-bold">
-                  {(parseFloat(dataPanier[0].montantHt) * 5) / 100} EURO
+                  {parseFloat(dataPanier[0].montantLivraison)} EURO
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">
+                  Montant total brut des articles
+                </div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantHt)} EURO
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">Montant total TVA</div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantTva)} EURO
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">Montant total remise</div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantRemise)} EURO
                 </div>
               </div>
 
               <div className="flex justify-between mb-8">
-                <div className="text-base ">total</div>
+                <div className="text-base ">Total</div>
                 <div className="text-base font-bold">
-                  {parseFloat(dataPanier[0].montantHt) +
-                    (parseFloat(dataPanier[0].montantHt) * 5) / 100}{" "}
-                  EURO
+                  {parseFloat(dataPanier[0].montantTTC)} EURO
                 </div>
               </div>
             </div>

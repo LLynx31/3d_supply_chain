@@ -28,7 +28,7 @@ function FormConnexion({forgetPassword,}){
   async function login(){
     
     const response = await authentificate(dataForm)
-    if(!response){
+    if(!response || response == undefined){
 
         setErrorMessage("Mail ou mot de passe incorrect")
         setEtatButtonForm('valider')
