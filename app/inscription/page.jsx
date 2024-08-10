@@ -2,8 +2,9 @@
 import { useState } from "react"
 import { postInscription } from "../features/inscription"
 import Link from "next/link"
-
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
+
 
 function FormInscription({setSucces, setLose, isLose}){
 
@@ -17,6 +18,7 @@ function FormInscription({setSucces, setLose, isLose}){
         plainPassword: ""
     })
 
+    const router = useRouter()
 
     const [isTextButton, setTextButton] = useState("VALIDER")
 
@@ -88,10 +90,12 @@ function FormInscription({setSucces, setLose, isLose}){
     async function actionForm(){
             setTextButton("CONNEXION...")
             const response = await postInscription(data)
+
+            console.log(response)
             if(response === true){
                 if(isLose) setLose(false)
                     setTextButton("VALIDER")
-                return setSucces(true)
+                return router.replace("/confirmeMail")
             }
             
             setLose(true)
@@ -107,13 +111,13 @@ function FormInscription({setSucces, setLose, isLose}){
 
             <form action={actionForm}>
                 <div className="w-full mt-5">
-                    <div className="text-base">Nom </div>
-                    <input  name="nom" value={data.nom} onChange={(e) => updateNom(e.target.value)} className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="nom"></input>
+                    <div className="text-base">Nom de l'entreprise</div>
+                    <input  name="nom" value={data.nom} onChange={(e) => updateNom(e.target.value)} className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="Nom de l'entreprise"></input>
                 </div>  
 
                 <div className="w-full mt-5">
-                    <div className="text-base">Prénoms </div>
-                    <input  name="prenom"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="prenoms"></input>
+                    <div className="text-base">Numéro de Kbis </div>
+                    <input  name="Numéro de Kbis"  value={data.prenoms} onChange={(e) => updatePrénom(e.target.value)}  className="w-full border border-gray-300 px-2 py-2" type="text" placeholder="Numéro de capis"></input>
                 </div>    
 
                 <div className="w-full mt-5">

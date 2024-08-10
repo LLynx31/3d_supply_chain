@@ -17,6 +17,8 @@ function AdresseItem({adresse,nbr}){
     const imgDangerCircle = "/Danger_Circle.png"
     const imgClose = "/x.png"
 
+    console.log(adresse)
+
     const [dataAdress,setDataAdress] = useState({
         ville:adresse.ville,
         commune:adresse.commune,
@@ -56,7 +58,7 @@ function AdresseItem({adresse,nbr}){
             <form className={!changeView ? "hidden" :  ""} action={changeAdresse}>
                 <h2 className="font-bold text-lg mt-5">Modifier l'adresse</h2>
                 <div className="w-full mt-3.5">
-                        <div className="text-base">Pays</div>
+                        <div className="text-base">Code postal</div>
                         <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.pays} onChange={e => setDataAdress({...dataAdress, pays: e.target.value})} type="text" placeholder="Cote d'Ivoire"></input>
                 </div>
                 <div className="w-full mt-3.5">
@@ -65,7 +67,7 @@ function AdresseItem({adresse,nbr}){
                 </div>
 
                 <div className="w-full mt-5">
-                    <div className="text-base">Commune</div>
+                    <div className="text-base">Rue</div>
                     <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.commune} onChange={e => setDataAdress({...dataAdress, commune: e.target.value})} type="text" ></input>
                 </div>
 
@@ -156,17 +158,17 @@ export function AddAdress(){
             <form className={!formAddAddressView ? "hidden" : ""} action={()=>actionForm(dataAdress)}>
                 <h2 className="font-bold text-lg mt-5">Ajouter une adresse</h2>
                 <div className="w-full mt-5">
-                <div className="text-base">Pays</div>
-                    <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.pays} onChange={e => setDataAdress({...dataAdress, pays: e.target.value})} type="text" placeholder="Cote d'Ivoire"></input>
+                <div className="text-base">Code postal</div>
+                    <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.pays} onChange={e => setDataAdress({...dataAdress, pays: e.target.value})} type="text" placeholder=""></input>
                 </div>
                 <div className="w-full mt-3.5">
                     <div className="text-base">Ville</div>
-                    <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.ville} placeholder="Abidjan" onChange={e => setDataAdress({...dataAdress, ville: e.target.value})} type="text" ></input>
+                    <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.ville} placeholder="" onChange={e => setDataAdress({...dataAdress, ville: e.target.value})} type="text" ></input>
                 </div>
 
                 <div className="w-full mt-5">
-                    <div className="text-base">Commune</div>
-                    <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.commune} onChange={e => setDataAdress({...dataAdress, commune: e.target.value})} type="text"  placeholder="Marcory"></input>
+                    <div className="text-base">Rue</div>
+                    <input className="w-full border border-gray-300 px-1 py-2" value={dataAdress.commune} onChange={e => setDataAdress({...dataAdress, commune: e.target.value})} type="text"  placeholder=""></input>
                 </div>
 
                 <div className="w-full mt-5">

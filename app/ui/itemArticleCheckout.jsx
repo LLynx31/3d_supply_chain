@@ -5,7 +5,7 @@ export function ItemArticleCheckout({image,nom,qte,prix}){
             <div className="flex flex-col">
                 <div className="text-base">{nom}</div>
                 <div className="text-base">QTE: {qte}</div>
-                <div className="text-base">prix: {prix}</div>
+                <div className="text-base">prix: {prix} EURO</div>
             </div>
         </div>
     )

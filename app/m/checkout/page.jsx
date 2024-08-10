@@ -30,7 +30,7 @@ export default function CheckoutPage() {
       try {
         const panier = await getPanier();
         const adresse = await getAdresse();
-        //console.log(panier['hydra:member'])
+        console.log(panier["hydra:member"]);
         if (panier["hydra:member"][0].detailDocuments.length <= 0) {
           return router.replace("/m/panier");
         }
@@ -38,6 +38,9 @@ export default function CheckoutPage() {
         setDataPanier(panier["hydra:member"]);
         setDataAdresse(adresse["hydra:member"]);
 
+        if (adresse["hydra:member"].length > 0) {
+          await updateAdresseLivraison(adresse["hydra:member"][0]["@id"]);
+        }
       } catch (error) {
         console.error(error);
         router.back();
@@ -88,7 +91,7 @@ export default function CheckoutPage() {
         key={panier["@id"]}
         image={panier.produit.imageProduits[0].path}
         nom={panier.produit.nom}
-        prix={parseInt(panier.prixUnitaire)}
+        prix={parseFloat(panier.montantTtc)}
         qte={panier.quantite}
       ></ItemArticleCheckout>
     ));
@@ -126,14 +129,21 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              <div>
-                <select
-                  onChange={(e) => updateAdresseLivraison(e.target.value)}
-                  className="md:w-[500px] w-full text-base px-1 py-2"
-                >
-                  {listAdresse}
-                </select>
-              </div>
+              {dataAdresse.length > 0 ? (
+                <div>
+                  <select
+                    onChange={(e) => updateAdresseLivraison(e.target.value)}
+                    className="md:w-[500px] w-full text-base px-1 py-2"
+                  >
+                    {listAdresse}
+                  </select>
+                </div>
+              ) : (
+                <div className="font-bold text-base text-red-600 ml-2">
+                  Ajouter une adresse de livraison à partir de votre compte pour
+                  pouvoir valider votre panier*
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col mt-5 bg-slate-50 rounded-md p-5 gap-3">
@@ -158,33 +168,37 @@ export default function CheckoutPage() {
               </Link>
             </div>
 
-            <div className="flex flex-col mt-5 bg-slate-50 rounded-md p-5 gap-3">
-              <div className="flex items-center">
-                <div className="w-[40px] h-[40px] flex justify-center items-center rounded-full bg-jaune">
-                  <div>3</div>
+            {dataAdresse.length > 0 && (
+              <div className="flex flex-col mt-5 bg-slate-50 rounded-md p-5 gap-3">
+                <div className="flex items-center">
+                  <div className="w-[40px] h-[40px] flex justify-center items-center rounded-full bg-jaune">
+                    <div>3</div>
+                  </div>
+
+                  <div className="font-bold text-base ml-2">
+                    Mode de paiement
+                  </div>
                 </div>
 
-                <div className="font-bold text-base ml-2">Mode de paiement</div>
+                <div className="text-base ml-3">
+                  <button
+                    onClick={validation}
+                    className="text-white text-base mt-5 w-fit px-5 mx-auto  bg-rouge text-center py-3 rounded-md uppercase"
+                  >
+                    {stateGenLink}
+                  </button>
+                  {linkPaiment && (
+                    <div className="text-base ml-1 mt-5">
+                      clickez{" "}
+                      <a className="underline text-wrap" href={linkPaiment}>
+                        ici
+                      </a>{" "}
+                      pour effectuer le paiement
+                    </div>
+                  )}
+                </div>
               </div>
-
-              <div className="text-base ml-3">
-                <button
-                  onClick={validation}
-                  className="text-white text-base mt-5 w-fit px-5 mx-auto  bg-rouge text-center py-3 rounded-md uppercase"
-                >
-                  {stateGenLink}
-                </button>
-                {linkPaiment && (
-                  <div className="text-base ml-1 mt-5">
-                    clickez{" "}
-                    <a className="underline text-wrap" href={linkPaiment}>
-                      ici
-                    </a> {" "}
-                    pour effectuer le paiement
-                  </div>
-                )}
-              </div>
-            </div>
+            )}
           </div>
 
           <div className="  border rounded-lg border-gray-200 px-3 py-5 h-fit ">
@@ -209,16 +223,39 @@ export default function CheckoutPage() {
               </div>*/}
 
               <div className="flex justify-between mb-3">
-                <div className="text-base ">livraison de 5%</div>
+                <div className="text-base ">Frais de livraison</div>
                 <div className="text-base font-bold">
-                  {(parseFloat(dataPanier[0].montantHt) * 5) / 100} EURO
+                  {parseFloat(dataPanier[0].montantLivraison)} EURO
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">
+                  Montant total brut des articles
+                </div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantHt)} EURO
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">Montant total TVA</div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantTva)} EURO
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">Montant total remise</div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantRemise)} EURO
                 </div>
               </div>
 
               <div className="flex justify-between mb-8">
-                <div className="text-base ">total</div>
+                <div className="text-base ">Total</div>
                 <div className="text-base font-bold">
-                  {parseFloat(dataPanier[0].montantHt) + (parseFloat(dataPanier[0].montantHt) * 5) / 100} EURO
+                  {parseFloat(dataPanier[0].montantTTC)} EURO
                 </div>
               </div>
             </div>

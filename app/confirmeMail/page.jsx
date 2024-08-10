@@ -4,6 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { verifyCodeConfirmeMail } from "../features/postData"
 import { motion } from "framer-motion"
+import { useEffect } from "react"
+import { registerSendMail } from "../features/authentification"
 
 export default function ConfirmeMailPage(){
 
@@ -25,9 +27,9 @@ export default function ConfirmeMailPage(){
     }
 
     setErrorCode(true)
-
-
   }
+
+  useEffect(()=>console.log(registerSendMail()),[])
 
   const logo = "/logo.png"
 

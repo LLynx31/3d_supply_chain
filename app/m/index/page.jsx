@@ -150,7 +150,7 @@ export default function PageIndex() {
 
           <div className="px-3 sm:px-8 pt-5">
 
-            <div className="w-full min-h-[500px]  overflow-hidden">
+            <div className="w-full min-h-[230px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[500px]  overflow-hidden">
 
               <img className="object-bottom w-full h-full mb-8"
                 loading="lazy"
@@ -164,7 +164,7 @@ export default function PageIndex() {
             <div className="pt-1 gap-9 mt-8 flex ">
 
               {/* barre de navigation */}
-              <div className="sticky md:block hidden top-5 h-fit items-stretch content-end flex-wrap flex md:w-[200px] flex-col ">
+              <div className="sticky md:block  top-5 h-fit items-stretch content-end flex-wrap flex md:w-[200px] flex-col ">
                 <div className="text-black text-xl font-bold w-full">
                   Navigation
                 </div>

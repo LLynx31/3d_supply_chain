@@ -1,60 +1,176 @@
-'use client'
+"use client";
 
-import { withCoalescedInvoke } from "next/dist/lib/coalesced-function"
-import { useState } from "react"
-import deleteArticlePanier from "../features/deleteData"
-import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react";
+import deleteArticlePanier from "../features/deleteData";
+import { useRouter } from "next/navigation";
+import { pacthQuantiteProduitPanier } from "../features/pacthData";
 
-export default function ItemPanier({nom,description,prix,quantiteProduct,imageProduct,id}){
-    const linkImage = "https://api.3dsupplychains.com/" + imageProduct
-    const imgClose = "/closePanier.png"
+export default function ItemPanier({
+  nom,
+  description,
+  montantBrut,
+  tva,
+  remise,
+  montantTTC,
+  quantiteProduct,
+  imageProduct,
+  id,
+  prixUnitaire,
+}) {
+  const linkImage = "https://api.3dsupplychains.com/" + imageProduct;
+  const imgClose = "/closePanier.png";
 
-    const [quantite, setQuantite] = useState(quantiteProduct)
-    const [vu, setVu] = useState('')
+  const [quantite, setQuantite] = useState(quantiteProduct);
+  const [vu, setVu] = useState("");
+  const [isDataArticle, setDataArticle] = useState({
+    montantBrut: montantBrut,
+    tva: tva,
+    remise: remise ? remise : 0,
+    montantTTC: montantTTC,
+    prixUnitaire: prixUnitaire,
+  });
 
-    const router = useRouter()
+  const router = useRouter();
 
-    function augmenteQuantite(){
-        setQuantite(quantite + 1)
+  async function augmenteQuantite() {
+    const response = await pacthQuantiteProduitPanier(id, quantite + 1);
+    if (response) {
+      setDataArticle({
+        montantBrut: parseFloat(response.montantBrut).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
+        tva: parseFloat(response.montantTva).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
+        remise: response.montantRemise
+          ? parseFloat(response.montantRemise).toLocaleString("fr-FR", {
+              style: "decimal",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+          : 0,
+        montantTTC: parseFloat(response.montantTtc).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
+        prixUnitaire: parseFloat(response.prixUnitaire).toLocaleString(
+          "fr-FR",
+          {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }
+        ),
+      });
+      return setQuantite(quantite + 1);
     }
+    //console.log(response);
+  }
 
-    function diminuQuantite(){
-        quantite > 1 && setQuantite(quantite - 1) 
+  async function diminuQuantite() {
+    if (quantite > 1) {
+      const response = await pacthQuantiteProduitPanier(id, quantite - 1);
+      if (response) {
+        setDataArticle({
+          montantBrut: parseFloat(response.montantBrut).toLocaleString(
+            "fr-FR",
+            {
+              style: "decimal",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }
+          ),
+          tva: parseFloat(response.montantTva).toLocaleString("fr-FR", {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }),
+          remise: response.montantRemise
+            ? parseFloat(response.montantRemise).toLocaleString("fr-FR", {
+                style: "decimal",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            : 0,
+          montantTTC: parseFloat(response.montantTtc).toLocaleString("fr-FR", {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }),
+          prixUnitaire: parseFloat(response.prixUnitaire).toLocaleString(
+            "fr-FR",
+            {
+              style: "decimal",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }
+          ),
+        });
+        return setQuantite(quantite - 1);
+      }
+      //console.log(response);
     }
+  }
 
-    async function supArticlePanier(){
-        try {
-
-            const response = await deleteArticlePanier(id)
-            setVu('hidden')     
-        } catch (error) {
-            console.log(error)
-        }
-        
-        
+  async function supArticlePanier() {
+    try {
+      const response = await deleteArticlePanier(id);
+      setVu("hidden");
+    } catch (error) {
+      console.log(error);
     }
-    return (
-        <>
-            <div className={`flex px-2 ${vu}`}>
-            <div className="w-[35%] flex px-1">
-                <img alt="boeuf" loading="lazy" className="mr-1" width={55} srcSet={linkImage}></img>
-                <div className="flex flex-col justify-center">
-                    <div className="text-base font-semibold ">{nom}</div>
-                    <div className="text-sm  ">{description} </div>
-                </div>
-            </div>
-            <div className="w-[15%] text-base font-semibold  align-middle flex justify-center items-center"><div>{prix} EURO</div></div>
-            <div className="w-[30%] flex justify-center items-center">
-                <div className="flex w-[70px] justify-center items-center px-1 borderborder-gray-300 py-1">
-                    {/*<button onClick={diminuQuantite}>-</button>*/}{quantite}{/*<button onClick={augmenteQuantite}>+</button>*/}
-                </div>
-            </div>
-            <div className="w-[15%] flex justify-center text-base items-center"><div>{prix * quantite} FCFA</div></div>
-            <div className="w-[5%] flex justify-center items-center"><button onClick={supArticlePanier }><img loading="lazy" srcSet={imgClose}></img></button></div>
+  }
 
-
-            </div>
-            <hr className={`${vu}`}></hr>
-        </>
-    )
+  return (
+    <tr className={`border-b border-gray-300 ${vu}`}>
+      <td className="p-3 text-base text-left flex items-center">
+        <img
+          alt="product"
+          loading="lazy"
+          className="w-16 h-16 mr-2 object-cover"
+          src={linkImage}
+        />
+        <div>
+          <div className="font-semibold">{nom}</div>
+          <div className="text-sm hidden sm:block">{description}</div>
+        </div>
+      </td>
+      <td className="p-3 text-base text-center font-semibold">
+        {isDataArticle.prixUnitaire}
+      </td>
+      <td className="p-3 text-base text-center font-semibold">
+        {isDataArticle.montantBrut}
+      </td>
+      <td className="p-3 text-base text-center font-semibold">
+        {isDataArticle.remise || 0}
+      </td>
+      <td className="p-3 text-base text-center font-semibold">
+        {isDataArticle.tva}
+      </td>
+      <td className="p-3 text-base text-center">
+        <div className="flex items-center justify-center border border-gray-300 p-1">
+          <button onClick={diminuQuantite} className="px-2">
+            -
+          </button>
+          {quantite}
+          <button onClick={augmenteQuantite} className="px-2">
+            +
+          </button>
+        </div>
+      </td>
+      <td className="p-3 text-base text-center font-semibold">
+        {isDataArticle.montantTTC}
+      </td>
+      <td className="p-3 text-base text-center">
+        <button onClick={supArticlePanier}>
+          <img alt="remove" loading="lazy" className="w-6 h-6" src={imgClose} />
+        </button>
+      </td>
+    </tr>
+  );
 }
