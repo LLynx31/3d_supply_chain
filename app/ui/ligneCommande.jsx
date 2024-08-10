@@ -14,31 +14,31 @@ function DetailsCommande({
   setView,
 }) {
   const listDetailCommande = detailsCommandes.map((commande) => (
-    <div key={commande.produit.nom} className="w-[60%] sm:w-auto">
-      <div className=" flex flex-col sm:flex-row px-2 py-2 mb-4">
-        <div className="sm:w-[15%] py-3 sm:py-0 text-base text-center ">
+    <div key={commande.produit.nom} className="w-auto">
+      <div className=" flex flex-row px-2 py-2 mb-4">
+        <div className="w-[12.5%] py-0 text-base text-center ">
           {commande.produit.nom}
         </div>
 
-        <div className="sm:w-[10%] py-3 sm:py-0 text-base text-center">
+        <div className="w-[12.5%] py-0 text-base text-center">
           {commande.quantite}
         </div>
 
-        <div className="sm:w-[15%] py-3 sm:py-0 text-base text-center">
+        <div className="w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.prixUnitaire).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}{" "}
         </div>
-        <div className="sm:w-[15%] py-3 sm:py-0 text-base text-center">
+        <div className="w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.montantBrut).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}{" "}
         </div>
-        <div className="sm:w-[15%] py-3 sm:py-0 text-base text-center">
+        <div className="w-[12.5%] py-0 text-base text-center">
           {commande.montantRemise
             ? parseFloat(commande.montantRemise).toLocaleString("fr-FR", {
                 style: "decimal",
@@ -47,14 +47,23 @@ function DetailsCommande({
               })
             : 0}{" "}
         </div>
-        <div className="sm:w-[15%] py-3 sm:py-0 text-base text-center">
+        <div className="w-[12.5%] py-0 text-base text-center">
+          {commande.montantRemise
+            ? parseFloat(commande.montantHt).toLocaleString("fr-FR", {
+                style: "decimal",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            : 0}{" "}
+        </div>
+        <div className="w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.montantTva).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}{" "}
         </div>
-        <div className="sm:w-[15%] py-3 sm:py-0 text-base text-center">
+        <div className="w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.montantTtc).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
@@ -82,30 +91,33 @@ function DetailsCommande({
     >
       <div className="absolute w-full h-full bg-slate-900 opacity-45"></div>
       <div className="absolute flex justify-center items-center w-full h-full">
-        <div className="flex justify-center overflow-scroll  sm:w-[800px] p-4 rounded-md sm:min-h-[300px] sm:max-h-[600px] bg-white w-full">
-          <div className={"mb-10 flex-row sm:flex-col flex w-full "}>
+        <div className="flex justify-center overflow-scroll  sm:w-[800px] p-4 rounded-md sm:min-h-[300px] sm:max-h-[600px] bg-white w-full mx-2">
+          <div className={"mb-10 flex-col flex w-full "}>
             <h1 className="text-base">Informations produits</h1>
             <hr className="mb-5"></hr>
-            <div className="bg-teal-50 w-[40%] sm:w-auto flex flex-col sm:flex-row px-2 py-2 mb-4">
-              <div className="sm:w-[15%] font-bold text-blue-700  py-3 sm:py-0 text-base text-center ">
+            <div className="bg-teal-50  w-auto flex  flex-row px-2 py-2 mb-4">
+              <div className="sm:w-[12.5%] font-bold text-blue-700  py-3 sm:py-0 text-base text-center ">
                 Produit
               </div>
-              <div className="sm:w-[10%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Quantite
               </div>
-              <div className="sm:w-[15%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Prix unitaire (euro)
               </div>
-              <div className="sm:w-[15%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Montant brut
               </div>
-              <div className="sm:w-[15%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Remise
               </div>
-              <div className="sm:w-[15%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+                MontantHt
+              </div>
+              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 TVA
               </div>
-              <div className="sm:w-[15%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Total
               </div>
             </div>
@@ -116,14 +128,6 @@ function DetailsCommande({
             <hr className="mb-5"></hr>
             <table className="min-w-full text-base border-collapse border border-gray-300">
               <tbody>
-                <tr className="bg-gray-100">
-                  <th className="text-left text-base p-2 border-b border-gray-300 text-blue-700">
-                    Montant livraison :
-                  </th>
-                  <td className="text-gray-500 p-2 border-b border-gray-300">
-                    {montantLivraison} EURO
-                  </td>
-                </tr>
                 <tr className="bg-white">
                   <th className="text-left text-base p-2 border-b border-gray-300 text-blue-700">
                     Montant brut :
@@ -202,15 +206,15 @@ export default function LigneCommandes({
   return (
     <>
       <div className="border-b border-b-slate-200 flex px-2 py-2 mb-4">
-        <div className="w-[15%] text-base text-center ">{numCommande}</div>
+        <div className="w-[12.5%] text-base text-center ">{numCommande}</div>
         <div className="w-[20%] text-base text-center">
           {adresse.pays} {adresse.ville} {adresse.commune}
         </div>
         <div className="w-[20%] text-base text-center">{date}</div>
 
-        <div className="w-[15%] text-base text-center">{total} EU</div>
-        <div className="w-[15%] text-base text-center">{statut}</div>
-        <div className="w-[15%] text-base text-center">
+        <div className="w-[12.5%] text-base text-center">{total} EU</div>
+        <div className="w-[12.5%] text-base text-center">{statut}</div>
+        <div className="w-[12.5%] text-base text-center">
           <button
             className="bg-red-100 rounded-md py-1 px-2 text-red-500 text-sm "
             onClick={() => {
@@ -225,7 +229,6 @@ export default function LigneCommandes({
           </button>
         </div>
       </div>
-    
 
       <DetailsCommande
         detailsCommandes={detailsCommandes}
