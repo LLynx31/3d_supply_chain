@@ -67,11 +67,14 @@ export default function ComponentPage({ data, commandes }) {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}
-        montantLivraison={parseFloat(commande.montantLivraison).toLocaleString("fr-FR", {
-          style: "decimal",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
+        montantLivraison={parseFloat(commande.montantLivraison).toLocaleString(
+          "fr-FR",
+          {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }
+        )}
         statut={commande.status == "VALIDATED" ? "validé" : "en attente"}
         date={formatISODate(commande.date).toLocaleString("fr-FR", {
           style: "decimal",
@@ -93,12 +96,14 @@ export default function ComponentPage({ data, commandes }) {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}
-        montantRemise={parseFloat(commande.montantRemise).toLocaleString("fr-FR", {
-          style: "decimal",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
-
+        montantRemise={parseFloat(commande.montantRemise).toLocaleString(
+          "fr-FR",
+          {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }
+        )}
       ></LigneCommandes>
     );
   });
@@ -153,7 +158,7 @@ export default function ComponentPage({ data, commandes }) {
         </div>
       </div>
 
-      <div className="flex flex-col sm:w-[80%] min-h-[500px] py-5 px-8">
+      <div className="flex flex-col sm:w-[80%] min-h-[500px] py-5 px-2">
         <div
           className={
             "fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " +
@@ -330,21 +335,34 @@ export default function ComponentPage({ data, commandes }) {
           id="commande"
           className={swipeOption == "commandes" ? "" : "hidden"}
         >
-          <div className="bg-gray-200 flex px-2 py-2 mb-4">
-            <div className="w-[15%] text-base text-center ">N° de commande</div>
-            <div className="w-[20%] text-base text-center ">
-              Adresse de livraison
-            </div>
-            <div className="w-[20%] text-base text-center">Date</div>
-    
-            <div className="w-[15%] text-base text-center">Total</div>
-            <div className="w-[15%] text-base text-center">Statut</div>
-            <div className="w-[15%] text-base text-center">Action</div>
+          <div className="overflow-x-auto">
+            <table className="w-full bg-gray-200  border-collapse">
+              <thead>
+                <tr className="px-2 py-2 mb-4">
+                  <th className="w-[100px] px-2 sm:w-[16%] text-base text-center border border-gray-300">
+                    N° de commande
+                  </th>
+                  <th className="w-[100px] px-2 sm:w-[16%] text-base text-center border border-gray-300">
+                    Adresse de livraison
+                  </th>
+                  <th className="w-[100px] px-2 sm:w-[16%] text-base text-center border border-gray-300">
+                    Date
+                  </th>
+                  <th className="w-[100px] px-2 sm:w-[16%] text-base text-center border border-gray-300">
+                    Total
+                  </th>
+                  <th className="w-[100px] px-2 sm:w-[16%] text-base text-center border border-gray-300">
+                    Statut
+                  </th>
+                  <th className="w-[100px] px-2 sm:w-[16%] text-base text-center border border-gray-300">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>{listLigneCommande}</tbody>
+            </table>
           </div>
-
-          {listLigneCommande}
         </div>
-        
       </div>
     </motion.div>
   );

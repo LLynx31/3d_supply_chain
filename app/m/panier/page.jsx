@@ -32,6 +32,11 @@ export default function Panier() {
       <ItemPanier
         id={panier["@id"]}
         key={panier["@id"]}
+        prixUnitaire={parseFloat(panier.prixUnitaire).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
         imageProduct={panier.produit.imageProduits[0]?.path}
         nom={panier.produit.nom}
         description={panier.produit.description}
@@ -69,22 +74,39 @@ export default function Panier() {
         <h1 className="text-center text-xl font-bold">Mon panier</h1>
         <hr></hr>
         <div className="mt-3 flex items-center flex-col xlg:flex-row">
-          <div className="w-full min-h-[250px]">
-            <div className="bg-gray-200 flex px-2 py-2 mb-4">
-              <div className="sm:w-[35%] text-base text-center">
-                NOM DU PRODUIT
-              </div>
-              <div className="w-[15%] text-base text-center">MONTANT BRUT</div>
-              <div className="w-[10%] text-base text-center">REMISE</div>
-              <div className="w-[10%] text-base text-center">TVA</div>
-              <div className="w-[10%] text-base text-center">QUANTITE</div>
-              <div className="w-[15%] text-base text-center ">MONTANT TTC</div>
-            </div>
-
-            <div className="flex flex-col gap-5">{listPanier}</div>
+          <div className="w-full min-h-[250px] overflow-x-auto">
+            <table className="w-full min-w-[600px] border-collapse border border-gray-300">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th className="text-base  text-center px-3 py-2 border-b border-gray-300">
+                    NOM DU PRODUIT
+                  </th>
+                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                    PRIX UNITAIRE (en euro)
+                  </th>
+                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                    MONTANT BRUT 
+                  </th>
+                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                    REMISE
+                  </th>
+                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                    TVA
+                  </th>
+                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                    QUANTITE
+                  </th>
+                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                    MONTANT TTC
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* Les lignes de données seront ajoutées ici */}
+               {listPanier}
+              </tbody>
+            </table>
           </div>
-
-         
 
           <button
             disabled={dataPanier[0]?.detailDocuments <= 0 ? true : false}

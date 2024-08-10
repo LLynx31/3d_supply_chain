@@ -14,31 +14,31 @@ function DetailsCommande({
   setView,
 }) {
   const listDetailCommande = detailsCommandes.map((commande) => (
-    <div key={commande.produit.nom} className="w-auto">
+    <div key={commande.produit.nom} className="w-fit sm:w-auto">
       <div className=" flex flex-row px-2 py-2 mb-4">
-        <div className="w-[12.5%] py-0 text-base text-center ">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center ">
           {commande.produit.nom}
         </div>
 
-        <div className="w-[12.5%] py-0 text-base text-center">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center">
           {commande.quantite}
         </div>
 
-        <div className="w-[12.5%] py-0 text-base text-center">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.prixUnitaire).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}{" "}
         </div>
-        <div className="w-[12.5%] py-0 text-base text-center">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.montantBrut).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}{" "}
         </div>
-        <div className="w-[12.5%] py-0 text-base text-center">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center">
           {commande.montantRemise
             ? parseFloat(commande.montantRemise).toLocaleString("fr-FR", {
                 style: "decimal",
@@ -47,7 +47,7 @@ function DetailsCommande({
               })
             : 0}{" "}
         </div>
-        <div className="w-[12.5%] py-0 text-base text-center">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center">
           {commande.montantRemise
             ? parseFloat(commande.montantHt).toLocaleString("fr-FR", {
                 style: "decimal",
@@ -56,14 +56,14 @@ function DetailsCommande({
               })
             : 0}{" "}
         </div>
-        <div className="w-[12.5%] py-0 text-base text-center">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.montantTva).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}{" "}
         </div>
-        <div className="w-[12.5%] py-0 text-base text-center">
+        <div className="w-[100px] sm:w-[12.5%] py-0 text-base text-center">
           {parseFloat(commande.montantTtc).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
@@ -91,33 +91,33 @@ function DetailsCommande({
     >
       <div className="absolute w-full h-full bg-slate-900 opacity-45"></div>
       <div className="absolute flex justify-center items-center w-full h-full">
-        <div className="flex justify-center overflow-scroll  sm:w-[800px] p-4 rounded-md sm:min-h-[300px] sm:max-h-[600px] bg-white w-full mx-2">
+        <div className="flex justify-center overflow-scroll mx-2 sm:w-[800px] p-4 rounded-md sm:min-h-[300px] sm:max-h-[600px] bg-white w-full">
           <div className={"mb-10 flex-col flex w-full "}>
             <h1 className="text-base">Informations produits</h1>
             <hr className="mb-5"></hr>
-            <div className="bg-teal-50  w-auto flex  flex-row px-2 py-2 mb-4">
-              <div className="sm:w-[12.5%] font-bold text-blue-700  py-3 sm:py-0 text-base text-center ">
+            <div className="bg-teal-50 w-fit  sm:w-auto flex  flex-row px-2 py-2 mb-4">
+              <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700  py-3 sm:py-0 text-base text-center ">
                 Produit
               </div>
-              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="w-[100px] sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Quantite
               </div>
-              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Prix unitaire (euro)
               </div>
-              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Montant brut
               </div>
-              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Remise
               </div>
-              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 MontantHt
               </div>
-              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 TVA
               </div>
-              <div className="sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
+              <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 Total
               </div>
             </div>
@@ -200,48 +200,61 @@ export default function LigneCommandes({
 }) {
   const [view, setView] = useState({
     etat: "hidden",
-    action: "Details ",
+    action: "Détails produits",
   });
 
   return (
     <>
-      <div className="border-b border-b-slate-200 flex px-2 py-2 mb-4">
-        <div className="w-[12.5%] text-base text-center ">{numCommande}</div>
-        <div className="w-[20%] text-base text-center">
+      <tr className="border-b border-b-slate-200">
+        <td className="w-[100px] sm:w-[16%] text-base text-center px-2 py-2 bg-gray-50">
+          {numCommande}
+        </td>
+        <td className="w-[100px] sm:w-[16%] text-base text-center px-2 py-2 bg-white">
           {adresse.pays} {adresse.ville} {adresse.commune}
-        </div>
-        <div className="w-[20%] text-base text-center">{date}</div>
-
-        <div className="w-[12.5%] text-base text-center">{total} EU</div>
-        <div className="w-[12.5%] text-base text-center">{statut}</div>
-        <div className="w-[12.5%] text-base text-center">
+        </td>
+        <td className="w-[100px] sm:w-[16%] text-base text-center px-2 py-2 bg-gray-50">
+          {date}
+        </td>
+        <td className="w-[100px] sm:w-[16%] text-base text-center px-2 py-2 bg-white">
+          {total} EU
+        </td>
+        <td className="w-[100px] sm:w-[16%] text-base text-center px-2 py-2 bg-gray-50">
+          {statut}
+        </td>
+        <td className="w-[100px] sm:w-[16%] text-base text-center px-2 py-2 bg-white">
           <button
-            className="bg-red-100 rounded-md py-1 px-2 text-red-500 text-sm "
+            className="bg-red-100 rounded-md py-1 px-2 text-red-600 text-sm"
             onClick={() => {
-              if (view.etat == "hidden") {
-                return setView({ etat: "", action: "fermer" });
+              if (view.etat === "hidden") {
+                return setView({ etat: "", action: "Fermer" });
               }
-
-              return setView({ etat: "hidden", action: "Details produits" });
+              return setView({ etat: "hidden", action: "Détails produits" });
             }}
           >
             {view.action}
           </button>
-        </div>
-      </div>
+        </td>
+      </tr>
 
-      <DetailsCommande
-        detailsCommandes={detailsCommandes}
-        view={view}
-        montantBrut={montantBrut}
-        montantHt={montantHt}
-        montantLivraison={montantLivraison}
-        montantTva={montantTva}
-        montantRemise={montantTva}
-        key={numCommande}
-        total={total}
-        setView={setView}
-      ></DetailsCommande>
+      {view.etat === "" && (
+        <tr>
+          <td colSpan="6" className="bg-gray-50">
+            <DetailsCommande
+              detailsCommandes={detailsCommandes}
+              view={view}
+              montantBrut={montantBrut}
+              montantHt={montantHt}
+              montantLivraison={montantLivraison}
+              montantTva={montantTva}
+              montantRemise={montantTva}
+              key={numCommande}
+              total={total}
+              setView={setView}
+            />
+          </td>
+        </tr>
+      )}
     </>
   );
 }
+
