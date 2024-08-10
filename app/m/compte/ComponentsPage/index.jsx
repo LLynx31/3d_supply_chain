@@ -55,17 +55,50 @@ export default function ComponentPage({ data, commandes }) {
   }
 
   const listLigneCommande = commandes.map((commande) => {
-    console.log(commande.detailDocuments);
+    console.log(commande);
     return (
       <LigneCommandes
         key={commande["@id"]}
         adresse={commande.adresse}
         detailsCommandes={commande.detailDocuments}
         numCommande={extraitNombre(commande["@id"])}
-        total={parseFloat(commande.montantTTC)}
-        montantLivraison={commande.montantLivraison}
+        total={parseFloat(commande.montantTTC).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        montantLivraison={parseFloat(commande.montantLivraison).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
         statut={commande.status == "VALIDATED" ? "validé" : "en attente"}
-        date={formatISODate(commande.date)}
+        date={formatISODate(commande.date).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        montantBrut={parseFloat(commande.montantBrut).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        montantHt={parseFloat(commande.montantHt).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        montantTva={parseFloat(commande.montantTva).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        montantRemise={parseFloat(commande.montantRemise).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+
       ></LigneCommandes>
     );
   });
@@ -298,19 +331,20 @@ export default function ComponentPage({ data, commandes }) {
           className={swipeOption == "commandes" ? "" : "hidden"}
         >
           <div className="bg-gray-200 flex px-2 py-2 mb-4">
-            <div className="w-[10%] text-base text-center ">N° de commande</div>
+            <div className="w-[15%] text-base text-center ">N° de commande</div>
             <div className="w-[20%] text-base text-center ">
               Adresse de livraison
             </div>
             <div className="w-[20%] text-base text-center">Date</div>
-            <div className="w-[15%] text-base text-center">Montant livraison</div>
+    
             <div className="w-[15%] text-base text-center">Total</div>
-            <div className="w-[10%] text-base text-center">Statut</div>
-            <div className="w-[10%] text-base text-center">Action</div>
+            <div className="w-[15%] text-base text-center">Statut</div>
+            <div className="w-[15%] text-base text-center">Action</div>
           </div>
 
           {listLigneCommande}
         </div>
+        
       </div>
     </motion.div>
   );

@@ -16,7 +16,7 @@ export default function Panier() {
     async function recupererPanier() {
       try {
         const panier = await getPanier();
-        //console.log(panier["hydra:member"]);
+        console.log(panier["hydra:member"]);
 
         setDataPanier(panier["hydra:member"]);
       } catch (error) {
@@ -35,10 +35,26 @@ export default function Panier() {
         imageProduct={panier.produit.imageProduits[0]?.path}
         nom={panier.produit.nom}
         description={panier.produit.description}
-        montantBrut={parseFloat(panier.montantBrut)}
-        montantTTC={parseFloat(panier.montantTtc)}
-        tva={parseFloat(panier.montantTva)}
-        remise={parseFloat(panier.montantRemise)}
+        montantBrut={parseFloat(panier.montantBrut).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        montantTTC={parseFloat(panier.montantTtc).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        tva={parseFloat(panier.montantTva).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        remise={parseFloat(panier.montantRemise).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
         quantiteProduct={panier.quantite}
       ></ItemPanier>
     ));
@@ -55,7 +71,7 @@ export default function Panier() {
         <div className="mt-3 flex items-center flex-col xlg:flex-row">
           <div className="w-full min-h-[250px]">
             <div className="bg-gray-200 flex px-2 py-2 mb-4">
-              <div className="w-[35%] text-base text-center">
+              <div className="sm:w-[35%] text-base text-center">
                 NOM DU PRODUIT
               </div>
               <div className="w-[15%] text-base text-center">MONTANT BRUT</div>
@@ -68,49 +84,7 @@ export default function Panier() {
             <div className="flex flex-col gap-5">{listPanier}</div>
           </div>
 
-          <div className=" hidden lg:w-[32%] border rounded-lg border-gray-200 px-3 py-5 h-fit ">
-            <div className="text-base">Entrez votre code promo</div>
-
-            <div className="w-full mt-5 flex ">
-              <input className="block w-[190px] text-base border border-gray-300 p-1"></input>
-
-              <button className="w-full bg-black text-white text-base ml-2">
-                SOUMETTRE
-              </button>
-            </div>
-
-            <hr className="mt-8"></hr>
-
-            <div className="mt-8">
-              <div className="flex justify-between mb-3">
-                <div className="text-base ">sous-total</div>
-                <div className="text-base font-bold">
-                  {parseInt(dataPanier[0]?.montantHt)} EURO
-                </div>
-              </div>
-
-              <div className="flex justify-between mb-3">
-                <div className="text-base ">livraison</div>
-                <div className="text-base font-bold">
-                  10 + {parseInt(dataPanier[0]?.montantHt)} EURO
-                </div>
-              </div>
-
-              <div className="flex justify-between mb-8">
-                <div className="text-base ">total</div>
-                <div className="text-base font-bold">
-                  {parseInt(dataPanier[0]?.montantHt) + 10} EURO
-                </div>
-              </div>
-
-              <button
-                onClick={() => router.push("/m/checkout")}
-                className="text-white text-base w-full bg-rouge text-center py-3 rounded-md"
-              >
-                verifier la commande
-              </button>
-            </div>
-          </div>
+         
 
           <button
             disabled={dataPanier[0]?.detailDocuments <= 0 ? true : false}
