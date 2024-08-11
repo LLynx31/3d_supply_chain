@@ -112,7 +112,7 @@ function DetailsCommande({
                 Remise
               </div>
               <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
-                MontantHt
+                Montant hors taxe
               </div>
               <div className="w-[100px]  sm:w-[12.5%] font-bold text-blue-700 py-3 sm:py-0 text-base text-center">
                 TVA

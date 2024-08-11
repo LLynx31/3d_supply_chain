@@ -252,6 +252,13 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">Montant total hors taxe</div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantHt)} EURO
+                </div>
+              </div>
+
               <div className="flex justify-between mb-8">
                 <div className="text-base ">Total</div>
                 <div className="text-base font-bold">

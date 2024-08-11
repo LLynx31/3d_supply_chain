@@ -16,7 +16,7 @@ export default function Panier() {
     async function recupererPanier() {
       try {
         const panier = await getPanier();
-        //console.log(panier["hydra:member"]);
+        console.log(panier["hydra:member"]);
 
         setDataPanier(panier["hydra:member"]);
       } catch (error) {

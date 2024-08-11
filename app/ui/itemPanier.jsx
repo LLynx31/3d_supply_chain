@@ -26,7 +26,7 @@ export default function ItemPanier({
   const [isDataArticle, setDataArticle] = useState({
     montantBrut: montantBrut,
     tva: tva,
-    remise:0,
+    remise: remise === "NaN" ? 0 : remise,
     montantTTC: montantTTC,
     prixUnitaire: prixUnitaire,
     montantHt: montantHt
@@ -68,6 +68,14 @@ export default function ItemPanier({
             maximumFractionDigits: 2,
           }
         ),
+        montantHt: parseFloat(response.montantHt).toLocaleString(
+          "fr-FR",
+          {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }
+        ),
       });
       return setQuantite(quantite + 1);
     }
@@ -87,6 +95,14 @@ export default function ItemPanier({
               maximumFractionDigits: 2,
             }
           ),
+          montantHt: parseFloat(response.montantHt).toLocaleString(
+          "fr-FR",
+          {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }
+        ),
           tva: parseFloat(response.montantTva).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
