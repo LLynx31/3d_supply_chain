@@ -15,6 +15,7 @@ export default function ItemPanier({
   quantiteProduct,
   imageProduct,
   id,
+  montantHt,
   prixUnitaire,
 }) {
   const linkImage = "https://api.3dsupplychains.com/" + imageProduct;
@@ -25,9 +26,10 @@ export default function ItemPanier({
   const [isDataArticle, setDataArticle] = useState({
     montantBrut: montantBrut,
     tva: tva,
-    remise: remise ? remise : 0,
+    remise:0,
     montantTTC: montantTTC,
     prixUnitaire: prixUnitaire,
+    montantHt: montantHt
   });
 
   const router = useRouter();
@@ -147,7 +149,10 @@ export default function ItemPanier({
         {isDataArticle.montantBrut}
       </td>
       <td className="p-3 text-base text-center font-semibold">
-        {isDataArticle.remise || 0}
+        {isDataArticle.remise}
+      </td>
+      <td className="p-3 text-base text-center font-semibold">
+        {isDataArticle.montantHt }
       </td>
       <td className="p-3 text-base text-center font-semibold">
         {isDataArticle.tva}
