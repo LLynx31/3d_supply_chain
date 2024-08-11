@@ -16,7 +16,7 @@ export default function Panier() {
     async function recupererPanier() {
       try {
         const panier = await getPanier();
-        console.log(panier["hydra:member"]);
+        //console.log(panier["hydra:member"]);
 
         setDataPanier(panier["hydra:member"]);
       } catch (error) {
@@ -60,6 +60,11 @@ export default function Panier() {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}
+        montantHt={parseFloat(panier.montantHt).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
         quantiteProduct={panier.quantite}
       ></ItemPanier>
     ));
@@ -89,6 +94,9 @@ export default function Panier() {
                   </th>
                   <th className="text-base text-center px-3 py-2 border-b border-gray-300">
                     REMISE
+                  </th>
+                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                    MONTANT HORS TAXE
                   </th>
                   <th className="text-base text-center px-3 py-2 border-b border-gray-300">
                     TVA
