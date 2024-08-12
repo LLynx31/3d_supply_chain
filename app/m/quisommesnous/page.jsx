@@ -24,11 +24,6 @@ export default function PageQuiSommesNous() {
             respect des engagements sociétaux pour mettre à votre disposition
             les meilleurs produits exotiques. Alors rejoignez-nous et ensemble
             nous irons loin.
-            <br></br>Mail :
-            <br></br>Tel : +33 7 73 46 37 42
-            <br></br>Facebook :
-            <br></br>Insta :
-            <br></br>Tiktok :
           </p>
         </div>
 

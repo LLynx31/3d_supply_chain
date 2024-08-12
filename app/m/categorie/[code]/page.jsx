@@ -90,7 +90,7 @@ export default function PageCategorie({params}){
       <div className="pt-1 gap-9 mt-8 flex">
 
         {/* barre de navigation */}
-        <div className="sticky hidden sm:block top-5 h-fit items-stretch content-end flex-wrap flex max-w-[202px] flex-col ">
+        <div className="sticky hidden sm:block top-5 h-fit items-stretch content-end flex-wrap max-w-[202px] flex-col ">
             <div className="text-black text-xl font-bold w-full">
               Navigation
             </div>
