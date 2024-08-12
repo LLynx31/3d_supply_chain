@@ -223,15 +223,8 @@ export default function CheckoutPage() {
               </div>*/}
 
               <div className="flex justify-between mb-3">
-                <div className="text-base ">Frais de livraison</div>
-                <div className="text-base font-bold">
-                  {parseFloat(dataPanier[0].montantLivraison)} EURO
-                </div>
-              </div>
-
-              <div className="flex justify-between mb-3">
                 <div className="text-base ">
-                  Montant total brut des articles
+                  Total brut
                 </div>
                 <div className="text-base font-bold">
                   {parseFloat(dataPanier[0].montantHt)} EURO
@@ -239,28 +232,36 @@ export default function CheckoutPage() {
               </div>
 
               <div className="flex justify-between mb-3">
-                <div className="text-base ">Montant total TVA</div>
-                <div className="text-base font-bold">
-                  {parseFloat(dataPanier[0].montantTva)} EURO
-                </div>
-              </div>
-
-              <div className="flex justify-between mb-3">
-                <div className="text-base ">Montant total remise</div>
+                <div className="text-base ">Total remise</div>
                 <div className="text-base font-bold">
                   {parseFloat(dataPanier[0].montantRemise)} EURO
                 </div>
               </div>
 
               <div className="flex justify-between mb-3">
-                <div className="text-base ">Montant total hors taxe</div>
+                <div className="text-base ">Total hors taxe</div>
                 <div className="text-base font-bold">
                   {parseFloat(dataPanier[0].montantHt)} EURO
                 </div>
               </div>
 
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">Total TVA</div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantTva)} EURO
+                </div>
+              </div>
+
+
+              <div className="flex justify-between mb-3">
+                <div className="text-base ">Frais de livraison</div>
+                <div className="text-base font-bold">
+                  {parseFloat(dataPanier[0].montantLivraison)} EURO
+                </div>
+              </div>
+
               <div className="flex justify-between mb-8">
-                <div className="text-base ">Total</div>
+                <div className="text-base ">Total TTC</div>
                 <div className="text-base font-bold">
                   {parseFloat(dataPanier[0].montantTTC)} EURO
                 </div>
