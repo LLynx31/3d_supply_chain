@@ -2,11 +2,9 @@ import Link from "next/link";
 
 export default function Footer() {
   const logo = "/logo.png";
-  const downloadApple = "/download_apple.png";
-  const downloadAndroid = "/download_android.png";
   const facebook = "/facebook.svg";
-  const linkedin = "/linkedin.svg";
-  const twitter = "/twitter.svg";
+  const linkedin = "/icons8-tic-tac.svg";
+
   return (
     <div className="bg-yellow-400 mt-36 p-5 max-md:px-5">
       <div className="gap-3 flex justify-between max-lg:flex-col max-md:items-stretch max-md:gap-0">
@@ -93,29 +91,25 @@ export default function Footer() {
             <div className="text-black text-lg font-bold whitespace-nowrap">
               Nos réseaux
             </div>
-            <div className="flex justify-between w-[150px]">
+            <div className="flex gap-2">
               <div className="w-[43px] h-[43px]  flex justify-center items-center rounded-[100%] bg-white">
-                <img
-                  loading="lazy"
-                  srcSet={facebook}
-                  className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full "
-                />
+                <a href="https://www.facebook.com/profile.php?id=61562355414130">
+                  <img
+                    loading="lazy"
+                    srcSet={facebook}
+                    className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full "
+                  />
+                </a>
               </div>
 
-              <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white">
-                <img
-                  loading="lazy"
-                  srcSet={linkedin}
-                  className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full"
-                />
-              </div>
-
-              <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] bg-white">
-                <img
-                  loading="lazy"
-                  srcSet={twitter}
-                  className="aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full "
-                />
+              <div className="w-[43px] h-[43px] flex justify-center items-center rounded-[100%] ">
+                <a href=" https://vm.tiktok.com/ZMrQLU5XS/">
+                  <img
+                    loading="lazy"
+                    srcSet={linkedin}
+                    className="aspect-square object-contain object-center  overflow-hidden shrink-0 max-w-full"
+                  />
+                </a>
               </div>
             </div>
           </div>

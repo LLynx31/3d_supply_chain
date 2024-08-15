@@ -12,8 +12,8 @@ export default function PageQuiSommesNous() {
       transition={{ duration: 0.3 }}
       className="px-8 lg:px-20 mt-20"
     >
-      <div className="rounded-lg w-full h-[400px] bg-gray-200 flex justify-center items-center">
-        <div className="font-bold text-lg">PHOTO DE L'EQUIPE</div>
+      <div className="rounded-lg w-full bg-gray-200 flex justify-center items-center">
+        <img className="rounded" src="/qui sommes nous 3D supply chain.jpg"></img>
       </div>
 
       <div className="flex flex-col sm:flex-row justify-center md:gap-10 items-center ">
