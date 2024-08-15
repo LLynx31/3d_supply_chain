@@ -2,13 +2,20 @@
 import ItemPanier from "../../ui/itemPanier";
 import { getPanier } from "@/app/features/getData";
 import LoadingSpinner from "@/app/ui/loading";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
+import { PageContext } from "@/app/contextProvider";
 
 export default function Panier() {
   const [dataPanier, setDataPanier] = useState(null);
+
+  const pathName = usePathname();
+  const thisPage = useContext(PageContext);
+  useEffect(() => {
+    thisPage.setPage(pathName);
+  });
 
   const router = useRouter();
 
@@ -83,35 +90,36 @@ export default function Panier() {
             <table className="w-full min-w-[600px] border-collapse border border-gray-300">
               <thead className="bg-gray-200">
                 <tr>
-                  <th className="text-base  text-center px-3 py-2 border-b border-gray-300">
+                  <th className="w-[200px] text-base  text-center px-3 py-2 border-b border-gray-300">
                     NOM DU PRODUIT
                   </th>
-                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300">
                     PRIX UNITAIRE (en euro)
                   </th>
-                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
-                    MONTANT BRUT 
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300">
+                    MONTANT BRUT
                   </th>
-                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300">
                     REMISE
                   </th>
-                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300">
                     MONTANT HORS TAXE
                   </th>
-                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300">
                     TVA
                   </th>
-                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300">
                     QUANTITE
                   </th>
-                  <th className="text-base text-center px-3 py-2 border-b border-gray-300">
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300">
                     MONTANT TTC
                   </th>
+                  <th className="w-[100px] text-base text-center px-3 py-2 border-b border-gray-300"></th>
                 </tr>
               </thead>
               <tbody>
                 {/* Les lignes de données seront ajoutées ici */}
-               {listPanier}
+                {listPanier}
               </tbody>
             </table>
           </div>
@@ -119,7 +127,7 @@ export default function Panier() {
           <button
             disabled={dataPanier[0]?.detailDocuments <= 0 ? true : false}
             onClick={() => router.push("/m/checkout")}
-            className="text-white text-base w-fit px-5  bg-rouge text-center py-3 rounded-md"
+            className="text-white text-base mt-3 w-fit px-5  bg-rouge text-center py-3 rounded-md"
           >
             VERIFICATION DE LA COMMANDE
           </button>

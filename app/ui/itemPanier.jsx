@@ -29,7 +29,7 @@ export default function ItemPanier({
     remise: remise === "NaN" ? 0 : remise,
     montantTTC: montantTTC,
     prixUnitaire: prixUnitaire,
-    montantHt: montantHt
+    montantHt: montantHt,
   });
 
   const router = useRouter();
@@ -68,14 +68,11 @@ export default function ItemPanier({
             maximumFractionDigits: 2,
           }
         ),
-        montantHt: parseFloat(response.montantHt).toLocaleString(
-          "fr-FR",
-          {
-            style: "decimal",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          }
-        ),
+        montantHt: parseFloat(response.montantHt).toLocaleString("fr-FR", {
+          style: "decimal",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
       });
       return setQuantite(quantite + 1);
     }
@@ -95,14 +92,11 @@ export default function ItemPanier({
               maximumFractionDigits: 2,
             }
           ),
-          montantHt: parseFloat(response.montantHt).toLocaleString(
-          "fr-FR",
-          {
+          montantHt: parseFloat(response.montantHt).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }
-        ),
+          }),
           tva: parseFloat(response.montantTva).toLocaleString("fr-FR", {
             style: "decimal",
             minimumFractionDigits: 2,
@@ -139,6 +133,7 @@ export default function ItemPanier({
     try {
       const response = await deleteArticlePanier(id);
       setVu("hidden");
+      router.refresh();
     } catch (error) {
       console.log(error);
     }
@@ -146,7 +141,7 @@ export default function ItemPanier({
 
   return (
     <tr className={`border-b border-gray-300 ${vu}`}>
-      <td className="p-3 text-base text-left flex items-center">
+      <td className="w-[200px] p-3 text-base text-left flex items-center">
         <img
           alt="product"
           loading="lazy"
@@ -158,22 +153,22 @@ export default function ItemPanier({
           <div className="text-sm hidden sm:block">{description}</div>
         </div>
       </td>
-      <td className="p-3 text-base text-center font-semibold">
+      <td className="w-[100px] p-3 text-base text-center font-semibold">
         {isDataArticle.prixUnitaire}
       </td>
-      <td className="p-3 text-base text-center font-semibold">
+      <td className="w-[100px] p-3 text-base text-center font-semibold">
         {isDataArticle.montantBrut}
       </td>
-      <td className="p-3 text-base text-center font-semibold">
+      <td className="w-[100px] p-3 text-base text-center font-semibold">
         {isDataArticle.remise}
       </td>
-      <td className="p-3 text-base text-center font-semibold">
-        {isDataArticle.montantHt }
+      <td className="w-[100px] p-3 text-base text-center font-semibold">
+        {isDataArticle.montantHt}
       </td>
-      <td className="p-3 text-base text-center font-semibold">
+      <td className="w-[100px] p-3 text-base text-center font-semibold">
         {isDataArticle.tva}
       </td>
-      <td className="p-3 text-base text-center">
+      <td className="w-[100px] p-3 text-base text-center">
         <div className="flex items-center justify-center border border-gray-300 p-1">
           <button onClick={diminuQuantite} className="px-2">
             -
@@ -184,12 +179,12 @@ export default function ItemPanier({
           </button>
         </div>
       </td>
-      <td className="p-3 text-base text-center font-semibold">
+      <td className="w-[100px] p-3 text-base text-center font-semibold">
         {isDataArticle.montantTTC}
       </td>
-      <td className="p-3 text-base text-center">
-        <button onClick={supArticlePanier}>
-          <img alt="remove" loading="lazy" className="w-6 h-6" src={imgClose} />
+      <td className="w-[100px] p-3 text-base text-center">
+        <button className="w-[50px] flex justify-center items-center" onClick={supArticlePanier}>
+          <img alt="remove" loading="lazy" src={imgClose} />
         </button>
       </td>
     </tr>

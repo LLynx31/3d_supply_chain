@@ -3,12 +3,18 @@ import Article from "../../ui/article";
 import { Categories } from "../../ui/categorie";
 import LoadingSpinner from "../../ui/loading";
 import Temoignages from "../../ui/temoignage";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { getAllPromotion } from "@/app/features/getData";
 import Promotion from "@/app/ui/promotion";
+import { PageContext } from "@/app/contextProvider";
 
 export default function PageIndex() {
+  const thisPage = useContext(PageContext);
+  useEffect(() => {
+    thisPage.setPage(false);
+  });
+
   const banner = "/barniere_site_3D_supply_chain.jpg";
   const processus1 = "/processus-1.png";
   const processus2 = "/processus-2.png";

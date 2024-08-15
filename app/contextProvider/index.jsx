@@ -4,6 +4,8 @@ import { getuser } from "../features/authentification";
 
 export const AuthContext = createContext()
 
+export const PageContext = createContext()
+
 export function AuthProvider({children}){
   const [connected, setConnected] = useState(false)
 
@@ -12,9 +14,9 @@ export function AuthProvider({children}){
       try{
         const connexion = await getuser()
         setConnected(connexion)
-        console.log('refresh')
+        //console.log('refresh')
       }catch (error){
-        
+        console.error(error)
       }
       
     }
@@ -28,4 +30,14 @@ export function AuthProvider({children}){
         {children}
       </AuthContext.Provider>  
     )
+}
+
+export function PageProvider({children}){
+  const [isPage, setPage] = useState("")
+
+  return (
+    <PageContext.Provider value={{isPage, setPage}}>
+        {children}
+    </PageContext.Provider>
+  )
 }

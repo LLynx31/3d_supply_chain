@@ -104,7 +104,7 @@ export default function Home() {
         <div className="pt-1 gap-9 mt-8 flex ">
 
           {/* barre de navigation */}
-            <div className="sticky md:block hidden top-5 h-fit items-stretch content-end flex-wrap flex md:w-[200px] flex-col ">
+            <div className="sticky md:block hidden top-5 h-fit items-stretch content-end flex-wrap md:w-[200px] flex-col ">
             <div className="text-black text-xl font-bold w-full">
               Navigation
             </div>

@@ -45,9 +45,9 @@ export default function PageQuiSommesNous() {
           <div className="w-full">
             <textarea
               className="outline-0 text-base bg-slate-100 rounded-md py-2 px-2 w-full sm:w-[400px]"
-              rows="5"
+              rows="5" placeholder="Votre message"
             >
-              votre message
+              
             </textarea>
           </div>
           <button className="mt-6 text-base w-full sm:w-[400px] bg-jaune text-center py-2.5 rounded-md mb-2 ">
@@ -57,7 +57,7 @@ export default function PageQuiSommesNous() {
 
         <div className="min-[1100px]:w-2/3 md:1/2 w-full  mt-16 flex justify-center items-center">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.8552746710984!2d-3.9634558261238433!3d5.285267536315043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ef5ea512a9f5%3A0xa9fd57d7eb0e72a!2sAgence%20Moses%20Art!5e0!3m2!1sfr!2sci!4v1709169364090!5m2!1sfr!2sci"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2640.4499063501576!2d-3.1635833244793243!3d48.56293122145482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48118cd08aefb993%3A0xb83e02538ff9e237!2s3%20Rue%20Paul%20Serusier%2C%2022200%20Guingamp%2C%20France!5e0!3m2!1sfr!2sci!4v1723570135837!5m2!1sfr!2sci"
             height="350"
             className="border-0 w-full"
             allowfullscreen=""

@@ -1,11 +1,7 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { getPanier, getUser } from "./getData";
-import { extraitNombre } from "./tools";
-import { pacthPanier } from "./pacthData";
-import { data } from "autoprefixer";
 
 export async function postAdress(formData) {
   //effectu le requete
@@ -124,6 +120,19 @@ export async function verifyCodeConfirmeMail(dataForm) {
       const error = await response.json();
       throw error;
     }
+
+    const responseParse = await response.json()
+    //console.log(responseParse.token)
+
+    cookies().set({
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/",
+      secure: true,
+      name: "session",
+      value: responseParse?.token,
+    });
+
     return true;
   } catch (e) {
     return e;
@@ -225,6 +234,8 @@ export async function postAddPanier(product, quantite) {
     //console.log(panier['hydra:member'][0].detailDocuments)
     return addExiste();
   }
+
+  //console.log(pathName)
 }
 
 export async function postPassword(formData) {

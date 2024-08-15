@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
-import {
-  authentificate,
-  deleteCookies,
-  getuser,
-} from "../features/authentification";
+import { authentificate, deleteCookies } from "../features/authentification";
 import { useRouter } from "next/navigation";
 import { getPanier } from "../features/getData";
 import { AuthContext } from "../contextProvider";
@@ -34,7 +30,7 @@ function FormConnexion({ forgetPassword }) {
     }
 
     authentification.setConnected(true);
-    router.replace("compte");
+    //router.replace("compte");
   }
 
   return (
@@ -292,7 +288,6 @@ export default function Header() {
 
   const [popupOpen, setPopupOpen] = useState("hidden");
 
-  //const [connected, setConnected] = useState(false)
   const [nbrArticlePanier, setNbrArticlePanier] = useState(0);
 
   const [isSearch, setSearch] = useState("");
@@ -301,34 +296,19 @@ export default function Header() {
     setPopupOpen("hidden");
   }
 
-  /*useEffect(() => {
-    async function verifieConnexion(){
-      try{
-        const connexion = await getuser()
-        setConnected(connexion)
-      }catch (error){
-        
-      }
-      
-    }
-
-    verifieConnexion()
-    
-  },[])*/
-
-  /*useEffect(() => {
-    async function nbrArticlePanier(){
+  useEffect(() => {
+    async function nbrArticlePanier() {
       try {
-        const response = await getPanier()
-        setNbrArticlePanier(response['hydra:member'][0].detailDocuments.length)
-      } catch (error){
-        console.error(error)
+        const response = await getPanier();
+        setNbrArticlePanier(response["hydra:member"][0].detailDocuments.length);
+        //console.log(response["hydra:member"][0].detailDocuments.length);
+      } catch (error) {
+        console.error(error);
       }
-      
     }
 
-    
-  },[])*/
+    nbrArticlePanier();
+  });
 
   const authentification = useContext(AuthContext);
 
@@ -393,12 +373,12 @@ export default function Header() {
 
         <img
           onClick={() => setPopupOpen("")}
-          className="w-[30px] cursor-pointer h-[30px]"
+          className="w-[30px] cursor-pointer h-[30px] "
           alt="User"
           src={user}
         />
 
-        <div className="flex items-center justify-center">
+        <div className="sm:flex hidden items-center justify-center">
           <Link href={"/m/panier"}>
             <img
               className="w-[30px] h-[30px]"
@@ -407,11 +387,11 @@ export default function Header() {
             />
           </Link>
 
-          {/*<div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f6cb05] rounded-full">
-                <div className="font-sans font-normal text-black ">
-                  {nbrArticlePanier}
-                </div>
-    </div>*/}
+          <div className="w-[25px] ml-1 flex justify-center items-center h-[25px]  bg-[#f60505] rounded-full">
+            <div className="font-sans font-normal text-white ">
+              {nbrArticlePanier}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -426,7 +406,10 @@ export default function Header() {
           <div className="font-sans h-[40px] font-normal text-black text-lg">
             <input
               value={isSearch}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value),
+                  router.push("/m/recherche/" + e.target.value);
+              }}
               type="search"
               placeholder="Rechercher un produit"
               className="font-sans w-[277px]  text-base p-1 h-full outline-0"

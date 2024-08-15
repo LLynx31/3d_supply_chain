@@ -3,6 +3,7 @@ import { sendCodeVerifyMail } from "./app/features/postData";
 import { cookies } from "next/headers";
 
 export async function middleware(request) {
+  
 
   const cookiesStore  =  cookies()
 
@@ -81,3 +82,4 @@ export async function middleware(request) {
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };
+

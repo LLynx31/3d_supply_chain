@@ -4,31 +4,35 @@ import Article from "../../../ui/article";
 
 import { useState, useEffect, useContext } from "react";
 import { postAddPanier } from "@/app/features/postData";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
 import { Categories } from "@/app/ui/categorie";
+import { Alert } from "@mui/material";
+import { PageContext } from "@/app/contextProvider";
 
 export default function ArticleView({ params }) {
   const router = useRouter();
+  
+  const pathName = usePathname();
+  const thisPage = useContext(PageContext);
+  useEffect(() => {
+    thisPage.setPage(pathName)
+  });
 
-  const imgBoeuf = "/boeuf.png";
+
   const imgShoppingCart = "/shopping-cart.png";
-  const imgDangerCircle = "/Danger_Circle.png";
-  const imgClose = "/x.png";
+  //const imgDangerCircle = "/Danger_Circle.png";
+  //const imgClose = "/x.png";
 
   const [quantite, setQuantite] = useState(1);
-  const [ajoutReussi, setAjoutReussi] = useState("hidden");
-  const [ajoutEchec, setAjoutEchec] = useState({ ui: "hidden", message: "" });
-
   const [swipeDescription, setSwipDescritption] = useState("description");
-
   const [swipeImageProduct, setImageProduct] = useState("");
   const [dataProduct, setDataProduct] = useState(null);
-
   const [dataProductSimilar, setDataProductSimilar] = useState(null);
-
   const [etatAjout, setEtatAJout] = useState("ajouter au panier");
+  const [showAlertSucces, setShowAlertSucces] = useState(false);
+  const [showAlertError, setShowAlertError] = useState(false);
 
   useEffect(() => {
     const link = "https://api.3dsupplychains.com/api/produits/" + params.code;
@@ -57,17 +61,29 @@ export default function ArticleView({ params }) {
       try {
         //console.log(dataProduct.id)
         const etat = await postAddPanier(dataProduct.id, quantite);
+        //console.log(pathName)
         //console.log(etat)
         if (etat == "Ok") {
-          setAjoutReussi("");
+          router.refresh();
+          setShowAlertSucces(true);
+
+          // Masquer l'alerte après 3 secondes
+          setTimeout(() => {
+            setShowAlertSucces(false);
+          }, 3000);
         } else {
           console.log(etat);
-          setAjoutEchec({ ui: "", message: etat.message });
+          setShowAlertError(etat.message);
+
+          // Masquer l'alerte après 3 secondes
+          setTimeout(() => {
+            setShowAlertError(false);
+          }, 3000);
         }
 
         setEtatAJout("ajouter au panier");
       } catch (error) {
-        router.push("/connexion")
+        router.push("/connexion");
       }
     }
 
@@ -83,7 +99,7 @@ export default function ArticleView({ params }) {
             onClick={() => setImageProduct(linkImage)}
             srcSet={linkImage}
             alt="boeuf"
-            className="rounded-md w-[80px] h-[80px] my-3"
+            className="rounded-md w-[80px] cursor-pointer h-[80px] my-3"
           ></img>
         );
       }
@@ -96,7 +112,7 @@ export default function ArticleView({ params }) {
         <Article
           poids={product.description2}
           code={product.id}
-          key={product["@id"]}
+          key={product.id}
           nom={product.nom}
           image={product.imageProduits[0]?.path}
           price={product.price}
@@ -122,43 +138,22 @@ export default function ArticleView({ params }) {
         transition={{ duration: 0.3 }}
         className="relative px-5 pt-5"
       >
-        <div
-          className={
-            "fixed right-7 flex py-2 justify-center px-2 bg-teal-100 rounded-xl w-fit transition-[display] " +
-            ajoutReussi
-          }
-        >
-          <img className="mr-2" loading="lazy" srcSet={imgDangerCircle}></img>
-          <div className="text-base">
-            {dataProduct.nom} ajouté au panier avec succès
+        {showAlertSucces && (
+          <div className="fixed flex justify-center w-full left-0 top-2">
+            <Alert className="w-fit" variant="filled" severity="success">
+              {dataProduct.nom} ajouté avec succès
+            </Alert>
           </div>
-          <button
-            onClick={() => {
-              setAjoutReussi("hidden");
-            }}
-          >
-            <img loading="lazy" srcSet={imgClose}></img>
-          </button>
-        </div>
+        )}
 
-        <div
-          className={
-            "fixed right-7 flex py-2 justify-center px-2 bg-red-100 rounded-xl w-fit transition-[display] " +
-            ajoutEchec.ui
-          }
-        >
-          <div className="text-base w-[300px] text-justify">
-            Article non ajouté. {ajoutEchec.message}{" "}
+        {showAlertError && (
+          <div className="fixed flex justify-center w-full left-0 top-2">
+            <Alert className="w-fit" variant="filled" severity="error">
+              {showAlertError}
+            </Alert>
           </div>
-          <button
-            className=" ml-2"
-            onClick={() => {
-              setAjoutEchec({ ...ajoutEchec, ui: "hidden" });
-            }}
-          >
-            <img loading="lazy" srcSet={imgClose}></img>
-          </button>
-        </div>
+        )}
+        
 
         <Categories></Categories>
         <div className="text-base  font-semibold mb-5">

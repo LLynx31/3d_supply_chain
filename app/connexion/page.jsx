@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext,useState } from "react";
 import { authentificate } from "../features/authentification";
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { AuthContext } from "../contextProvider";
+import { AuthContext, PageContext } from "../contextProvider";
 import { sendCode, verifyCode } from "../features/postData";
 
 function FormConnexion({ forgetPassword }) {
   const authentification = useContext(AuthContext);
+  const thisPage = useContext(PageContext)
 
   const router = useRouter();
 
@@ -31,7 +32,12 @@ function FormConnexion({ forgetPassword }) {
     }
 
     authentification.setConnected(true);
-    router.replace("m/compte");
+    
+    if(thisPage.isPage && thisPage.isPage.includes("/m/article")){
+      return router.push(thisPage.isPage)
+    }
+
+    return router.push("/m/compte")
   }
 
   return (

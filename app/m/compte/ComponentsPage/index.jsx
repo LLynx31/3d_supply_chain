@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AddAdress, Adresse } from "../../../ui/adresseItem";
 import { pacthUser } from "@/app/features/pacthData";
 import { postPassword } from "@/app/features/postData";
@@ -8,8 +8,18 @@ import { postPassword } from "@/app/features/postData";
 import { motion } from "framer-motion";
 import LigneCommandes from "@/app/ui/ligneCommande";
 import { extraitNombre, formatISODate } from "@/app/features/tools";
+import { usePathname } from "next/navigation";
+import { PageContext } from "@/app/contextProvider";
 
 export default function ComponentPage({ data, commandes }) {
+  const pathName = usePathname();
+
+  const thisPage = useContext(PageContext);
+
+  useEffect(() => {
+    thisPage.setPage(pathName);
+  });
+
   const [swipeOption, setSwipeOption] = useState("infoPerso");
   const [ajoutReussi, setAjoutReussi] = useState("hidden");
   const [ajoutPassword, setAjoutPassword] = useState("hidden");
@@ -55,7 +65,7 @@ export default function ComponentPage({ data, commandes }) {
   }
 
   const listLigneCommande = commandes.map((commande) => {
-    console.log(commande);
+    //console.log(commande);
     return (
       <LigneCommandes
         key={commande["@id"]}

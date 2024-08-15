@@ -2,16 +2,20 @@
 
 import {Categories, SousCategories} from "@/app/ui/categorie";
 import Article from "@/app/ui/article";
-
 import { useState, useRef, useEffect } from "react";
 import LoadingSpinner from "@/app/ui/loading";
-
 import { motion } from "framer-motion"
+import { PageContext } from "@/app/contextProvider";
+
+
 export default function PageCategorie({params}){
 
-  const [categorieInView, setCategorieInView] = useState('best seller')
-  
+  const thisPage = useContext(PageContext);
+  useEffect(() => {
+    thisPage.setPage(false);
+  });
 
+  const [categorieInView, setCategorieInView] = useState('best seller')
   const [nameCetgorie, setNameCetgorie] = useState('best seller')
 
   const refBestSeller = useRef(null)
