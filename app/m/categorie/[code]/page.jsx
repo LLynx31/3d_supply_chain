@@ -2,7 +2,7 @@
 
 import {Categories, SousCategories} from "@/app/ui/categorie";
 import Article from "@/app/ui/article";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import LoadingSpinner from "@/app/ui/loading";
 import { motion } from "framer-motion"
 import { PageContext } from "@/app/contextProvider";
