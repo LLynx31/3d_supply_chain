@@ -108,7 +108,7 @@ function FormInscription({ setLose, isLose }) {
             onChange={(e) => updatePrénom(e.target.value)}
             className="w-full border border-gray-300 px-2 py-2"
             type="text"
-            placeholder="Numéro de capis"
+            placeholder="Numéro de Kbis"
           ></input>
         </div>
 
