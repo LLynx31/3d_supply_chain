@@ -264,7 +264,7 @@ export default function PageIndex() {
                       Les best sellers
                     </h1>
 
-                    <div className="py-5">
+                    <div className="py-5 flex  gap-2">
                       {dataProductBestSeller["hydra:view"]["hydra:next"] && (
                         <button
                           className="text-base px-3 py-1 bg-jaune rounded text-black"
@@ -309,7 +309,7 @@ export default function PageIndex() {
                     <h1 ref={refArrivage} className="text-xl font-bold ">
                       Nouveaux arrivages
                     </h1>
-                    <div className="py-5">
+                    <div className="py-5 flex  gap-2">
                       {dataProductNewArrivage["hydra:view"]["hydra:next"] && (
                         <button
                           className="text-base px-3 py-1 bg-jaune rounded text-black"

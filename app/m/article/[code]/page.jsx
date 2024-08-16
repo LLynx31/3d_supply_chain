@@ -13,26 +13,27 @@ import { PageContext } from "@/app/contextProvider";
 
 export default function ArticleView({ params }) {
   const router = useRouter();
-  
+
   const pathName = usePathname();
   const thisPage = useContext(PageContext);
   useEffect(() => {
-    thisPage.setPage(pathName)
+    thisPage.setPage(pathName);
   });
-
 
   const imgShoppingCart = "/shopping-cart.png";
   //const imgDangerCircle = "/Danger_Circle.png";
-  //const imgClose = "/x.png";
+  //const imgClose = "/x.png"
 
   const [quantite, setQuantite] = useState(1);
   const [swipeDescription, setSwipDescritption] = useState("description");
-  const [swipeImageProduct, setImageProduct] = useState("");
+  const [swipeImageProduct, setImageProduct] = useState(false);
   const [dataProduct, setDataProduct] = useState(null);
-  const [dataProductSimilar, setDataProductSimilar] = useState(null);
+  const [dataProductSimilar, setDataProductSimilar] = useState(false);
   const [etatAjout, setEtatAJout] = useState("ajouter au panier");
   const [showAlertSucces, setShowAlertSucces] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
+
+  //useEffect(() => console.log(swipeImageProduct), [swipeImageProduct]);
 
   useEffect(() => {
     const link = "https://api.3dsupplychains.com/api/produits/" + params.code;
@@ -40,10 +41,12 @@ export default function ArticleView({ params }) {
       .then((response) => response.json())
       .then((responseParse) => {
         setDataProduct(responseParse);
-        setImageProduct(
-          "https://api.3dsupplychains.com/" +
-            responseParse.imageProduits["hydra:member"][0]?.path
-        );
+        if (responseParse.imageProduits["hydra:member"][0]?.path) {
+          setImageProduct(
+            "https://api.3dsupplychains.com/" +
+              responseParse.imageProduits["hydra:member"][0]?.path
+          );
+        }
 
         fetch(
           "https://api.3dsupplychains.com/api/produits?page=1&sousCategorie=" +
@@ -153,7 +156,6 @@ export default function ArticleView({ params }) {
             </Alert>
           </div>
         )}
-        
 
         <Categories></Categories>
         <div className="text-base  font-semibold mb-5">
@@ -165,17 +167,25 @@ export default function ArticleView({ params }) {
         <div className="flex sm:flex-row gap-5 flex-col mb-12">
           {/* image en mignature */}
           <div className="flex sm:flex-col gap-1 flex-wrap w-full sm:w-[100px]">
-            {listImageDataProduct}
+            {listImageDataProduct.length > 0 ? (
+              listImageDataProduct
+            ) : (
+              <div className="bg-slate-300 w-[80px] h-[80px]  "></div>
+            )}
           </div>
           {/* fin image en mignature */}
 
           {/* image en grandeur nature */}
-          <img
-            loading="lazy"
-            srcSet={swipeImageProduct}
-            alt={dataProduct.nom}
-            className="md:w-[310px] lg:w-[450px]"
-          ></img>
+          {swipeImageProduct ? (
+            <img
+              loading="lazy"
+              srcSet={swipeImageProduct}
+              alt={dataProduct.nom}
+              className="md:w-[310px] lg:w-[450px]"
+            ></img>
+          ) : (
+            <div className="bg-slate-300 w-full h-[200px] md:w-[310px] lg:w-[450px] md:h-[310px]  "></div>
+          )}
 
           {/* description */}
           <div className=" w-fit">

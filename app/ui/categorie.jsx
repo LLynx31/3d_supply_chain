@@ -7,18 +7,16 @@ import {motion} from "framer-motion"
 
 register()
 
-const imageCategorie = "/categorie.png"
-
 function Categorie({code, image, nom, className}){
 
     return (
       <motion.div whileHover={{scale:0.9}}>
           <Link href={"/m/categorie/" + code}>
-          <div className={"flex-col w-[100px]  sm:w-[150px]  flex sm:w-fit h-max" + className}>
+          <div className={"flex-col w-[100px] flex sm:w-fit h-max" + className}>
           <img
             loading="lazy"
-            srcSet={"https://api.3dsupplychains.com/" + image}
-            className=" sm:w-[150px] sm:h-full"
+            srcSet={image ? "https://api.3dsupplychains.com/" + image : "/image_categorie.jpg"}
+            className=" sm:w-[120px] "
           />
           <div className="text-black overflow-hidden text-wrap   text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
             {nom}
@@ -46,8 +44,8 @@ function SousCategorie({id, image, nom, className, setDataProduct}){
         <motion.div whileHover={{scale:0.9}} className={"flex-col flex w-fit cursor-pointer " + className} onClick={()=>getProduct()}>
         <img
           loading="lazy"
-          srcSet={"https://api.3dsupplychains.com/" + image}
-          className="w-[100px] sm:w-full sm:h-full"
+          srcSet={image ? "https://api.3dsupplychains.com/" + image : "/image_categorie.jpg"}
+          className="w-[120px] sm:w-full"
         />
         <div className="text-black overflow-hidden text-[11px] whitespace-nowrap bg-amber-300 justify-center py-1">
           {nom}
